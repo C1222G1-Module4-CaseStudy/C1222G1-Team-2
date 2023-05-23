@@ -6,12 +6,19 @@ import javax.persistence.*;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id_customer")
+    private Integer idCustomer;
+    @Column(name = "name_customer")
     private String name;
+    @Column(name = "date_of_birth")
     private String dateOfBirth;
+    @Column(name = "address")
     private String address;
+    @Column(name = "phone_number")
     private String phoneNumber;
+    @Column(name = "email_customer")
     private String email;
+    @Column(name = "avatar_customer")
     private String avatar;
     @ManyToOne
     @JoinColumn(name = "customer_type_id", referencedColumnName = "id")
@@ -20,8 +27,8 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(Integer id, String name, String dateOfBirth, String address, String phoneNumber, String email, String avatar, CustomerType customerType) {
-        this.id = id;
+    public Customer(Integer idCustomer, String name, String dateOfBirth, String address, String phoneNumber, String email, String avatar, CustomerType customerType) {
+        this.idCustomer = idCustomer;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
@@ -31,12 +38,12 @@ public class Customer {
         this.customerType = customerType;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdCustomer() {
+        return idCustomer;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdCustomer(Integer idCustomer) {
+        this.idCustomer = idCustomer;
     }
 
     public String getName() {
@@ -45,6 +52,14 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getAddress() {
@@ -81,14 +96,6 @@ public class Customer {
 
     public CustomerType getCustomerType() {
         return customerType;
-    }
-
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
     }
 
     public void setCustomerType(CustomerType customerType) {

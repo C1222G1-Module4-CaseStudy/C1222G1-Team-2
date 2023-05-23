@@ -1,6 +1,10 @@
 package com.example.codegymfoods.model.login;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "app_user", //
@@ -14,18 +18,27 @@ public class AppUser {
     private Long userId;
 
     @Column(name = "user_name", length = 36, nullable = false)
+    @NotBlank(message = "Tài khoản không được để trống")
     private String userName;
 
     @Column(name = "encrypt_password", length = 128, nullable = false)
+    @NotBlank(message = "Mật khẩu không được để trống")
+    @Size(min = 6, message = "Mật khẩu phải trên 6 ký tự")
     private String encrytedPassword;
 
     public AppUser() {
     }
 
     @Column(name = "enabled", length = 1, nullable = false)
-
-
+    @Value("${some.key: true}")
     private boolean enabled;
+
+    public AppUser(Long userId, String userName, String encrytedPassword, boolean enabled) {
+        this.userId = userId;
+        this.userName = userName;
+        this.encrytedPassword = encrytedPassword;
+        this.enabled = enabled;
+    }
 
     public Long getUserId() {
         return userId;

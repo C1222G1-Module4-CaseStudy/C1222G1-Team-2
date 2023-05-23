@@ -9,23 +9,23 @@ import javax.persistence.Id;
 public class CustomerType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idCustomerType;
     private String name;
 
     public CustomerType() {
     }
 
-    public CustomerType(Integer id, String name) {
-        this.id = id;
+    public CustomerType(Integer idCustomerType, String name) {
+        this.idCustomerType = idCustomerType;
         this.name = name;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdCustomerType() {
+        return idCustomerType;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdCustomerType(Integer idCustomerType) {
+        this.idCustomerType = idCustomerType;
     }
 
     public String getName() {
@@ -36,3 +36,4 @@ public class CustomerType {
         this.name = name;
     }
 }
+
