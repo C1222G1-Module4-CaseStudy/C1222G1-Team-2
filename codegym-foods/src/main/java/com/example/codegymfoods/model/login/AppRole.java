@@ -9,9 +9,9 @@ import javax.persistence.*;
 public class AppRole {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id", nullable = false)
-    private Long roleId;
+    private Integer roleId;
 
     @Column(name = "role_name", length = 30, nullable = false)
     private String roleName;
@@ -19,11 +19,16 @@ public class AppRole {
     public AppRole() {
     }
 
-    public Long getRoleId() {
+    public AppRole(Integer roleId, String roleName) {
+        this.roleId = roleId;
+        this.roleName = roleName;
+    }
+
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Long roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 

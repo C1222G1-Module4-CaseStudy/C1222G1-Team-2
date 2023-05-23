@@ -13,38 +13,56 @@ import javax.validation.constraints.Size;
 public class AppUser {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
-    private Long userId;
+    private Integer userId;
 
     @Column(name = "user_name", length = 36, nullable = false)
     @NotBlank(message = "Tài khoản không được để trống")
     private String userName;
 
-    @Column(name = "encrypt_password", length = 128, nullable = false)
+    @Column(name = "encryted_password", length = 128, nullable = false)
     @NotBlank(message = "Mật khẩu không được để trống")
     @Size(min = 6, message = "Mật khẩu phải trên 6 ký tự")
     private String encrytedPassword;
-
-    public AppUser() {
-    }
 
     @Column(name = "enabled", length = 1, nullable = false)
     @Value("${some.key: true}")
     private boolean enabled;
 
-    public AppUser(Long userId, String userName, String encrytedPassword, boolean enabled) {
+
+    public AppUser() {
+    }
+
+    public AppUser(String userName, String encrytedPassword, boolean enabled) {
+        this.userName = userName;
+        this.encrytedPassword = encrytedPassword;
+        this.enabled = enabled;
+    }
+
+    public AppUser(Integer userId, String userName, String encrytedPassword) {
+        this.userId = userId;
+        this.userName = userName;
+        this.encrytedPassword = encrytedPassword;
+    }
+
+    public AppUser(String userName, String encrytedPassword) {
+        this.userName = userName;
+        this.encrytedPassword = encrytedPassword;
+    }
+
+    public AppUser(Integer userId, String userName, String encrytedPassword, boolean enabled) {
         this.userId = userId;
         this.userName = userName;
         this.encrytedPassword = encrytedPassword;
         this.enabled = enabled;
     }
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

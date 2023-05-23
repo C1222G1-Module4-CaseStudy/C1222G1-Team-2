@@ -1,56 +1,54 @@
-package com.example.codegymfoods.model.customer;
+package com.example.codegymfoods.dto;
 
+import com.example.codegymfoods.model.customer.CustomerType;
 import com.example.codegymfoods.model.login.AppUser;
 
-import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
-@Entity
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_customer")
+public class CustomerDTO {
     private Integer idCustomer;
-    @Column(name = "name_customer")
+    @NotBlank(message = "Tên không được để trống")
     private String name;
-    @Column(name = "date_of_birth")
+
+    @NotBlank(message = "Ngày sinh không được để trống")
     private String dateOfBirth;
-    @Column(name = "address")
+    @NotBlank(message = " Đia chỉ không được để trống")
     private String address;
-    @Column(name = "phone_number")
-    private String phoneNumber;
-    @Column(name = "email_customer")
+    @NotBlank(message = "Email không được để trống")
+    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", message = "Không đúng định dạng example@gmail")
     private String email;
-    @Column(name = "avatar_customer")
-    private String avatar;
-    @ManyToOne
-    @JoinColumn(name = "customer_type_id", referencedColumnName = "id")
+    @NotBlank(message = "Số điện thoai không được để trống")
+    @Pattern(regexp = "\\d{9,10}", message = "Số điện thoại phải từ 9 đến 10 số")
+    private String phoneNumber;
+
+
     private CustomerType customerType;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @Valid
     private AppUser appUser;
 
-    public Customer() {
+    public CustomerDTO() {
     }
 
-    public Customer(Integer idCustomer, String name, String dateOfBirth, String address, String phoneNumber, String email, String avatar, CustomerType customerType) {
-        this.idCustomer = idCustomer;
+
+    public CustomerDTO(String name, String dateOfBirth, String address, String email, String phoneNumber, CustomerType customerType, AppUser appUser) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
-        this.phoneNumber = phoneNumber;
         this.email = email;
-        this.avatar = avatar;
+        this.phoneNumber = phoneNumber;
         this.customerType = customerType;
+        this.appUser = appUser;
     }
 
-    public Customer(Integer idCustomer, String name, String dateOfBirth, String address, String phoneNumber, String email, String avatar, CustomerType customerType, AppUser appUser) {
+    public CustomerDTO(Integer idCustomer, String name, String dateOfBirth, String address, String email, String phoneNumber, CustomerType customerType, AppUser appUser) {
         this.idCustomer = idCustomer;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
-        this.phoneNumber = phoneNumber;
         this.email = email;
-        this.avatar = avatar;
+        this.phoneNumber = phoneNumber;
         this.customerType = customerType;
         this.appUser = appUser;
     }
@@ -87,14 +85,6 @@ public class Customer {
         this.address = address;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -103,12 +93,12 @@ public class Customer {
         this.email = email;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setPhoneNumber(String phone) {
+        this.phoneNumber = phoneNumber;
     }
 
     public CustomerType getCustomerType() {

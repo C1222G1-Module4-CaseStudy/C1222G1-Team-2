@@ -9,9 +9,9 @@ import javax.persistence.*;
 public class UserRole {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -24,11 +24,22 @@ public class UserRole {
     public UserRole() {
     }
 
-    public Long getId() {
+    public UserRole(AppUser appUser, AppRole appRole) {
+        this.appUser = appUser;
+        this.appRole = appRole;
+    }
+
+    public UserRole(Integer id, AppUser appUser, AppRole appRole) {
+        this.id = id;
+        this.appUser = appUser;
+        this.appRole = appRole;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
