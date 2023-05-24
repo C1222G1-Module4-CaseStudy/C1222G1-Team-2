@@ -1,26 +1,39 @@
 package com.example.codegymfoods.model.employee;
 
+import com.example.codegymfoods.model.login.AppUser;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(columnDefinition = "Varchar(40)")
     private String name;
+    @Column(columnDefinition = "Varchar(40)")
     private String address;
+    @Column(columnDefinition = "Varchar(15)")
     private String phoneNumber;
+    @Column(columnDefinition = "Varchar(40)")
     private String email;
-    private String dateOfBirth;
+    @Column(columnDefinition = "date")
+    private Date dateOfBirth;
     private String avatar;
+
     @ManyToOne
     @JoinColumn(name = "position_id", referencedColumnName = "id")
     private Position position;
 
+    @OneToOne
+    @JoinColumn(name = "app_user_id", referencedColumnName = "user_id", nullable = false)
+    private AppUser appUser;
+
     public Employee() {
     }
 
-    public Employee(Integer id, String name, String address, String phoneNumber, String email, String dateOfBirth, String avatar, Position position) {
+    public Employee(Integer id, String name, String address, String phoneNumber, String email, Date dateOfBirth, String avatar, Position position, AppUser appUser) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -29,6 +42,7 @@ public class Employee {
         this.dateOfBirth = dateOfBirth;
         this.avatar = avatar;
         this.position = position;
+        this.appUser = appUser;
     }
 
     public Integer getId() {
@@ -71,11 +85,11 @@ public class Employee {
         this.email = email;
     }
 
-    public String getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -93,5 +107,13 @@ public class Employee {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 }
