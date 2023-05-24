@@ -1,5 +1,6 @@
-package com.example.codegymfoods.model;
+package com.example.codegymfoods.model.bill;
 
+import com.example.codegymfoods.model.bill.Bill;
 import com.example.codegymfoods.model.product.Product;
 
 import javax.persistence.*;
