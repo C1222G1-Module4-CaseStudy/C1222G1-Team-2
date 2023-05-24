@@ -1,5 +1,8 @@
 package com.example.codegymfoods.model.login;
 
+import com.example.codegymfoods.model.customer.Customer;
+import com.example.codegymfoods.model.employee.Employee;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,7 +14,8 @@ public class AppUser {
     @Id
     @GeneratedValue
     @Column(name = "user_id", nullable = false)
-    private Long userId;
+    private Integer id;
+
 
     @Column(name = "user_name", length = 36, nullable = false)
     private String userName;
@@ -19,20 +23,30 @@ public class AppUser {
     @Column(name = "encrypt_password", length = 128, nullable = false)
     private String encrytedPassword;
 
+    @Column(name = "enabled", length = 1, nullable = false)
+    private boolean enabled;
+    @OneToOne(mappedBy = "appUser")
+    private Employee employee;
+    @OneToOne(mappedBy = "appUser")
+    private Customer customer;
     public AppUser() {
     }
 
-    @Column(name = "enabled", length = 1, nullable = false)
-
-
-    private boolean enabled;
-
-    public Long getUserId() {
-        return userId;
+    public AppUser(Integer id, String userName, String encrytedPassword, boolean enabled, Employee employee, Customer customer) {
+        this.id = id;
+        this.userName = userName;
+        this.encrytedPassword = encrytedPassword;
+        this.enabled = enabled;
+        this.employee = employee;
+        this.customer = customer;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -59,4 +73,19 @@ public class AppUser {
         this.enabled = enabled;
     }
 
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }

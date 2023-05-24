@@ -1,18 +1,21 @@
 package com.example.codegymfoods.model.product;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(columnDefinition = "Varchar(40)")
     private String name;
     private String description;
     private Double price;
-    private String quantity;
+    private int quantity;
     private String picture;
-    private String dateExpiration;
+    @Column(columnDefinition = "date")
+    private Date dateExpiration;
     @ManyToOne
     @JoinColumn(name = "product_type_id", referencedColumnName = "id")
     private ProductType productType;
@@ -20,7 +23,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(Integer id, String name, String description, Double price, String quantity, String picture, String dateExpiration, ProductType productType) {
+    public Product(Integer id, String name, String description, Double price, int quantity, String picture, Date dateExpiration, ProductType productType) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -63,11 +66,11 @@ public class Product {
         this.price = price;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -79,11 +82,11 @@ public class Product {
         this.picture = picture;
     }
 
-    public String getDateExpiration() {
+    public Date getDateExpiration() {
         return dateExpiration;
     }
 
-    public void setDateExpiration(String dateExpiration) {
+    public void setDateExpiration(Date dateExpiration) {
         this.dateExpiration = dateExpiration;
     }
 
