@@ -3,19 +3,20 @@ package com.example.codegymfoods.model.blog;
 import com.example.codegymfoods.model.employee.Employee;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(columnDefinition = "Varchar(40)")
     private String title;
-    private String dateNow;
+    @Column(columnDefinition = "date")
+    private Date dateNow;
     private String author;
     private String content;
-    @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
-    private Category category;
+
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
@@ -23,13 +24,12 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(Integer id, String title, String dateNow, String author, String content, Category category, Employee employee) {
+    public Blog(Integer id, String title, Date dateNow, String author, String content, Employee employee) {
         this.id = id;
         this.title = title;
         this.dateNow = dateNow;
         this.author = author;
         this.content = content;
-        this.category = category;
         this.employee = employee;
     }
 
@@ -49,11 +49,11 @@ public class Blog {
         this.title = title;
     }
 
-    public String getDateNow() {
+    public Date getDateNow() {
         return dateNow;
     }
 
-    public void setDateNow(String dateNow) {
+    public void setDateNow(Date dateNow) {
         this.dateNow = dateNow;
     }
 
@@ -71,14 +71,6 @@ public class Blog {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public Employee getEmployee() {

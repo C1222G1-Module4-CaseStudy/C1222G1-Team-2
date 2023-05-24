@@ -1,26 +1,35 @@
 package com.example.codegymfoods.model.customer;
 
+import com.example.codegymfoods.model.login.AppUser;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(columnDefinition = "Varchar(40)")
     private String name;
-    private String dateOfBirth;
+    @Column(columnDefinition = "date")
+    private Date dateOfBirth;
+    @Column(columnDefinition = "Varchar(40)")
     private String address;
+    @Column(columnDefinition = "Varchar(15)")
     private String phoneNumber;
+    @Column(columnDefinition = "Varchar(40)")
     private String email;
     private String avatar;
-    @ManyToOne
-    @JoinColumn(name = "customer_type_id", referencedColumnName = "id")
-    private CustomerType customerType;
+
+    @OneToOne
+    @JoinColumn(name = "app_user_id", referencedColumnName = "user_id", nullable = false)
+    private AppUser appUser;
 
     public Customer() {
     }
 
-    public Customer(Integer id, String name, String dateOfBirth, String address, String phoneNumber, String email, String avatar, CustomerType customerType) {
+    public Customer(Integer id, String name, Date dateOfBirth, String address, String phoneNumber, String email, String avatar, AppUser appUser) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -28,7 +37,7 @@ public class Customer {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.avatar = avatar;
-        this.customerType = customerType;
+        this.appUser = appUser;
     }
 
     public Integer getId() {
@@ -45,6 +54,14 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getAddress() {
@@ -79,19 +96,11 @@ public class Customer {
         this.avatar = avatar;
     }
 
-    public CustomerType getCustomerType() {
-        return customerType;
+    public AppUser getAppUser() {
+        return appUser;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public void setCustomerType(CustomerType customerType) {
-        this.customerType = customerType;
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 }
