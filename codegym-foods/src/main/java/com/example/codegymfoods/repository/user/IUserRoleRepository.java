@@ -1,4 +1,4 @@
-package com.example.codegymfoods.repository.customer;
+package com.example.codegymfoods.repository.user;
 
 import com.example.codegymfoods.model.login.AppUser;
 import com.example.codegymfoods.model.login.UserRole;

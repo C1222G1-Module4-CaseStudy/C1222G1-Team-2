@@ -23,6 +23,8 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.codegymfoods.utils.EncrytedPasswordUtils.encrytePassword;
+
 //import static com.example.codegymfoods.utils.EncrytedPasswordUtils.encrytePassword;
 
 @Controller
@@ -81,14 +83,23 @@ public class EmployeeController {
         model.addAttribute("position", this.positionService.findAll());
         if (bindingResult.hasErrors()) {
             return "/employee/create-employee";
+        } else if (employeeService.existsByEmail(employeeDTO.getEmail())) {
+            model.addAttribute("message", "Email đã tồn tại, vui lòng nhập email khác");
+            return "/employee/create-employee";
+        } else if (employeeService.existsByPhoneNumber(employeeDTO.getPhoneNumber())) {
+            model.addAttribute("message1", "Số điện thoại đã tồn tại, vui lòng nhập số điện thoại khác");
+            return "/employee/create-employee";
+        } else if (employeeService.existsByAppUser_UserName(employeeDTO.getAppUser().getUserName())) {
+            model.addAttribute("message2", "Tài khoản đã tồn tại, vui lòng nhập tài khoản khác");
+            return "/employee/create-employee";
         } else {
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDTO, employee);
-//            employee.getAppUser().setEncrytedPassword(encrytePassword(employee.getAppUser().getEncrytedPassword()));
+            employee.getAppUser().setEncrytedPassword(encrytePassword(employee.getAppUser().getEncrytedPassword()));
             employeeService.save(employee);
             AppUser appUser = employee.getAppUser();
-            AppRole appRole = new AppRole(2, "ROLE_USER");
-                userRoleService.saveUserRole(new UserRole(appUser, appRole));
+            AppRole appRole = new AppRole(1, "ROLE_ADMIN");
+            userRoleService.saveUserRole(new UserRole(appUser, appRole));
             redirectAttributes.addFlashAttribute("message", "Thêm mới thành công");
             return "redirect:/admin/employee";
         }

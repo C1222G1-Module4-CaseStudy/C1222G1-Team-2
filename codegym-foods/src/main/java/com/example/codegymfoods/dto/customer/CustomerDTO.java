@@ -1,4 +1,4 @@
-package com.example.codegymfoods.dto;
+package com.example.codegymfoods.dto.customer;
 
 import com.example.codegymfoods.model.employee.Position;
 import com.example.codegymfoods.model.login.AppUser;
@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-public class EmployeeDTO {
+public class CustomerDTO {
     private Integer id;
     @NotBlank(message = "Không được để trống")
     private String name;
@@ -24,10 +24,10 @@ public class EmployeeDTO {
     private AppUser appUser;
     private Position position;
 
-    public EmployeeDTO() {
+    public CustomerDTO() {
     }
 
-    public EmployeeDTO(Integer id, String name, String address, String phoneNumber, String email, String dateOfBirth, String avatar, AppUser appUser, Position position) {
+    public CustomerDTO(Integer id, String name, String address, String phoneNumber, String email, String dateOfBirth, String avatar, AppUser appUser, Position position) {
         this.id = id;
         this.name = name;
         this.address = address;

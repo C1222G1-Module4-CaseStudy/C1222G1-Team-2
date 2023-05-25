@@ -1,5 +1,6 @@
 package com.example.codegymfoods.service.employee;
 
+import com.example.codegymfoods.model.customer.Customer;
 import com.example.codegymfoods.model.employee.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,4 +19,13 @@ public interface IEmployeeService {
     Optional<Employee> findById(Integer id);
 
     void save(Employee employee);
+
+
+    boolean existsByEmail(String email);
+
+    boolean existsByPhoneNumber(String phoneNumber);
+
+    boolean existsByAppUser_UserName(String userName);
+
+    Employee findByUsername(String username);
 }

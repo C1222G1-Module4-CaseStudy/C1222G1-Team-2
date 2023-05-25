@@ -60,7 +60,7 @@ public class CartController {
     public String delete(@RequestParam(value = "idDelete") int id,@SessionAttribute(name = "cartDTO") CartDTO cartDTO) {
         Map<Integer,Integer> cartMap = cartDTO.getSelectedProducts();
         cartMap.remove(id);
-        return "redirect:/cart";
+        return "redirect:/cart/home";
     }
     @GetMapping("/home")
     public String getProductsFromCart(@SessionAttribute(name = "cartDTO") CartDTO cartDTO, Model model) {

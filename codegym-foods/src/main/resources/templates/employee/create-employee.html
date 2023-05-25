@@ -495,6 +495,7 @@
                                                     th:field="*{phoneNumber}"
                                                     type="text">
                             </div>
+                            <span style="color: red" th:text="${message}"></span>
                             <p style="color: red"
                                th:errors="*{phoneNumber}" th:if="${#fields.hasErrors('phoneNumber')}"></p>
 
@@ -506,8 +507,9 @@
                             </div>
                             <p style="color: red"
                                th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></p>
-
                         </div>
+                        <span style="color: red" th:text="${message1}"></span>
+
                         <div class="col-12"><p class="m-2">Địa chỉ nhân viên</p>
                             <div class="box"><input class="form-control" placeholder="Vui lòng nhập Địa chỉ nhân viên"
                                                     th:field="*{address}"
@@ -565,6 +567,7 @@
                                                     placeholder="Vui lòng nhập tên đăng nhập"
                                                     th:field="*{appUser.userName}"
                                                     type="text">
+                                <span style="color: red" th:text="${message2}"></span>
                             </div>
 
                             <div class="col-12"><p class="m-2">Mật khẩu</p>
@@ -688,16 +691,13 @@
     });
 
     // Lắng nghe sự kiện khi người dùng nhập vào ô mật khẩu
-    document.getElementById('confirmPassword').addEventListener('input', function () {
+    document.getElementById('confirmPassword').addEventListener('blur', function () {
         var password = document.getElementById('password').value;
         var confirmPassword = this.value;
 
-        // Kiểm tra xem hai mật khẩu có giống nhau hay không
         if (password === confirmPassword) {
-            // Hai mật khẩu giống nhau, thực hiện các hành động phù hợp ở đây
             alert('Hai mật khẩu giống nhau');
         } else {
-            // Hai mật khẩu không giống nhau, thực hiện các hành động phù hợp ở đây
             alert('Hai mật khẩu không giống nhau. Vui lòng kiểm tra lại');
         }
     });

@@ -196,43 +196,6 @@
 <body>
 <div th:replace="layout-index:: navba-top"></div>
 <div style="height: 10rem"></div>
-<!--<div class="row">-->
-<!--    <div class="col-3"></div>-->
-<!--    <div class="col-6">-->
-<!--        <div class="row row-cols-1 row-cols-md-2 g-4">-->
-<!--            <div class="col" th:each="product : ${productFromCartDTOList}">-->
-<!--                <div class="card">-->
-<!--                    <img th:src="${product.picture}" class="card-img-top" alt="...">-->
-<!--                    <div class="card-body">-->
-<!--                        <h5 class="card-title" th:text="${product.nameProductFromCartDTO}"></h5>-->
-<!--                        <span><strong>Đơn giá</strong></span>-->
-<!--                        <p class="card-text" th:text="${product.priceProductFromCartDTO + 'đ'}"></p>-->
-<!--                        <span><strong>Số lượng</strong></span>-->
-<!--                        <div>-->
-<!--                            <form action="/cart/changeQuantity">-->
-<!--                                <input type="hidden" th:value="${product.id}" th:name="id">-->
-<!--                                <input type="number" name="quantity" th:value="${product.quantityProductFromCartDTO}">-->
-<!--                                <p>Nhập số lượng muốn thay đổi <button type="submit" class="btn btn-primary">Thay đổi</button></p>-->
-<!--                            </form>-->
-<!--                        </div>-->
-<!--                        <span><strong>Tổng giá của sản phẩm</strong></span>-->
-<!--                        <p class="card-text" th:text="${product.totalPrice + 'đ'}"></p>-->
-<!--                        <a th:href="@{/home/detail/{id}(id=${product.id})}" class="btn btn-primary">Chi tiết </a>-->
-<!--                        <div>-->
-<!--                            <button th:onclick="|deleteById(${product.id})|" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modelId">-->
-<!--                                <i class="bi bi-trash"></i> Xóa-->
-<!--                            </button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="total-price">-->
-<!--            <p>Tổng tiền: <span th:text="*{totalBill}"></span>đ</p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="col-3"></div>-->
-<!--</div>-->
 <div class="card">
     <div class="row">
         <div class="col-md-8 cart">
@@ -259,16 +222,14 @@
                                 </p>
                             </form>
                         </div>
-                        <div class="col" th:text="${product.priceProductFromCartDTO + 'đ'}"><span
-                                class="close">&#10005;</span></div>
-                        <span><strong>Đơn giá của sản phẩm</strong></span>-->
-                        <p class="card-text" th:text="${product.totalPrice + 'đ'}"></p>
+                        <div style="color:black" class="col" th:text="${product.priceProductFromCartDTO + 'đ'}"><span
+                                style="color:black" class="close">&#10005;</span></div>
+                        <span style="color:black"><strong>Đơn giá của sản phẩm</strong></span>-->
+                        <p style="color:black" class="card-text" th:text="${product.totalPrice + 'đ'}"></p>
                         <a class="btn btn-primary" th:href="@{/home/detail/{id}(id=${product.id})}">Chi tiết </a>
                         <div>
-                            <button class="btn btn-danger" data-bs-target="#modelId" data-bs-toggle="modal"
-                                    th:onclick="|deleteById(${product.id})|" type="button">
-                                <i class="bi bi-trash"></i> Xóa
-                            </button>
+                                <i class="btn btn-primary" data-bs-target="#modelId" data-bs-toggle="modal"
+                                   th:onclick="|deleteById(${product.id})|">Xóa</i>
                         </div>
                     </div>
                 </div>
@@ -292,7 +253,7 @@
                 <div class="col">Tổng tiền</div>
                 <div class="col text-right" id="totalPrice" th:text="*{totalBill}"></div>
             </div>
-            <button class="btn" type="submit">Thanh Toán</button>
+            <a class="btn" th:href="@{https://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1806000&vnp_Command=pay&vnp_CreateDate=20210801153333&vnp_CurrCode=VND&vnp_IpAddr=127.0.0.1&vnp_Locale=vn&vnp_OrderInfo=Thanh+toan+don+hang+%3A5&vnp_OrderType=other&vnp_ReturnUrl=https%3A%2F%2Fdomainmerchant.vn%2FReturnUrl&vnp_TmnCode=DEMOV210&vnp_TxnRef=5&vnp_Version=2.1.0&vnp_SecureHash=3e0d61a0c0534b2e36680b3f7277743e8784cc4e1d68fa7d276e79c23be7d6318d338b477910a27992f5057bb1582bd44bd82ae8009ffaf6d141219218625c42}" type="submit">Thanh Toán</a>
         </div>
     </div>
 </div>
@@ -316,12 +277,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                Bạn có muốn xóa
-            </div>
+            <span style="color: red ; text-align: center">  Bạn có muốn xóa sản phẩm này không ?</span>
             <div class="modal-footer">
-                <form action="/home/deleteInCart">
-                    <input th:id="idDelete" th:name="idDelete">
+                <form th:action="@{cart/deleteInCart}">
                     <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Hủy</button>
                     <button class="btn btn-danger" type="submit"><i class="bi bi-trash"></i> Xóa</button>
                 </form>

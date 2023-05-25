@@ -2,8 +2,8 @@ package com.example.codegymfoods.service.customer.impl;
 
 import com.example.codegymfoods.model.login.AppUser;
 import com.example.codegymfoods.model.login.UserRole;
-import com.example.codegymfoods.repository.customer.IAppUserRepository;
-import com.example.codegymfoods.repository.customer.IUserRoleRepository;
+import com.example.codegymfoods.repository.user.IAppUserRepository;
+import com.example.codegymfoods.repository.user.IUserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

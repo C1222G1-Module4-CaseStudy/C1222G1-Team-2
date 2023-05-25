@@ -48,4 +48,24 @@ public class EmployeeService implements IEmployeeService {
     public void save(Employee employee) {
         this.employeeRepository.save(employee);
     }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return employeeRepository.existsByEmail(email);
+    }
+
+    @Override
+    public boolean existsByPhoneNumber(String phoneNumber) {
+        return employeeRepository.existsByPhoneNumber(phoneNumber);
+    }
+
+    @Override
+    public boolean existsByAppUser_UserName(String userName) {
+        return employeeRepository.existsByAppUser_UserName(userName);
+    }
+
+    @Override
+    public Employee findByUsername(String username) {
+        return employeeRepository.findCustomerByAppUser_UserName(username);
+    }
 }
