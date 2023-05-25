@@ -1,4 +1,4 @@
-package com.example.codegymfoods.service.impl.employee;
+package com.example.codegymfoods.service.employee.impl;
 
 import com.example.codegymfoods.model.employee.Position;
 import com.example.codegymfoods.repository.employee.IPositionRepository;

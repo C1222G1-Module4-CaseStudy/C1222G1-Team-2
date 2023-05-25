@@ -1,20 +1,25 @@
-package com.example.codegymfoods.service.impl.employee;
+package com.example.codegymfoods.service.employee.impl;
 
 import com.example.codegymfoods.model.employee.Employee;
 import com.example.codegymfoods.repository.employee.IEmployeeRepository;
-import com.example.codegymfoods.service.employee.IEmployyeService;
+import com.example.codegymfoods.service.employee.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeService implements IEmployyeService {
+public class EmployeeService implements IEmployeeService {
     @Autowired
     private IEmployeeRepository employeeRepository;
+
+    @Override
+    public List<Employee> getEmployee() {
+        return employeeRepository.findAll();
+    }
 
     @Override
     public Page<Employee> findAllByName(String name, Pageable pageable) {
