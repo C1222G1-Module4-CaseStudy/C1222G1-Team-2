@@ -1,9 +1,9 @@
-package com.example.codegymfoods.dto;
+package com.example.codegymfoods.dto.employee;
 
 import com.example.codegymfoods.model.employee.Position;
 import com.example.codegymfoods.model.login.AppUser;
+import com.example.codegymfoods.service.employee.annotation.YearOldValid;
 
-import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -19,6 +19,7 @@ public class EmployeeDTO {
     @Email(message = "Email chưa đúng định dạng. Vui lòng kiểm tra lại")
     private String email;
     @NotBlank(message = "Không được để trống")
+    @YearOldValid
     private String dateOfBirth;
     private String avatar;
     private AppUser appUser;

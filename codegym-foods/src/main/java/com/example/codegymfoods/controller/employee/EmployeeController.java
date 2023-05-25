@@ -1,7 +1,11 @@
 package com.example.codegymfoods.controller.employee;
 
-import com.example.codegymfoods.dto.EmployeeDTO;
+import com.example.codegymfoods.dto.employee.EmployeeDTO;
 import com.example.codegymfoods.model.employee.Employee;
+import com.example.codegymfoods.model.login.AppRole;
+import com.example.codegymfoods.model.login.AppUser;
+import com.example.codegymfoods.model.login.UserRole;
+import com.example.codegymfoods.service.customer.IUserRoleService;
 import com.example.codegymfoods.service.employee.IEmployeeService;
 import com.example.codegymfoods.service.employee.IPositionService;
 import org.springframework.beans.BeanUtils;
@@ -19,6 +23,8 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
+//import static com.example.codegymfoods.utils.EncrytedPasswordUtils.encrytePassword;
+
 @Controller
 @RequestMapping("/admin/employee")
 public class EmployeeController {
@@ -26,6 +32,8 @@ public class EmployeeController {
     private IEmployeeService employeeService;
     @Autowired
     private IPositionService positionService;
+    @Autowired
+    private IUserRoleService userRoleService;
 
     @GetMapping("")
     public String getEmployee(@RequestParam(defaultValue = "", required = false) String search,
@@ -60,7 +68,7 @@ public class EmployeeController {
     public String showCreate(
             Model model
     ) {
-        model.addAttribute("employeeCreate", new EmployeeDTO());
+        model.addAttribute("employeeCreateDTO", new EmployeeDTO());
         model.addAttribute("position", this.positionService.findAll());
         return "/employee/create-employee";
     }
@@ -76,9 +84,13 @@ public class EmployeeController {
         } else {
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDTO, employee);
+//            employee.getAppUser().setEncrytedPassword(encrytePassword(employee.getAppUser().getEncrytedPassword()));
             employeeService.save(employee);
-            redirectAttributes.addFlashAttribute("msg", "Thêm mới thành công");
-            return "redirect:/";
+            AppUser appUser = employee.getAppUser();
+            AppRole appRole = new AppRole(2, "ROLE_USER");
+                userRoleService.saveUserRole(new UserRole(appUser, appRole));
+            redirectAttributes.addFlashAttribute("message", "Thêm mới thành công");
+            return "redirect:/admin/employee";
         }
     }
 }

@@ -467,7 +467,7 @@
             </div>
         </nav>
         <form action="/admin/employee/create" id="my-form" method="post" style="margin: 0 auto;margin-top: 60px;"
-              th:object="${employeeCreate}">
+              th:object="${employeeCreateDTO}">
             <div class="container">
                 <div class="card"><p class="h-1">Thêm mới nhân viên</p>
                     <div class="bar mb-3"></div>
@@ -479,22 +479,14 @@
                             </div>
                             <p style="color: red" th:errors="*{name}"
                                th:if="${#fields.hasErrors('name')}"></p>
-                            <!--                            this.name = name;-->
-                            <!--                            this.address = address;-->
-                            <!--                            this.phoneNumber = phoneNumber;-->
-                            <!--                            this.email = email;-->
-                            <!--                            this.dateOfBirth = dateOfBirth;-->
-                            <!--                            this.avatar = avatar;-->
-                            <!--                            this.appUser = appUser;-->
-                            <!--                            this.position = position;-->
                         </div>
-                        <div class="col-12"><p class="m-2">Địa chỉ nhân viên</p>
-                            <div class="box"><input class="form-control" placeholder="Vui lòng nhập Địa chỉ nhân viên"
-                                                    th:field="*{address}"
-                                                    type="text">
+                        <div class="col-12"><p class="m-2">Ngày sinh nhân viên</p>
+                            <div class="box"><input class="form-control" placeholder="Vui lòng nhập Ngày sinh"
+                                                    th:field="*{dateOfBirth}"
+                                                    type="date">
                             </div>
                             <p style="color: red"
-                               th:errors="*{address}" th:if="${#fields.hasErrors('address')}"></p>
+                               th:errors="*{dateOfBirth}" th:if="${#fields.hasErrors('dateOfBirth')}"></p>
 
                         </div>
                         <div class="col-12"><p class="m-2">Số điện thoại nhân viên</p>
@@ -535,7 +527,6 @@
                             <p style="color: red" th:errors="*{position}"
                                th:if="${#fields.hasErrors('position')}"></p>
 
-
                         </div>
                         <div class="col-12"><p class="m-2">Thêm ảnh</p>
                             <div class="box">
@@ -565,6 +556,30 @@
                                 <!-- <div class="pic"> <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt=""> <span class="fas fa-times"></span> </div> -->
                                 <div class="rounded-circle"><span class="fas fa-plus"></span> <span
                                         class="number">3</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12"><p class="m-2">Tên đăng nhập</p>
+                            <div class="box"><input class="form-control"
+                                                    placeholder="Vui lòng nhập tên đăng nhập"
+                                                    th:field="*{appUser.userName}"
+                                                    type="text">
+                            </div>
+
+                            <div class="col-12"><p class="m-2">Mật khẩu</p>
+                                <div class="box"><input class="form-control" id="password"
+                                                        placeholder="Vui lòng nhập mật khẩu"
+                                                        th:field="*{appUser.encrytedPassword}"
+                                                        type="text">
+                                </div>
+                            </div>
+
+                            <div class="col-12"><p class="m-2">Xác nhận Mật khẩu</p>
+                                <div class="box"><input class="form-control" id="confirmPassword"
+                                                        placeholder="Vui lòng nhập mật khẩu"
+                                                        th:field="*{appUser.encrytedPassword}"
+                                                        type="text">
                                 </div>
                             </div>
                         </div>
@@ -669,6 +684,21 @@
             } else {
                 document.getElementById("my-form").submit();
             }
+        }
+    });
+
+    // Lắng nghe sự kiện khi người dùng nhập vào ô mật khẩu
+    document.getElementById('confirmPassword').addEventListener('input', function () {
+        var password = document.getElementById('password').value;
+        var confirmPassword = this.value;
+
+        // Kiểm tra xem hai mật khẩu có giống nhau hay không
+        if (password === confirmPassword) {
+            // Hai mật khẩu giống nhau, thực hiện các hành động phù hợp ở đây
+            alert('Hai mật khẩu giống nhau');
+        } else {
+            // Hai mật khẩu không giống nhau, thực hiện các hành động phù hợp ở đây
+            alert('Hai mật khẩu không giống nhau. Vui lòng kiểm tra lại');
         }
     });
 

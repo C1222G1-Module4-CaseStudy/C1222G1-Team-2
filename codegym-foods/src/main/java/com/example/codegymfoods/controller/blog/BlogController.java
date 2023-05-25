@@ -24,13 +24,12 @@ public class BlogController {
     @Autowired
     private IEmployeeService iEmployeeService;
 
-    @GetMapping("")
-    public String listBlog(Model model,
-                           @PageableDefault(size = 3) Pageable pageable) {
-        model.addAttribute("blogList", this.iBlogService.getBlog(pageable));
-        return "/blog/viewBlog";
+//    @GetMapping("")
+//    public String listBlog(Model model,
+//                           @PageableDefault(size = 3) Pageable pageable) {
+//        model.addAttribute("blogList", this.iBlogService.getBlog(pageable));
 //        return "/index";
-    }
+//    }
     @GetMapping("/create-form")
     public String createFormBlog (Model model) {
         model.addAttribute("blogs", new BlogDTO());

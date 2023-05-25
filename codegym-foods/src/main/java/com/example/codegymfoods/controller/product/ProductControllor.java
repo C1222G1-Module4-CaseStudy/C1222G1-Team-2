@@ -23,12 +23,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/")
-@SessionAttributes(value = "cartDTO")
+//@SessionAttributes(value = "cartDTO")
 public class ProductControllor {
-    @ModelAttribute(name = "cartDTO")
-    private CartDTO initCartDTO() {
-        return new CartDTO();
-    }
+//    @ModelAttribute(name = "cartDTO")
+//    private CartDTO initCartDTO() {
+//        return new CartDTO();
+//    }
     @Autowired
    private IProductService productService;
     @Autowired
