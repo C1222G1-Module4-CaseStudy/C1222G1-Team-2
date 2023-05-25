@@ -27,7 +27,7 @@ public class Employee {
     private Position position;
 
     @OneToOne
-    @JoinColumn(name = "app_user_id", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "app_user_id", referencedColumnName = "user_id", nullable = false, unique = true)
     private AppUser appUser;
 
     public Employee() {
