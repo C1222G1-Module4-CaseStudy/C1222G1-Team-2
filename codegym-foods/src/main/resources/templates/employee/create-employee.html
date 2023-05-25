@@ -467,7 +467,7 @@
             </div>
         </nav>
         <form action="/admin/employee/create" id="my-form" method="post" style="margin: 0 auto;margin-top: 60px;"
-              th:object="${employeeCreateDTO}">
+              th:object="${employeeCreate}">
             <div class="container">
                 <div class="card"><p class="h-1">Thêm mới nhân viên</p>
                     <div class="bar mb-3"></div>
@@ -479,14 +479,22 @@
                             </div>
                             <p style="color: red" th:errors="*{name}"
                                th:if="${#fields.hasErrors('name')}"></p>
+                            <!--                            this.name = name;-->
+                            <!--                            this.address = address;-->
+                            <!--                            this.phoneNumber = phoneNumber;-->
+                            <!--                            this.email = email;-->
+                            <!--                            this.dateOfBirth = dateOfBirth;-->
+                            <!--                            this.avatar = avatar;-->
+                            <!--                            this.appUser = appUser;-->
+                            <!--                            this.position = position;-->
                         </div>
-                        <div class="col-12"><p class="m-2">Ngày Sinh</p>
-                            <div class="box"><input class="form-control" placeholder="Vui lòng nhập Ngày sinh nhân viên"
-                                                    th:field="*{dateOfBirth}"
-                                                    type="date">
+                        <div class="col-12"><p class="m-2">Địa chỉ nhân viên</p>
+                            <div class="box"><input class="form-control" placeholder="Vui lòng nhập Địa chỉ nhân viên"
+                                                    th:field="*{address}"
+                                                    type="text">
                             </div>
                             <p style="color: red"
-                               th:errors="*{dateOfBirth}" th:if="${#fields.hasErrors('dateOfBirth')}"></p>
+                               th:errors="*{address}" th:if="${#fields.hasErrors('address')}"></p>
 
                         </div>
                         <div class="col-12"><p class="m-2">Số điện thoại nhân viên</p>

@@ -1,27 +1,24 @@
-package com.example.codegymfoods.dto.employee;
+package com.example.codegymfoods.dto;
 
-import com.example.codegymfoods.dto.employee.annotation.YearOldValid;
 import com.example.codegymfoods.model.employee.Position;
 import com.example.codegymfoods.model.login.AppUser;
 
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 public class EmployeeDTO {
     private Integer id;
-    @NotBlank(message = "Vui lòng không được để trống")
+    @NotBlank(message = "Không được để trống")
     private String name;
-    @NotBlank(message = "Vui lòng không được để trống")
+    @NotBlank(message = "Không được để trống")
     private String address;
-    @NotBlank(message = "Vui lòng không được để trống")
-    @Pattern(regexp = "\\b\\d{10,11}\\b", message = "Số điện thoại phải 10 hoặc 11 số")
+    @NotBlank(message = "Không được để trống")
     private String phoneNumber;
-    @NotBlank(message = "Vui lòng không được để trống")
+    @NotBlank(message = "Không được để trống")
     @Email(message = "Email chưa đúng định dạng. Vui lòng kiểm tra lại")
     private String email;
-    @NotBlank(message = "Vui lòng không được để trống")
-    @YearOldValid
+    @NotBlank(message = "Không được để trống")
     private String dateOfBirth;
     private String avatar;
     private AppUser appUser;
