@@ -106,116 +106,116 @@
     </div>
 </head>
 <body>
-            <div th:fragment="nav-top">
-                <nav class="navbar p-0 fixed-top d-flex flex-row">
-                    <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-                        <a class="navbar-brand brand-logo-mini" href="../index.html"><img alt="logo"
-                                                                                          src="assets/images/logo-mini.png"/></a>
+<div th:fragment="nav-top">
+    <nav class="navbar p-0 fixed-top d-flex flex-row">
+        <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+            <a class="navbar-brand brand-logo-mini" href="../index.html"><img alt="logo"
+                                                                              src="assets/images/logo-mini.png"/></a>
+        </div>
+        <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+            <button class="navbar-toggler navbar-toggler align-self-center" data-toggle="minimize"
+                    type="button">
+                <span class="mdi mdi-menu"></span>
+            </button>
+            <ul class="navbar-nav w-100">
+                <li class="nav-item w-100">
+                    <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                        <input class="form-control" name="name" placeholder="Tìm kiếm"
+                               style="color: white" th:value="${name}" type="text">
+                    </form>
+                </li>
+            </ul>
+            <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item dropdown d-none d-lg-block">
+                    <a aria-expanded="false" class="nav-link btn btn-success create-new-button"
+                       data-bs-toggle="dropdown" id="createbuttonDropdown"
+                       onclick="location.href = '/admin/employee/create'">+ Thêm mới</a>
+                </li>
+                <li class="nav-item dropdown border-left">
+                    <a class="nav-link count-indicator dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                       id="notificationDropdown">
+                        <i class="mdi mdi-bell"></i>
+                        <span class="count bg-danger"></span>
+                    </a>
+                    <div aria-labelledby="messageDropdown"
+                         class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                         th:classappend="${message} ? 'show' : ''">
+                        <h6 class="p-3 mb-0">Messages</h6>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <img alt="image"
+                                     class="rounded-circle profile-pic"
+                                     src="https://phunugioi.com/wp-content/uploads/2020/03/anh-hot-girl-trung-quoc-cuc-tinh-y-451x600.jpg">
+                            </div>
+                            <div th:class="${message} ? 'preview-item-content message-visible' : 'preview-item-content'">
+                                <p class="preview-subject ellipsis mb-1" th:text="${message}"></p>
+                                <p class="text-muted mb-0" id="currentTime"></p>
+                            </div>
+                        </a>
                     </div>
-                    <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
-                        <button class="navbar-toggler navbar-toggler align-self-center" data-toggle="minimize"
-                                type="button">
-                            <span class="mdi mdi-menu"></span>
-                        </button>
-                        <ul class="navbar-nav w-100">
-                            <li class="nav-item w-100">
-                                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                                    <input class="form-control" name="name" placeholder="Tìm kiếm"
-                                           style="color: white" th:value="${search}" type="text">
-                                </form>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav navbar-nav-right">
-                            <li class="nav-item dropdown d-none d-lg-block">
-                                <a aria-expanded="false" class="nav-link btn btn-success create-new-button"
-                                   data-bs-toggle="dropdown" id="createbuttonDropdown"
-                                   onclick="location.href = '/admin/employee/create'">+ Thêm mới</a>
-                            </li>
-                            <li class="nav-item dropdown border-left">
-                                <a class="nav-link count-indicator dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                                   id="notificationDropdown">
-                                    <i class="mdi mdi-bell"></i>
-                                    <span class="count bg-danger"></span>
-                                </a>
-                                <div aria-labelledby="messageDropdown"
-                                     class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                                     th:classappend="${message} ? 'show' : ''">
-                                    <h6 class="p-3 mb-0">Messages</h6>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item preview-item">
-                                        <div class="preview-thumbnail">
-                                            <img alt="image"
-                                                 class="rounded-circle profile-pic"
-                                                 src="https://phunugioi.com/wp-content/uploads/2020/03/anh-hot-girl-trung-quoc-cuc-tinh-y-451x600.jpg">
-                                        </div>
-                                        <div th:class="${message} ? 'preview-item-content message-visible' : 'preview-item-content'">
-                                            <p class="preview-subject ellipsis mb-1" th:text="${message}"></p>
-                                            <p class="text-muted mb-0" id="currentTime"></p>
-                                        </div>
-                                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-bs-toggle="dropdown" href="#" id="profileDropdown">
+                        <div class="navbar-profile">
+                            <form class="d-flex" role="search">
+                                <div class="user-info">
+                                    <img alt=""
+                                         class="img-xs rounded-circle"
+                                         src="${customerList.avatar}">
+                                    <!--                                        <span class="mb-0 font-weight-normal text-light m-2"-->
+                                    <!--                                              th:utext="${#request.userPrincipal.getName()}"></span>-->
                                 </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link" data-bs-toggle="dropdown" href="#" id="profileDropdown">
-                                    <div class="navbar-profile">
-                                        <form class="d-flex" role="search">
-                                            <div class="user-info">
-                                                <img alt=""
-                                                     class="img-xs rounded-circle"
-                                                     src="https://andy.codegym.vn/storage/images/avatars/db4f3d54fe0abe9c0a6dd50bdc707422.jpg">
-                                                <!--                                        <span class="mb-0 font-weight-normal text-light m-2"-->
-                                                <!--                                              th:utext="${#request.userPrincipal.getName()}"></span>-->
-                                            </div>
-                                            <!-- Button trigger modal -->
-                                            <button class="btn btn-outline-success" type="button">
-                                                Đăng xuất
-                                            </button>
-                                        </form>
-                                    </div>
-                                </a>
-                                <div aria-labelledby="profileDropdown"
-                                     class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list">
-                                    <h6 class="p-3 mb-0">Profile</h6>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item preview-item">
-                                        <div class="preview-thumbnail">
-                                            <div class="preview-icon bg-dark rounded-circle">
-                                                <i class="mdi mdi-settings text-success"></i>
-                                            </div>
-                                        </div>
-                                        <div class="preview-item-content">
-                                            <p class="preview-subject mb-1">Thông tin tài khoản</p>
-                                        </div>
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item preview-item">
-                                        <div class="preview-thumbnail">
-                                            <div class="preview-icon bg-dark rounded-circle">
-                                                <i class="mdi mdi-logout text-danger"></i>
-                                            </div>
-                                        </div>
-                                        <div class="preview-item-content">
-                                            <p class="preview-subject mb-1" data-bs-target="#logoutModal"
-                                               data-bs-toggle="modal">Đăng xuất</p>
-                                        </div>
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <p class="p-3 mb-0 text-center">Cài đặt</p>
+                                <!-- Button trigger modal -->
+                                <button class="btn btn-outline-success" type="button">
+                                    Tài khoản
+                                </button>
+                            </form>
+                        </div>
+                    </a>
+                    <div aria-labelledby="profileDropdown"
+                         class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list">
+                        <h6 class="p-3 mb-0">Profile</h6>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <div class="preview-icon bg-dark rounded-circle">
+                                    <i class="mdi mdi-settings text-success"></i>
                                 </div>
-                            </li>
-                        </ul>
-                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
-                                data-toggle="offcanvas"
-                                type="button">
-                            <span class="mdi mdi-format-line-spacing"></span>
-                        </button>
+                            </div>
+                            <div class="preview-item-content">
+                                <a class="preview-subject mb-1" th:href="@{/user/detail}">Thông tin tài khoản</a>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <div class="preview-icon bg-dark rounded-circle">
+                                    <i class="mdi mdi-logout text-danger"></i>
+                                </div>
+                            </div>
+                            <div class="preview-item-content">
+                                <p class="preview-subject mb-1" data-bs-target="#logoutModal"
+                                   data-bs-toggle="modal">Đăng xuất</p>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <p class="p-3 mb-0 text-center">Cài đặt</p>
                     </div>
-                </nav>
-            </div>
+                </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
+                    data-toggle="offcanvas"
+                    type="button">
+                <span class="mdi mdi-format-line-spacing"></span>
+            </button>
+        </div>
+    </nav>
+</div>
 <div th:fragment="footer">
     <footer class="footer">
         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Codegym-C12 Group 1 - 2023</span>
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Codegym-C12 Group 2 - 2023</span>
         </div>
     </footer>
 
@@ -226,7 +226,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Hôp thoại đăng xuất</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Hộp thoại đăng xuất</h5>
                     <button aria-label="Close" class="btn-close text-white" data-bs-dismiss="modal"
                             type="button">&times;
                     </button>
