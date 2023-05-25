@@ -2,7 +2,7 @@ package com.example.codegymfoods.controller.employee;
 
 import com.example.codegymfoods.dto.EmployeeDTO;
 import com.example.codegymfoods.model.employee.Employee;
-import com.example.codegymfoods.service.employee.IEmployyeService;
+import com.example.codegymfoods.service.employee.IEmployeeService;
 import com.example.codegymfoods.service.employee.IPositionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import java.util.List;
 @RequestMapping("/admin/employee")
 public class EmployeeController {
     @Autowired
-    private IEmployyeService employeeService;
+    private IEmployeeService employeeService;
     @Autowired
     private IPositionService positionService;
 

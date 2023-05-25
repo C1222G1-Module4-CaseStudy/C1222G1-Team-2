@@ -1,31 +1,26 @@
-package com.example.codegymfoods.model.blog;
+package com.example.codegymfoods.dto.blog;
 
 import com.example.codegymfoods.model.employee.Employee;
 
-import javax.persistence.*;
-import java.util.Date;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
-@Entity
-public class Blog {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BlogDTO {
     private Integer id;
-    @Column(columnDefinition = "Varchar(40)")
+    @NotEmpty(message = "Không thể để trống")
     private String title;
-    @Column(columnDefinition = "date")
-    private Date dateNow;
+    @NotBlank(message = "Không thể để trống")
+    private String dateNow;
+    @NotBlank(message = "Không thể để trống")
     private String imgUrl;
+    @NotBlank(message = "Không thể để trống")
     private String content;
-
-    @ManyToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 
-    public Blog() {
+    public BlogDTO() {
     }
 
-    public Blog(Integer id, String title, Date dateNow, String imgUrl, String content, Employee employee) {
-
+    public BlogDTO(Integer id, String title, String dateNow, String imgUrl, String content, Employee employee) {
         this.id = id;
         this.title = title;
         this.dateNow = dateNow;
@@ -50,11 +45,11 @@ public class Blog {
         this.title = title;
     }
 
-    public Date getDateNow() {
+    public String getDateNow() {
         return dateNow;
     }
 
-    public void setDateNow(Date dateNow) {
+    public void setDateNow(String dateNow) {
         this.dateNow = dateNow;
     }
 
