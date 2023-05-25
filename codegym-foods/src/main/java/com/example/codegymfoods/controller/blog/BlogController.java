@@ -3,6 +3,7 @@ package com.example.codegymfoods.controller.blog;
 import com.example.codegymfoods.dto.blog.BlogDTO;
 import com.example.codegymfoods.model.blog.Blog;
 import com.example.codegymfoods.service.blog.IBlogService;
+import com.example.codegymfoods.service.employee.IEmployeeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -20,19 +21,20 @@ import javax.validation.Valid;
 public class BlogController {
     @Autowired
     private IBlogService iBlogService;
-//    @Autowired
-//    private IEmployeeService iEmployeeService;
+    @Autowired
+    private IEmployeeService iEmployeeService;
 
     @GetMapping("")
     public String listBlog(Model model,
                            @PageableDefault(size = 3) Pageable pageable) {
         model.addAttribute("blogList", this.iBlogService.getBlog(pageable));
         return "/blog/viewBlog";
+//        return "/index";
     }
     @GetMapping("/create-form")
     public String createFormBlog (Model model) {
         model.addAttribute("blogs", new BlogDTO());
-//        model.addAttribute("employee", this.iEmployeeService.getEmployee());
+        model.addAttribute("employee", this.iEmployeeService.getEmployee());
         return "/blog/createBlog";
     }
     @PostMapping("/createBlog")
@@ -51,7 +53,7 @@ public class BlogController {
     @GetMapping("/{id}/update")
     public String update(@PathVariable Integer id, Model model) {
         model.addAttribute("blogs", iBlogService.findById(id));
-//        model.addAttribute("employee", this.iEmployeeService.getEmployee());
+        model.addAttribute("employee", this.iEmployeeService.getEmployee());
         return "/blog/updateBlog";
     }
 
@@ -71,7 +73,7 @@ public class BlogController {
     @GetMapping("/{id}/detail")
     public String detail(@PathVariable Integer id, Model model) {
         model.addAttribute("blog", iBlogService.findById(id));
-//        model.addAttribute("employee", this.iEmployeeService.getEmployee());
+        model.addAttribute("employee", this.iEmployeeService.getEmployee());
         return "/blog/detailBlog";
     }
 

@@ -14,7 +14,7 @@ public class AppUser {
     @Id
     @GeneratedValue
     @Column(name = "user_id", nullable = false)
-    private Long id;
+    private Integer id;
 
 
     @Column(name = "user_name", length = 36, nullable = false)
@@ -32,7 +32,8 @@ public class AppUser {
     public AppUser() {
     }
 
-    public AppUser(Long id, String userName, String encrytedPassword, boolean enabled, Employee employee, Customer customer) {
+
+    public AppUser(Integer id, String userName, String encrytedPassword, boolean enabled, Employee employee, Customer customer) {
         this.id = id;
         this.userName = userName;
         this.encrytedPassword = encrytedPassword;
@@ -41,11 +42,11 @@ public class AppUser {
         this.customer = customer;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

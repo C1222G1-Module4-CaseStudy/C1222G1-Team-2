@@ -25,6 +25,7 @@ public class Blog {
     }
 
     public Blog(Integer id, String title, Date dateNow, String imgUrl, String content, Employee employee) {
+
         this.id = id;
         this.title = title;
         this.dateNow = dateNow;
@@ -61,7 +62,7 @@ public class Blog {
         return imgUrl;
     }
 
-    public void setImgUrl(String author) {
+    public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
 
