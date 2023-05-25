@@ -23,7 +23,7 @@ public class Customer {
     private String avatar;
 
     @OneToOne
-    @JoinColumn(name = "app_user_id", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "app_user_id", referencedColumnName = "user_id", nullable = false, unique = true)
     private AppUser appUser;
 
     public Customer() {
