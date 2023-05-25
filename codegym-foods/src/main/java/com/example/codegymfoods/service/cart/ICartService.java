@@ -1,8 +1,15 @@
 package com.example.codegymfoods.service.cart;
 
+import com.example.codegymfoods.dto.cart.CartDTO;
+import com.example.codegymfoods.dto.product.ProductFromCartDTO;
+import com.example.codegymfoods.model.product.Product;
+
 import java.util.List;
 
 public interface ICartService {
 
-//    long totalBill(List<ProductFromCartDTO> productFromCartDTOList);
+    void addToCart(Product product, CartDTO cartDTO);
+    void changeQuantity(int id, int quantity, CartDTO cartDTO);
+
+    long totalBill(List<ProductFromCartDTO> productFromCartDTOList);
 }

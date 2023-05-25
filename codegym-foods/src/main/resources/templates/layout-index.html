@@ -2,18 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <!--Phần này nhúng HEADER -->
+    <div th:fragment="head-config">
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
     <title>CodeGym Foods</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
-    <!--    cua modal 2 line cart-->
-    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
-    <!--    <link th:href="@{/home/assets/css/style-modal-cart.css}" rel="stylesheet">-->
-
-    <script src="
-https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 "></script>
     <!-- Favicons -->
     <link rel="icon" th:href="@{/home/assets/img/favicon.png}">
@@ -35,145 +31,148 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 
     <!-- Template Main CSS File -->
     <link rel="stylesheet" th:href="@{/home/assets/css/style.css}">
+    </div>
 </head>
 
 <body>
-
+<!--Phần này nhúng Navbar -->
 <!-- ======= Top Bar ======= -->
-<div class="d-flex align-items-center fixed-top" id="topbar">
-    <div class="container d-flex justify-content-center justify-content-md-between">
+<div th:fragment="navba-top">
+    <div class="d-flex align-items-center fixed-top" id="topbar">
+        <div class="container d-flex justify-content-center justify-content-md-between">
 
-        <div class="contact-info d-flex align-items-center">
-            <i class="bi bi-phone d-flex align-items-center"><span>+84 702712217</span></i>
-            <i class="bi bi-clock d-flex align-items-center ms-4"><span> 24h/7</span></i>
+            <div class="contact-info d-flex align-items-center">
+                <i class="bi bi-phone d-flex align-items-center"><span>+84 702712217</span></i>
+                <i class="bi bi-clock d-flex align-items-center ms-4"><span> 24h/7</span></i>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- ======= Header ======= -->
-<header class="fixed-top d-flex align-items-cente" id="header">
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+    <!-- ======= Header ======= -->
+    <header class="fixed-top d-flex align-items-cente" id="header">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
 
-        <h1 class="logo me-auto me-lg-0"><a href="index.html">CodeGym Foods</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+            <h1 class="logo me-auto me-lg-0"><a href="index.html">CodeGym Foods</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-        <nav class="navbar order-last order-lg-0" id="navbar">
-            <ul>
-                <li><a class="nav-link scrollto active" href="#hero">Trang chủ</a></li>
-                <li><a class="nav-link scrollto" href="#about">Giới thiệu</a></li>
-                <li><a class="nav-link scrollto" href="#menu">Danh mục</a></li>
-                <li><a class="nav-link scrollto" href="#specials">Tin tức</a></li>
-                <li><a class="nav-link scrollto" href="#events">Khuyến mãi</a></li>
-                <li><a class="nav-link scrollto" href="#chefs">Nhân viên</a></li>
-                <li><a class="nav-link scrollto" href="#gallery">Hình ảnh</a></li>
+            <nav class="navbar order-last order-lg-0" id="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto active" href="#hero">Trang chủ</a></li>
+                    <li><a class="nav-link scrollto" href="#about">Giới thiệu</a></li>
+                    <li><a class="nav-link scrollto" href="#menu">Danh mục</a></li>
+                    <li><a class="nav-link scrollto" href="#specials">Tin tức</a></li>
+                    <li><a class="nav-link scrollto" href="#events">Khuyến mãi</a></li>
+                    <li><a class="nav-link scrollto" href="#chefs">Nhân viên</a></li>
+                    <li><a class="nav-link scrollto" href="#gallery">Hình ảnh</a></li>
 
-                <li><a class="nav-link scrollto" href="#contact">Liên hệ</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-        <a class="book-a-table-btn scrollto d-none d-lg-flex" data-target="#myModal" data-toggle="modal" href="/cart/home"
-           id="id"><span><i class="bi bi-basket-fill"style="font-size: 24px "></i></span>
-            <span id="cartItemCount"></span>
-        </a>
-
-        <!--        giỏ hàng -->
-        <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="myModal" role="dialog"
-             tabindex="-1">
-            <div class="popup">
-                <h2>Giỏ hàng của bạn</h2>
-                <div class="tableSection">
-                    <table class="table addCartTable">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th>Số lượng</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Loại sản phẩm</th>
-                            <th>Đơn giá</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="product,inter:${productFromCartDTOList}">
-                            <td>
-                                <img alt="" class="menu-img" th:src="${product.picture}">
-                            </td>
-                            <td>
-                                <!-- <input type="text" value="1" id="qty"> -->
-                                <input class="form-control" id="qty" th:text="${product.quantityProductFromCartDTO}" type="text"
-                                       value="1">
-                            </td>
-                            <td th:text="${product.nameProductFromCartDTO}">
-                            </td>
-                            <td>
-                                <p><span class="price" th:text="${product.priceProductFromCartDTO}"></span></p>
-                                <span class="remove">Xoá</span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <a class="addmorebtn" href="#">+ Thêm lựa chọn kích cỡ sản phẩm</a>
-                <div class="paySection">
-                    <a class="btn btn-primary btn-lg checkoutbtn" href="#">Thanh Toán</a>
-                </div>
-                <div class="carroselSection">
-                    <h3>Thêm sản phẩm vào giỏ hàng</h3>
-                    <div class="carrosalinner">
-                        <div class="carrosalthumb">
-                            <div class="carrosalblock">
-                                <div class="imgSection">
-                                    <img alt="" src="http://www.gedachtegoed.nl/img/mobileimg1.png">
-                                </div>
-                                <div class="carrosaltextSection">
-                                    <h4>Gildan 8oz Heavy Blend Hoodie Black</h4>
-                                    <p class="price"><span class="orignal">$39.99</span><span
-                                            class="discount">$36.99</span></p>
-                                    <button class="add-product-button" data-discount="36.99"
-                                            datat-select="Gildan 8oz Heavy Blend Hoodie Black">Add
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carrosalthumb">
-                            <div class="carrosalblock">
-                                <div class="imgSection">
-                                    <img alt="" src="http://www.gedachtegoed.nl/img/mobileimg1.png">
-                                </div>
-                                <div class="carrosaltextSection">
-                                    <h4>Hanes Tagless Tee Black</h4>
-                                    <p class="price"><span class="orignal">$22.99</span><span
-                                            class="discount">$19.99</span></p>
-                                    <button class="add-product-button" data-discount="19.99"
-                                            data-select="Hanes Tagless Tee Black">Add
-                                    </button>
+                    <li><a class="nav-link scrollto" href="#contact">Liên hệ</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <a class="book-a-table-btn scrollto d-none d-lg-flex" data-target="#myModal" data-toggle="modal"
+               href="/cart/home"
+               id="id"><span><i class="bi bi-basket-fill"
+                                style="font-size: 24px "></i></span>
+            </a>
+            <!--        giỏ hàng -->
+            <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="myModal" role="dialog"
+                 tabindex="-1">
+                <div class="popup">
+                    <h2>Giỏ hàng của bạn</h2>
+                    <div class="tableSection">
+                        <table class="table addCartTable">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Số lượng</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Loại sản phẩm</th>
+                                <th>Đơn giá</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="product,inter:${productFromCartDTOList}">
+                                <td>
+                                    <img alt="" class="menu-img" th:src="${product.picture}">
+                                </td>
+                                <td>
+                                    <!-- <input type="text" value="1" id="qty"> -->
+                                    <input class="form-control" id="qty" th:text="${product.quantityProductFromCartDTO}"
+                                           type="text"
+                                           value="1">
+                                </td>
+                                <td th:text="${product.nameProductFromCartDTO}">
+                                </td>
+                                <td>
+                                    <p><span class="price" th:text="${product.priceProductFromCartDTO}"></span></p>
+                                    <span class="remove">Xoá</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a class="addmorebtn" href="#">+ Thêm lựa chọn kích cỡ sản phẩm</a>
+                    <div class="paySection">
+                        <a class="btn btn-primary btn-lg checkoutbtn" href="#">Thanh Toán</a>
+                    </div>
+                    <div class="carroselSection">
+                        <h3>Thêm sản phẩm vào giỏ hàng</h3>
+                        <div class="carrosalinner">
+                            <div class="carrosalthumb">
+                                <div class="carrosalblock">
+                                    <div class="imgSection">
+                                        <img alt="" src="http://www.gedachtegoed.nl/img/mobileimg1.png">
+                                    </div>
+                                    <div class="carrosaltextSection">
+                                        <h4>Gildan 8oz Heavy Blend Hoodie Black</h4>
+                                        <p class="price"><span class="orignal">$39.99</span><span
+                                                class="discount">$36.99</span></p>
+                                        <button class="add-product-button" data-discount="36.99"
+                                                datat-select="Gildan 8oz Heavy Blend Hoodie Black">Add
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="carrosalthumb">
-                            <div class="carrosalblock">
-                                <div class="imgSection">
-                                    <img alt="" src="http://www.gedachtegoed.nl/img/mobileimg1.png">
+                            <div class="carrosalthumb">
+                                <div class="carrosalblock">
+                                    <div class="imgSection">
+                                        <img alt="" src="http://www.gedachtegoed.nl/img/mobileimg1.png">
+                                    </div>
+                                    <div class="carrosaltextSection">
+                                        <h4>Hanes Tagless Tee Black</h4>
+                                        <p class="price"><span class="orignal">$22.99</span><span
+                                                class="discount">$19.99</span></p>
+                                        <button class="add-product-button" data-discount="19.99"
+                                                data-select="Hanes Tagless Tee Black">Add
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="carrosaltextSection">
-                                    <h4>Gildan Women's Relaxed Tee Black</h4>
-                                    <p class="price"><span class="orignal">$22.99</span><span
-                                            class="discount">$19.99</span></p>
-                                    <button class="add-product-button" data-discount="19.99"
-                                            data-select="Gildan Women's Relaxed Tee Black">Add
-                                    </button>
+                            </div>
+                            <div class="carrosalthumb">
+                                <div class="carrosalblock">
+                                    <div class="imgSection">
+                                        <img alt="" src="http://www.gedachtegoed.nl/img/mobileimg1.png">
+                                    </div>
+                                    <div class="carrosaltextSection">
+                                        <h4>Gildan Women's Relaxed Tee Black</h4>
+                                        <p class="price"><span class="orignal">$22.99</span><span
+                                                class="discount">$19.99</span></p>
+                                        <button class="add-product-button" data-discount="19.99"
+                                                data-select="Gildan Women's Relaxed Tee Black">Add
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <button class="btn btn-default closemodal" data-dismiss="modal" type="button">&times;</button>
                 </div>
-                <button class="btn btn-default closemodal" data-dismiss="modal" type="button">&times;</button>
             </div>
+
         </div>
-
-    </div>
-</header><!-- End Header -->
-
+    </header><!-- End Header -->
+</div>
 <!-- ======= Hero Section ======= -->
 <section class="d-flex align-items-center" id="hero">
     <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
@@ -312,14 +311,15 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                     <img alt="" class="menu-img" th:src="${product.picture}">
                     <div class="menu-content">
                         <a href="#" th:text="${product.name}"></a><span th:text="${product.price + 'đ'}"></span>
-                        <a th:href="@{/cart/addToCart/{id}(id=${product.id})}" onclick="addToCart(event)"><i class="bi bi-bag-plus-fill"></i> </a>
+                        <a th:href="@{/cart/addToCart/{id}(id=${product.id})}"><i class="bi bi-bag-plus-fill"></i> </a>
                     </div>
                     <div class="menu-ingredients">
                         <p th:text="${product.description}"></p>
                     </div>
                     <div class="section-title">
                         <a role="button"
-                           th:href="@{/updateProduct/{id}(id=${product.id})}"><i class="bi bi-gear-fill" style="color: aliceblue"></i></a>
+                           th:href="@{/updateProduct/{id}(id=${product.id})}"><i class="bi bi-gear-fill"
+                                                                                 style="color: aliceblue"></i></a>
                         <i class="bi bi-trash-fill" data-bs-target="#modelId" data-bs-toggle="modal"
                            th:onclick="|deleteByID(${product.id})|"
                            type="button"></i>
@@ -345,27 +345,105 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                 <h2>Tin tức</h2>
                 <p>Những thông tin chia sẻ</p>
             </div>
-
             <div class="row" data-aos="fade-up" data-aos-delay="100">
                 <div class="col-lg-3">
                     <ul class="nav nav-tabs flex-column">
-                        <li class="nav-item" th:each="item, itemIndex : ${blogList}">
-                            <a class="nav-link" th:class="${itemIndex == 0 ? 'active show' : ''}"
-                               th:data-bs-toggle="tab" th:href="'#tab-' + ${itemIndex}">[[${item.title}]]</a>
+                        <li class="nav-item">
+                            <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">Unde prae</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#tab-2">Unde praesentium sed</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#tab-3">Pariatur explicabo vel</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#tab-4">Nostrum qui quasi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#tab-5">Iusto ut expedita aut</a>
                         </li>
                     </ul>
                 </div>
                 <div class="col-lg-9 mt-4 mt-lg-0">
                     <div class="tab-content">
-                        <div class="tab-pane" th:each="item, itemIndex : ${blogList}"
-                             th:class="${itemIndex == 0 ? 'active show' : ''}" th:id="'tab-' + ${itemIndex}">
+                        <div class="tab-pane active show" id="tab-1">
                             <div class="row">
                                 <div class="col-lg-8 details order-2 order-lg-1">
-                                    <h3 th:text="${item.title}"></h3>
-                                    <p class="fst-italic" th:text="${item.content}">Content</p>
+                                    <h3>Architecto ut aperiam autem id</h3>
+                                    <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila
+                                        parde sonata raqer a videna mareta paulona marka</p>
+                                    <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum
+                                        eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat
+                                        minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui
+                                        similique accusamus nostrum rem vero</p>
                                 </div>
                                 <div class="col-lg-4 text-center order-1 order-lg-2">
-                                    <img alt="" class="img-fluid" th:src="${item.imgUrl}">
+                                    <img alt="" class="img-fluid" src="/home/assets/img/specials-1.png">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-2">
+                            <div class="row">
+                                <div class="col-lg-8 details order-2 order-lg-1">
+                                    <h3>Et blanditiis nemo veritatis excepturi</h3>
+                                    <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila
+                                        parde sonata raqer a videna mareta paulona marka</p>
+                                    <p>Ea ipsum voluptatem consequatur quis est. Illum error ullam omnis quia et
+                                        reiciendis sunt sunt est. Non aliquid repellendus itaque accusamus eius et velit
+                                        ipsa voluptates. Optio nesciunt eaque beatae accusamus lerode pakto madirna
+                                        desera vafle de nideran pal</p>
+                                </div>
+                                <div class="col-lg-4 text-center order-1 order-lg-2">
+                                    <img alt="" class="img-fluid" src="/home/assets/img/specials-2.png">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-3">
+                            <div class="row">
+                                <div class="col-lg-8 details order-2 order-lg-1">
+                                    <h3>Impedit facilis occaecati odio neque aperiam sit</h3>
+                                    <p class="fst-italic">Eos voluptatibus quo. Odio similique illum id quidem non enim
+                                        fuga. Qui natus non sunt dicta dolor et. In asperiores velit quaerat perferendis
+                                        aut</p>
+                                    <p>Iure officiis odit rerum. Harum sequi eum illum corrupti culpa veritatis
+                                        quisquam. Neque necessitatibus illo rerum eum ut. Commodi ipsam minima molestiae
+                                        sed laboriosam a iste odio. Earum odit nesciunt fugiat sit ullam. Soluta et
+                                        harum voluptatem optio quae</p>
+                                </div>
+                                <div class="col-lg-4 text-center order-1 order-lg-2">
+                                    <img alt="" class="img-fluid" src="/home/assets/img/specials-3.png">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-4">
+                            <div class="row">
+                                <div class="col-lg-8 details order-2 order-lg-1">
+                                    <h3>Fuga dolores inventore laboriosam ut est accusamus laboriosam dolore</h3>
+                                    <p class="fst-italic">Totam aperiam accusamus. Repellat consequuntur iure voluptas
+                                        iure porro quis delectus</p>
+                                    <p>Eaque consequuntur consequuntur libero expedita in voluptas. Nostrum ipsam
+                                        necessitatibus aliquam fugiat debitis quis velit. Eum ex maxime error in
+                                        consequatur corporis atque. Eligendi asperiores sed qui veritatis aperiam quia a
+                                        laborum inventore</p>
+                                </div>
+                                <div class="col-lg-4 text-center order-1 order-lg-2">
+                                    <img alt="" class="img-fluid" src="/home/assets/img/specials-4.png">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-5">
+                            <div class="row">
+                                <div class="col-lg-8 details order-2 order-lg-1">
+                                    <h3>Est eveniet ipsam sindera pad rone matrelat sando reda</h3>
+                                    <p class="fst-italic">Omnis blanditiis saepe eos autem qui sunt debitis porro
+                                        quia.</p>
+                                    <p>Exercitationem nostrum omnis. Ut reiciendis repudiandae minus. Omnis recusandae
+                                        ut non quam ut quod eius qui. Ipsum quia odit vero atque qui quibusdam amet.
+                                        Occaecati sed est sint aut vitae molestiae voluptate vel</p>
+                                </div>
+                                <div class="col-lg-4 text-center order-1 order-lg-2">
+                                    <img alt="" class="img-fluid" src="/home/assets/img/specials-5.png">
                                 </div>
                             </div>
                         </div>
@@ -442,32 +520,38 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                   method="post" role="form">
                 <div class="row">
                     <div class="col-lg-4 col-md-6 form-group">
-                        <input class="form-control" data-msg="Please enter at least 4 chars" data-rule="minlen:4" id="name" name="name"
+                        <input class="form-control" data-msg="Please enter at least 4 chars" data-rule="minlen:4"
+                               id="name" name="name"
                                placeholder="Your Name" type="text">
                         <div class="validate"></div>
                     </div>
                     <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                        <input class="form-control" data-msg="Please enter a valid email" data-rule="email" id="email" name="email"
+                        <input class="form-control" data-msg="Please enter a valid email" data-rule="email" id="email"
+                               name="email"
                                placeholder="Your Email" type="email">
                         <div class="validate"></div>
                     </div>
                     <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                        <input class="form-control" data-msg="Please enter at least 4 chars" data-rule="minlen:4" id="phone" name="phone"
+                        <input class="form-control" data-msg="Please enter at least 4 chars" data-rule="minlen:4"
+                               id="phone" name="phone"
                                placeholder="Your Phone" type="text">
                         <div class="validate"></div>
                     </div>
                     <div class="col-lg-4 col-md-6 form-group mt-3">
-                        <input class="form-control" data-msg="Please enter at least 4 chars" data-rule="minlen:4" id="date" name="date"
+                        <input class="form-control" data-msg="Please enter at least 4 chars" data-rule="minlen:4"
+                               id="date" name="date"
                                placeholder="Date" type="text">
                         <div class="validate"></div>
                     </div>
                     <div class="col-lg-4 col-md-6 form-group mt-3">
-                        <input class="form-control" data-msg="Please enter at least 4 chars" data-rule="minlen:4" id="time" name="time"
+                        <input class="form-control" data-msg="Please enter at least 4 chars" data-rule="minlen:4"
+                               id="time" name="time"
                                placeholder="Time" type="text">
                         <div class="validate"></div>
                     </div>
                     <div class="col-lg-4 col-md-6 form-group mt-3">
-                        <input class="form-control" data-msg="Please enter at least 1 chars" data-rule="minlen:1" id="people" name="people"
+                        <input class="form-control" data-msg="Please enter at least 1 chars" data-rule="minlen:1"
+                               id="people" name="people"
                                placeholder="# of people" type="number">
                         <div class="validate"></div>
                     </div>
@@ -769,7 +853,8 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
         <div data-aos="fade-up">
             <iframe allowfullscreen
                     frameborder="0"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.2065620400426!2d108.22781327180523!3d16.05476730586307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219a486b7f699%3A0xae6269b629a63e82!2zQ29kZUd5bSDEkMOgIE7hurVuZw!5e0!3m2!1sen!2s!4v1684899875884!5m2!1sen!2s" style="border:0; width: 100%; height: 350px;"></iframe>
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.2065620400426!2d108.22781327180523!3d16.05476730586307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219a486b7f699%3A0xae6269b629a63e82!2zQ29kZUd5bSDEkMOgIE7hurVuZw!5e0!3m2!1sen!2s!4v1684899875884!5m2!1sen!2s"
+                    style="border:0; width: 100%; height: 350px;"></iframe>
         </div>
 
         <div class="container" data-aos="fade-up">
@@ -846,7 +931,10 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
         </div>
     </section><!-- End Contact Section -->
 
-</main><!-- End #main -->
+</main>
+<!-- End #main -->
+<!--Phần này nhúng Footer -->
+<div th:fragment="footer">
     <footer id="footer">
         <div class="footer-top">
             <div class="container">
@@ -923,50 +1011,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 
     <!-- Template Main JS File -->
     <script th:src="@{/home/assets/js/main.js}"></script>
-
-
-    <div aria-hidden="true" aria-labelledby="modelTitleId" class="modal fade" id="modelId" role="dialog" tabindex="-1">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modelTitleId"></h4>
-                    <button aria-label="Close" class="close" data-bs-dismiss="modal" type="button">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <span style="color: red"> Bạn có muốn xóa sản phẩm này không ?</span>
-                </div>
-                <div class="modal-footer">
-                    <form action="/deleteProduct">
-                        <input th:id="idDelete" th:name="id" type="hidden">
-                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Đóng</button>
-                        <button class="btn btn-danger" type="submit">Xóa</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        function deleteByID(id) {
-            document.getElementById("idDelete").value = id;
-        }
-    </script>
-    <script>
-        function findByName(nameToSearch) {
-            nameToSearch = $('#search').val()
-            $.ajax({
-                url: `http://localhost:8080/cart/addToCart/${nameToSearch}`,
-                type: "get",
-                success: function (blogList) {
-
-                    //
-                    $('#Listblog').html(blogListStr)
-
-                }
-            })
-        }
-    </script>
+</div>
 </body>
 
 </html>

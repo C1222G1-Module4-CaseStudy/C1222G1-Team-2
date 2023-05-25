@@ -24,6 +24,11 @@ public class UserRole {
     public UserRole() {
     }
 
+    public UserRole(AppUser appUser, AppRole appRole) {
+        this.appUser = appUser;
+        this.appRole = appRole;
+    }
+
     public Integer getId() {
         return id;
     }

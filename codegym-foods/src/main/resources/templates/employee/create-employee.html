@@ -527,23 +527,6 @@
                             <p style="color: red" th:errors="*{position}"
                                th:if="${#fields.hasErrors('position')}"></p>
 
-                            <div class="col-12"><p class="m-2">Tên đăng nhập</p>
-                                <div class="box"><input class="form-control"
-                                                        placeholder="Vui lòng nhập tên đăng nhập"
-                                                        th:field="*{appUser?.userName}"
-                                                        type="text">
-                                </div>
-                                <p style="color: red"
-                                   th:errors="*{appUser?.userName}" th:if="${#fields.hasErrors('appUser?.userName')}"></p>
-
-                                <div class="col-12"><p class="m-2">Mật khẩu</p>
-                                    <div class="box"><input class="form-control" placeholder="Vui lòng nhập Địa chỉ nhân viên"
-                                                            th:field="*{appUser?.encrytedPassword}"
-                                                            type="text">
-                                    </div>
-                                    <p style="color: red"
-                                       th:errors="*{appUser?.encrytedPassword}" th:if="${#fields.hasErrors('appUser?.encrytedPassword')}"></p>
-
                             </div>
                             <div class="col-12"><p class="m-2">Thêm ảnh</p>
                                 <div class="box">
@@ -582,7 +565,20 @@
                                        type="submit"
                                        value="Xác nhận Tạo mới nhân viên">
                             </div>
-                        </div>
+
+                        <div class="col-12"><p class="m-2">Tên đăng nhập</p>
+                            <div class="box"><input class="form-control"
+                                                    placeholder="Vui lòng nhập tên đăng nhập"
+                                                    th:field="*{appUser.userName}"
+                                                    type="text">
+                            </div>
+
+                            <div class="col-12"><p class="m-2">Mật khẩu</p>
+                                <div class="box"><input class="form-control" placeholder="Vui lòng nhập Địa chỉ nhân viên"
+                                                        th:field="*{appUser.encrytedPassword}"
+                                                        type="text">
+                                </div>
+                            </div>
                     </div>
                 </div>
         </form>
