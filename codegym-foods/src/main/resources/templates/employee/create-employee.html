@@ -467,7 +467,7 @@
             </div>
         </nav>
         <form action="/admin/employee/create" id="my-form" method="post" style="margin: 0 auto;margin-top: 60px;"
-              th:object="${employeeCreate}">
+              th:object="${employeeCreateDTO}">
             <div class="container">
                 <div class="card"><p class="h-1">Thêm mới nhân viên</p>
                     <div class="bar mb-3"></div>
@@ -479,22 +479,14 @@
                             </div>
                             <p style="color: red" th:errors="*{name}"
                                th:if="${#fields.hasErrors('name')}"></p>
-                            <!--                            this.name = name;-->
-                            <!--                            this.address = address;-->
-                            <!--                            this.phoneNumber = phoneNumber;-->
-                            <!--                            this.email = email;-->
-                            <!--                            this.dateOfBirth = dateOfBirth;-->
-                            <!--                            this.avatar = avatar;-->
-                            <!--                            this.appUser = appUser;-->
-                            <!--                            this.position = position;-->
                         </div>
-                        <div class="col-12"><p class="m-2">Địa chỉ nhân viên</p>
-                            <div class="box"><input class="form-control" placeholder="Vui lòng nhập Địa chỉ nhân viên"
-                                                    th:field="*{address}"
-                                                    type="text">
+                        <div class="col-12"><p class="m-2">Ngày sinh nhân viên</p>
+                            <div class="box"><input class="form-control" placeholder="Vui lòng nhập Ngày sinh"
+                                                    th:field="*{dateOfBirth}"
+                                                    type="date">
                             </div>
                             <p style="color: red"
-                               th:errors="*{address}" th:if="${#fields.hasErrors('address')}"></p>
+                               th:errors="*{dateOfBirth}" th:if="${#fields.hasErrors('dateOfBirth')}"></p>
 
                         </div>
                         <div class="col-12"><p class="m-2">Số điện thoại nhân viên</p>
@@ -535,48 +527,64 @@
                             <p style="color: red" th:errors="*{position}"
                                th:if="${#fields.hasErrors('position')}"></p>
 
+                            <div class="col-12"><p class="m-2">Tên đăng nhập</p>
+                                <div class="box"><input class="form-control"
+                                                        placeholder="Vui lòng nhập tên đăng nhập"
+                                                        th:field="*{appUser?.userName}"
+                                                        type="text">
+                                </div>
+                                <p style="color: red"
+                                   th:errors="*{appUser?.userName}" th:if="${#fields.hasErrors('appUser?.userName')}"></p>
 
-                        </div>
-                        <div class="col-12"><p class="m-2">Thêm ảnh</p>
-                            <div class="box">
-                                <input class="form-control" id="image-url" name="image-url" th:field="*{avatar}"
-                                       type="text">
+                                <div class="col-12"><p class="m-2">Mật khẩu</p>
+                                    <div class="box"><input class="form-control" placeholder="Vui lòng nhập Địa chỉ nhân viên"
+                                                            th:field="*{appUser?.encrytedPassword}"
+                                                            type="text">
+                                    </div>
+                                    <p style="color: red"
+                                       th:errors="*{appUser?.encrytedPassword}" th:if="${#fields.hasErrors('appUser?.encrytedPassword')}"></p>
+
                             </div>
-                            <input id="file-input" type="file">
-                        </div>
-                        <p style="color: red" th:errors="*{avatar}"
-                           th:if="${#fields.hasErrors('avatar')}"></p>
+                            <div class="col-12"><p class="m-2">Thêm ảnh</p>
+                                <div class="box">
+                                    <input class="form-control" id="image-url" name="image-url" th:field="*{avatar}"
+                                           type="text">
+                                </div>
+                                <input id="file-input" type="file">
+                            </div>
+                            <p style="color: red" th:errors="*{avatar}"
+                               th:if="${#fields.hasErrors('avatar')}"></p>
 
-                        <div class="col-12">
-                            <div class="d-flex align-items-center mt-4">
-                                <div class="pic"><img
-                                        alt=""
-                                        src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500">
-                                    <span class="fas fa-times"></span></div>
-                                <div class="pic"><img
-                                        alt=""
-                                        src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500">
-                                    <span class="fas fa-times"></span></div>
-                                <div class="pic"><img
-                                        alt=""
-                                        src="https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500">
-                                    <span class="fas fa-times"></span></div>
-                                <!-- <div class="pic"> <img src="https://images.pexels.com/photos/2078265/pexels-photo-2078265.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt=""> <span class="fas fa-times"></span> </div> -->
-                                <!-- <div class="pic"> <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt=""> <span class="fas fa-times"></span> </div> -->
-                                <div class="rounded-circle"><span class="fas fa-plus"></span> <span
-                                        class="number">3</span>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center mt-4">
+                                    <div class="pic"><img
+                                            alt=""
+                                            src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500">
+                                        <span class="fas fa-times"></span></div>
+                                    <div class="pic"><img
+                                            alt=""
+                                            src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500">
+                                        <span class="fas fa-times"></span></div>
+                                    <div class="pic"><img
+                                            alt=""
+                                            src="https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500">
+                                        <span class="fas fa-times"></span></div>
+                                    <!-- <div class="pic"> <img src="https://images.pexels.com/photos/2078265/pexels-photo-2078265.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt=""> <span class="fas fa-times"></span> </div> -->
+                                    <!-- <div class="pic"> <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt=""> <span class="fas fa-times"></span> </div> -->
+                                    <div class="rounded-circle"><span class="fas fa-plus"></span> <span
+                                            class="number">3</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <input class="form-control" id="upload-btn"
-                                   style="border: 1px solid #00bb00; border-radius: 15px;margin-top: 20px "
-                                   type="submit"
-                                   value="Xác nhận Tạo mới nhân viên">
+                            <div class="col-12">
+                                <input class="form-control" id="upload-btn"
+                                       style="border: 1px solid #00bb00; border-radius: 15px;margin-top: 20px "
+                                       type="submit"
+                                       value="Xác nhận Tạo mới nhân viên">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </form>
     </div>
 </div>
