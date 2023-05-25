@@ -32,6 +32,7 @@ public class AppUser {
     public AppUser() {
     }
 
+
     public AppUser(Integer id, String userName, String encrytedPassword, boolean enabled, Employee employee, Customer customer) {
         this.id = id;
         this.userName = userName;
