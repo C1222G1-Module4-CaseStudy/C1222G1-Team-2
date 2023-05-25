@@ -1,6 +1,6 @@
 package com.example.codegymfoods.controller.employee;
 
-import com.example.codegymfoods.dto.EmployeeDTO;
+import com.example.codegymfoods.dto.employee.EmployeeDTO;
 import com.example.codegymfoods.model.employee.Employee;
 import com.example.codegymfoods.service.employee.IEmployyeService;
 import com.example.codegymfoods.service.employee.IPositionService;
@@ -49,9 +49,9 @@ public class EmployeeController {
     }
 
     @GetMapping("/delete")
-    public String deleteEmployee(@RequestParam Integer idDelete,
+    public String deleteEmployee(@RequestParam(name = "id") Integer id,
                                  RedirectAttributes redirectAttributes) {
-        employeeService.delete(idDelete, employeeService.findById(idDelete).get());
+        employeeService.delete(id, employeeService.findById(id).get());
         redirectAttributes.addFlashAttribute("message", "Xoá thành công");
         return "redirect:/list-employee";
     }
@@ -60,7 +60,7 @@ public class EmployeeController {
     public String showCreate(
             Model model
     ) {
-        model.addAttribute("employeeCreate", new EmployeeDTO());
+        model.addAttribute("employeeCreateDTO", new EmployeeDTO());
         model.addAttribute("position", this.positionService.findAll());
         return "/employee/create-employee";
     }
@@ -77,8 +77,8 @@ public class EmployeeController {
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDTO, employee);
             employeeService.save(employee);
-            redirectAttributes.addFlashAttribute("msg", "Thêm mới thành công");
-            return "redirect:/";
+            redirectAttributes.addFlashAttribute("message", "Thêm mới thành công");
+            return "redirect:";
         }
     }
 }
