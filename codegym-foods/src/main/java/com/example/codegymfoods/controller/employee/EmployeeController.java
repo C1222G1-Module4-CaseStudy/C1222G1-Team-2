@@ -23,7 +23,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.codegymfoods.utils.EncrytedPasswordUtils.encrytePassword;
+//import static com.example.codegymfoods.utils.EncrytedPasswordUtils.encrytePassword;
 
 @Controller
 @RequestMapping("/admin/employee")
@@ -84,8 +84,7 @@ public class EmployeeController {
         } else {
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDTO, employee);
-            employeeService.save(employee);
-            employee.getAppUser().setEncrytedPassword(encrytePassword(employee.getAppUser().getEncrytedPassword()));
+//            employee.getAppUser().setEncrytedPassword(encrytePassword(employee.getAppUser().getEncrytedPassword()));
             employeeService.save(employee);
             AppUser appUser = employee.getAppUser();
             AppRole appRole = new AppRole(2, "ROLE_USER");
