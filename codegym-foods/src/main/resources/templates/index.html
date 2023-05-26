@@ -77,8 +77,77 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                                                                        style="font-size: 24px "></i></span>
         </a>
 
-        <a href="/account/login" class="book-a-table-btn scrollto d-none d-lg-flex">Đăng nhập
-        </a>
+        <!--        <a href="/account/login" class="book-a-table-btn scrollto d-none d-lg-flex">Đăng nhập-->
+
+        <!--        </a>-->
+        <div th:if="${request != null}" class="d-flex justify-content-between align-items-center">
+            <div th:if="${#request.userPrincipal != null}">
+                <form>
+                    <div class="user-info d-flex align-items-center" th:if="${#request.userPrincipal != null}">
+                        <ul>
+                            <li class="nav-item dropdown" style="list-style: none">
+                                <a class="nav-link" data-bs-toggle="dropdown" href="#" id="profileDropdown">
+                                    <div class="navbar-profile">
+                                        <form class="d-flex" role="search">
+                                            <div class="user-info">
+                                                <img alt=""
+                                                     class="img-xs rounded-circle"
+                                                     src="${customerList.avatar}">
+                                                <!--                                        <span class="mb-0 font-weight-normal text-light m-2"-->
+                                                <!--                                              th:utext="${#request.userPrincipal.getName()}"></span>-->
+                                            </div>
+                                            <!-- Button trigger modal -->
+                                            <button class="btn btn-outline-success" type="button" style="border: none">
+                                                <img class="img-xs rounded-circle"
+                                                     src="https://andy.codegym.vn/storage/images/avatars/eaf3a049a40db2776e366e2d3a464464.jpg"
+                                                     width="46px" alt="">
+                                            </button>
+                                        </form>
+                                    </div>
+                                </a>
+                                <div aria-labelledby="profileDropdown"
+                                     class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list">
+                                    <h6 class="p-3 mb-0">Profile</h6>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-dark rounded-circle">
+                                                <i class="mdi mdi-settings text-success"></i>
+                                            </div>
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <a class="preview-subject mb-1" th:href="@{/user/detail}">Thông tin tài
+                                                khoản</a>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-dark rounded-circle">
+                                                <i class="mdi mdi-logout text-danger"></i>
+                                            </div>
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <p class="preview-subject mb-1" data-bs-toggle="modal"
+                                               data-bs-target="#staticBackdrop">
+                                                Đăng xuất
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <p class="p-3 mb-0 text-center">Cài đặt</p>
+                                </div>
+                            </li>
+                        </ul>
+
+
+                    </div>
+                </form>
+            </div>
+            <div th:if="${#request.userPrincipal == null}">
+                <a class="book-a-table-btn scrollto d-none d-lg-flex" onclick="location.href = '/account/login'"><span>Đăng nhập</span></a>
+            </div>
+        </div>
+        <!--        Đăng nhập-->
 
 
     </div>
@@ -204,7 +273,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
             <div class="section-title">
                 <h2>Danh sách</h2>
                 <p>Đồ ăn vặt
-                <span th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                    <span th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
                     <a th:href="@{/creatProduct}"
                        role="button"><i class="bi bi-patch-plus-fill"></i></a>
                 </span>
@@ -280,7 +349,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                                     <p class="fst-italic" th:text="${item.content}">Content</p>
                                 </div>
                                 <div class="col-lg-4 text-center order-1 order-lg-2">
-                                    <img alt="" class="img-fluid m-2" th:src="${item.imgUrl}" >
+                                    <img alt="" class="img-fluid m-2" th:src="${item.imgUrl}">
                                 </div>
                             </div>
                         </div>
@@ -343,7 +412,6 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 
         </div>
     </section><!-- End Events Section -->
-
 
 
     <!-- ======= Testimonials Section ======= -->
@@ -812,21 +880,37 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
         document.getElementById("idDelete").value = id;
     }
 </script>
-<script>
-    function findByName(nameToSearch) {
-        nameToSearch = $('#search').val()
-        $.ajax({
-            url: `http://localhost:8080/cart/addToCart/${nameToSearch}`,
-            type: "get",
-            success: function (blogList) {
 
-                //
-                $('#Listblog').html(blogListStr)
 
-            }
-        })
-    }
-</script>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Hôp thoại đăng xuất</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn <span class="mb-0 text-danger font-weight-medium m-2" th:if="${#request.userPrincipal != null}"
+                          th:text="${#request.userPrincipal.getName()}"></span> có chắc chắn muốn đăng xuất?
+            </div>
+            <div class="modal-footer">
+                <form action="/account/logout" method="get">
+                    <button type="submit" class="btn btn-primary">Đăng xuất</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+
 </body>
 
 </html>
