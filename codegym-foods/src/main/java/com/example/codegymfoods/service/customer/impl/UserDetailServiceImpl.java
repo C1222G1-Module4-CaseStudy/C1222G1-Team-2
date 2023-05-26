@@ -24,13 +24,13 @@ public class UserDetailServiceImpl implements UserDetailsService {
     private IUserRoleRepository userRoleRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //Tìm đối tượng đang đăng nhập trong DB
-        AppUser appUser = this.appUserRepository.findByUserName(userName);
+        AppUser appUser = this.appUserRepository.findByUserName(username);
 
         if (appUser == null) {
-            System.out.println("User not found! " + userName);
-            throw new UsernameNotFoundException("User " + userName + " was not found in the database");
+            System.out.println("User not found! " + username);
+            throw new UsernameNotFoundException("User " + username + " was not found in the database");
         }
 
         System.out.println("Found User: " + appUser);
@@ -47,11 +47,10 @@ public class UserDetailServiceImpl implements UserDetailsService {
             }
         }
 
-        UserDetails userDetails = (UserDetails) new User(appUser.getUserName(),
+        return new User(appUser.getUserName(),
                 appUser.getEncrytedPassword(), grantList);
-
-        return userDetails;
     }
+
 
 }
 

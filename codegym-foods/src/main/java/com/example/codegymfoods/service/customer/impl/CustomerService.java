@@ -1,6 +1,7 @@
 package com.example.codegymfoods.service.customer.impl;
 
 import com.example.codegymfoods.model.customer.Customer;
+import com.example.codegymfoods.model.login.AppUser;
 import com.example.codegymfoods.repository.customer.ICustomerRepository;
 import com.example.codegymfoods.service.customer.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +15,19 @@ public class CustomerService implements ICustomerService {
     @Autowired
     private ICustomerRepository customerRepository;
     @Override
+    public Page<Customer> findAllByName(String name, PageRequest pageRequest) {
+        return customerRepository.findAllByNameContaining(name,pageRequest);
+    }
+
+    @Override
     public Page<Customer> findAllCustomer(String name, Pageable pageable) {
-        return customerRepository.findByNameContaining(name,pageable);
+        return null;
     }
 
     @Override
     public void saveCustomer(Customer customer) {
         customerRepository.save(customer);
     }
-
     @Override
     public void deleteCustomer(Integer idCustomer) {
         customerRepository.deleteById(idCustomer);
@@ -34,14 +39,10 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public Page<Customer> findByNameCustomer(String nameCustomer, PageRequest pageRequest) {
-        return customerRepository.findByNameCustomer(nameCustomer, pageRequest);
+    public Page<Customer> findByNameCustomer(String nameCustomer, Pageable pageable) {
+        return customerRepository.findAllByNameContaining(nameCustomer, pageable);
     }
 
-    @Override
-    public Page<Customer> findByCustomerType(Integer idCustomerType, Pageable pageable) {
-        return customerRepository.findByCustomerType(idCustomerType, pageable);
-    }
 
     @Override
     public boolean existsByEmail(String email) {
@@ -49,8 +50,8 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public boolean existsByPhone(String phone) {
-        return customerRepository.existsByPhone(phone);
+    public boolean existsByPhoneNumber(String phoneNumber) {
+        return customerRepository.existsByPhoneNumber(phoneNumber);
     }
 
     @Override
@@ -61,5 +62,10 @@ public class CustomerService implements ICustomerService {
     @Override
     public Customer findByNameAccount(String nameAccount) {
         return customerRepository.findCustomerByAppUser_UserName(nameAccount);
+    }
+
+    @Override
+    public Customer findByUsername(String username) {
+        return customerRepository.findByUsername(username);
     }
 }

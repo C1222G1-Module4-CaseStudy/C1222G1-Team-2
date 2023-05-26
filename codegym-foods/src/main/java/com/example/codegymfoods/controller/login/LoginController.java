@@ -5,80 +5,92 @@ import com.example.codegymfoods.model.customer.Customer;
 import com.example.codegymfoods.model.login.AppRole;
 import com.example.codegymfoods.model.login.AppUser;
 import com.example.codegymfoods.model.login.UserRole;
-import com.example.codegymfoods.service.customer.ICustomerService;
-import com.example.codegymfoods.service.customer.ICustomerTypeService;
-import com.example.codegymfoods.service.customer.IUserRoleService;
+import com.example.codegymfoods.service.customer.impl.CustomerService;
+import com.example.codegymfoods.service.customer.impl.UserRoleService;
+import com.example.codegymfoods.utils.EncrytedPasswordUtils;
 import com.example.codegymfoods.utils.WebUtils;
-import org.apache.catalina.User;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
-public class LoginController {
+
+public class LoginController extends EncrytedPasswordUtils {
     @Autowired
-    private ICustomerService customerService;
+    private CustomerService customerService;
     @Autowired
-    private ICustomerTypeService customerTypeService;
+    private EncrytedPasswordUtils encrytedPasswordUtils;
     @Autowired
-    private IUserRoleService userRoleService;
+    private UserRoleService userRoleService;
+
     @GetMapping("/register")
     public String registerForm(Model model) {
         model.addAttribute("customerDto", new CustomerDTO());
-        model.addAttribute("customerType", customerTypeService.findAllCustomerType());
+//        model.addAttribute("customerType", customerTypeService.findAllCustomerType());
         return "register";
     }
 
     @PostMapping("/register")
+    @Scheduled(fixedDelay = 20)
     public String register(@Valid @ModelAttribute("customerDto") CustomerDTO customerCreateDTO, BindingResult bindingResult, Model model, RedirectAttributes redirect) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("customerType", customerTypeService.findAllCustomerType());
+//            model.addAttribute("customerType", customerTypeService.findAllCustomerType());
             return "register";
         } else if (customerService.existsByEmail(customerCreateDTO.getEmail())) {
             model.addAttribute("message", "Email đã tồn tại, vui lòng nhập email khác");
-            model.addAttribute("customerType", customerTypeService.findAllCustomerType());
             return "register";
-        } else if (customerService.existsByPhone(customerCreateDTO.getPhoneNumber())) {
-            model.addAttribute("message", "Số điện thoại đã tồn tại, vui lòng nhập số điện thoại khác");
-            model.addAttribute("customerType", customerTypeService.findAllCustomerType());
+        } else if (customerService.existsByPhoneNumber(customerCreateDTO.getPhoneNumber())) {
+            model.addAttribute("message1", "Số điện thoại đã tồn tại, vui lòng nhập số điện thoại khác");
+//            model.addAttribute("customerType", customerTypeService.findAllCustomerType());
             return "register";
         } else if (customerService.existsByAppUser_UserName(customerCreateDTO.getAppUser().getUserName())) {
-            model.addAttribute("message", "Tài khoản đã tồn tại, vui lòng nhập tài khoản khác");
-            model.addAttribute("customerType", customerTypeService.findAllCustomerType());
+            model.addAttribute("message2", "Tài khoản đã tồn tại, vui lòng nhập tài khoản khác");
+//            model.addAttribute("customerType", customerTypeService.findAllCustomerType());
             return "register";
         } else {
             Customer customer = new Customer();
             BeanUtils.copyProperties(customerCreateDTO, customer);
+            customer.getAppUser().setEncrytedPassword(encrytePassword(customer.getAppUser().getEncrytedPassword()));
             customerService.saveCustomer(customer);
             AppUser appUser = customer.getAppUser();
             AppRole appRole = new AppRole(2, "ROLE_USER");
             userRoleService.saveUserRole(new UserRole(appUser, appRole));
             redirect.addFlashAttribute("msg", "Đăng ký thành công");
+            redirect.addFlashAttribute("timer", 10);
             return "redirect:/login";
         }
     }
 
-
-    @GetMapping(value = {"/", "/welcome"})
-    public String welcomePage() {
-        return "index";
+    @GetMapping(value = "/")
+    public String indexPage(Model model) {
+        return "login";
     }
-
+    @GetMapping(value = "/home")
+    public String homePage(Model model) {
+        return "home";
+    }
     @GetMapping(value = "/login")
     public String loginPage(Model model) {
         return "login";
     }
 
+    @PostMapping(value = "login")
+    public String loginSuccessfulPage(Model model, RedirectAttributes redirect){
+        redirect.addFlashAttribute("message", "Đăng nhập thành công");
+        return "redirect:/";
+    }
     @GetMapping(value = "/logout")
     public String logoutSuccessfulPage(Model model, RedirectAttributes redirect) {
-//        model.addAttribute("message", "Đăng xuất thành công");
         redirect.addFlashAttribute("message", "Đăng xuất thành công");
         return "redirect:/login";
     }
@@ -92,9 +104,9 @@ public class LoginController {
 
         System.out.println("User Name: " + userName);
 
-        User loginUser = (User) ((Authentication) principal).getPrincipal();
+        User loginUser = (User)((Authentication) principal).getPrincipal();
 
-        String userInfo = WebUtils.toString(loginUser);
+        String userInfo = WebUtils.toString((org.springframework.security.core.userdetails.User) loginUser);
         model.addAttribute("userInfo", userInfo);
 
         return "userInfoPage";
@@ -104,9 +116,9 @@ public class LoginController {
     @GetMapping(value = "/admin")
     public String adminPage(Model model, Principal principal) {
 
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
+        User loginedUser = (User)((Authentication) principal).getPrincipal();
 
-        String userInfo = WebUtils.toString(loginedUser);
+        String userInfo = WebUtils.toString((org.springframework.security.core.userdetails.User) loginedUser);
         model.addAttribute("userInfo", userInfo);
 
         return "adminPage";
@@ -115,7 +127,7 @@ public class LoginController {
     @GetMapping(value = "/403")
     public String accessDenied(Model model, Principal principal) {
         if (principal != null) {
-            User loginedUser = (User) ((Authentication) principal).getPrincipal();
+            User loginedUser = (User)((Authentication) principal).getPrincipal();
 
             String userInfo = WebUtils.toString(loginedUser);
 
@@ -129,13 +141,4 @@ public class LoginController {
         return "403Page";
     }
 
-    @GetMapping("/about")
-    public String about() {
-        return "about";
-    }
-
-    @GetMapping("/contact")
-    public String contact() {
-        return "contact";
-    }
 }

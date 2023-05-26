@@ -1,8 +1,9 @@
 package com.example.codegymfoods.dto;
 
-import com.example.codegymfoods.model.customer.CustomerType;
+//import com.example.codegymfoods.model.customer.CustomerType;
 import com.example.codegymfoods.model.login.AppUser;
 
+import javax.persistence.Column;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -17,39 +18,29 @@ public class CustomerDTO {
     @NotBlank(message = " Đia chỉ không được để trống")
     private String address;
     @NotBlank(message = "Email không được để trống")
-    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", message = "Không đúng định dạng example@gmail")
+    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", message = "Không đúng định dạng example@xxxx.com")
     private String email;
     @NotBlank(message = "Số điện thoai không được để trống")
-    @Pattern(regexp = "\\d{9,10}", message = "Số điện thoại phải từ 9 đến 10 số")
+//    @Pattern(regexp = "^\\d{9,10}$", message = "Số điện thoại phải từ 9 đến 10 số")
     private String phoneNumber;
 
+    private String avatar;
 
-    private CustomerType customerType;
+//    private CustomerType customerType;
     @Valid
     private AppUser appUser;
 
     public CustomerDTO() {
     }
 
-
-    public CustomerDTO(String name, String dateOfBirth, String address, String email, String phoneNumber, CustomerType customerType, AppUser appUser) {
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
-        this.address = address;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.customerType = customerType;
-        this.appUser = appUser;
-    }
-
-    public CustomerDTO(Integer idCustomer, String name, String dateOfBirth, String address, String email, String phoneNumber, CustomerType customerType, AppUser appUser) {
+    public CustomerDTO(Integer idCustomer, String name, String dateOfBirth, String address, String email, String phoneNumber, String avatar, AppUser appUser) {
         this.idCustomer = idCustomer;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.customerType = customerType;
+        this.avatar = avatar;
         this.appUser = appUser;
     }
 
@@ -97,16 +88,16 @@ public class CustomerDTO {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phone) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public CustomerType getCustomerType() {
-        return customerType;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setCustomerType(CustomerType customerType) {
-        this.customerType = customerType;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public AppUser getAppUser() {

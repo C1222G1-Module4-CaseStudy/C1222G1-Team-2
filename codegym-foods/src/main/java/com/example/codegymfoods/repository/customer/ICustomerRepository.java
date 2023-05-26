@@ -11,11 +11,12 @@ import org.springframework.data.repository.query.Param;
 public interface ICustomerRepository extends PagingAndSortingRepository<Customer, Integer> {
     @Query(value = "select * from customer where name_customer like concat('%',:name_customer,'%')", nativeQuery = true)
     Page<Customer> findByNameCustomer(@Param("name_customer") String name, PageRequest pageRequest);
-    @Query(value = "select * from customer where customer_type_id = :customer_type_id", nativeQuery = true)
-    Page<Customer> findByCustomerType(@Param("customer_type_id") Integer id, Pageable pageable);
     boolean existsByEmail(String email);
-    boolean existsByPhone(String phone);
+    boolean existsByPhoneNumber(String phoneNumber);
     boolean existsByAppUser_UserName(String userName);
     Customer findCustomerByAppUser_UserName(String account);
-    Page<Customer>findByNameContaining(String name , Pageable pageable);
+    Page<Customer>findAllByNameContaining(String name , Pageable pageable);
+
+    @Query(value = "select * from customer join app_user on customer.user_id = app_user.user_id where app_user.user_name = ? ",nativeQuery = true)
+    Customer findByUsername(String username);
 }

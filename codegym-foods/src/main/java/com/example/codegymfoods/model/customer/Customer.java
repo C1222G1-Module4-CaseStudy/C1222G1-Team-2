@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_customer")
+    @Column(name = "id")
     private Integer idCustomer;
     @Column(name = "name_customer")
     private String name;
@@ -22,9 +22,9 @@ public class Customer {
     private String email;
     @Column(name = "avatar_customer")
     private String avatar;
-    @ManyToOne
-    @JoinColumn(name = "customer_type_id", referencedColumnName = "id")
-    private CustomerType customerType;
+//    @ManyToOne
+//    @JoinColumn(name = "customer_type_id", referencedColumnName = "id")
+//    private CustomerType customerType;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private AppUser appUser;
@@ -32,7 +32,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(Integer idCustomer, String name, String dateOfBirth, String address, String phoneNumber, String email, String avatar, CustomerType customerType) {
+    public Customer(Integer idCustomer, String name, String dateOfBirth, String address, String phoneNumber, String email, String avatar, AppUser appUser) {
         this.idCustomer = idCustomer;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -40,18 +40,6 @@ public class Customer {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.avatar = avatar;
-        this.customerType = customerType;
-    }
-
-    public Customer(Integer idCustomer, String name, String dateOfBirth, String address, String phoneNumber, String email, String avatar, CustomerType customerType, AppUser appUser) {
-        this.idCustomer = idCustomer;
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.avatar = avatar;
-        this.customerType = customerType;
         this.appUser = appUser;
     }
 
@@ -109,14 +97,6 @@ public class Customer {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
-    }
-
-    public CustomerType getCustomerType() {
-        return customerType;
-    }
-
-    public void setCustomerType(CustomerType customerType) {
-        this.customerType = customerType;
     }
 
     public AppUser getAppUser() {
