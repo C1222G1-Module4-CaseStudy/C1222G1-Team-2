@@ -19,7 +19,7 @@ public interface IProductService {
 
     void updateById(Product product);
 
-    Page<Product> getBlogPage(Pageable pageable);
+    Page<Product> getBlogPage(Pageable pageableProduct);
 
 
     List<Product> getAllByType(int id);

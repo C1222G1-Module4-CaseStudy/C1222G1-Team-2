@@ -41,8 +41,8 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Page<Product> getBlogPage(Pageable pageable) {
-        return productRepository.findAll(pageable);
+    public Page<Product> getBlogPage(Pageable pageableProduct) {
+        return productRepository.findAll(pageableProduct);
     }
 
     @Override

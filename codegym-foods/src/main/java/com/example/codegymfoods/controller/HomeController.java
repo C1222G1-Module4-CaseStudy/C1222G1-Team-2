@@ -35,7 +35,7 @@ public class HomeController {
     private IProductTypeService productTypeService;
     @GetMapping("")
     public String index(Model model,
-                        @PageableDefault(size = 3) Pageable pageable) {
+                        @PageableDefault() Pageable pageable) {
         model.addAttribute("blogList", this.iBlogService.getBlog(pageable));
         Page<Product> productList = productService.getBlogPage(pageable);
         List<ProductType> productTypeList = productTypeService.getAll();
