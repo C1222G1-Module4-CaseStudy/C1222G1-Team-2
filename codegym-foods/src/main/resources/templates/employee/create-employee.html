@@ -495,7 +495,7 @@
                                                     th:field="*{phoneNumber}"
                                                     type="text">
                             </div>
-                            <span style="color: red" th:text="${message}"></span>
+                            <span style="color: red" th:text="${message1}"></span>
                             <p style="color: red"
                                th:errors="*{phoneNumber}" th:if="${#fields.hasErrors('phoneNumber')}"></p>
 
@@ -508,7 +508,7 @@
                             <p style="color: red"
                                th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></p>
                         </div>
-                        <span style="color: red" th:text="${message1}"></span>
+                        <span style="color: red" th:text="${message}"></span>
 
                         <div class="col-12"><p class="m-2">Địa chỉ nhân viên</p>
                             <div class="box"><input class="form-control" placeholder="Vui lòng nhập Địa chỉ nhân viên"
@@ -574,15 +574,14 @@
                                 <div class="box"><input class="form-control" id="password"
                                                         placeholder="Vui lòng nhập mật khẩu"
                                                         th:field="*{appUser.encrytedPassword}"
-                                                        type="text">
+                                                        type="password">
                                 </div>
                             </div>
 
                             <div class="col-12"><p class="m-2">Xác nhận Mật khẩu</p>
                                 <div class="box"><input class="form-control" id="confirmPassword"
                                                         placeholder="Vui lòng nhập mật khẩu"
-                                                        th:field="*{appUser.encrytedPassword}"
-                                                        type="text">
+                                                        type="password">
                                 </div>
                             </div>
                         </div>
