@@ -2,7 +2,11 @@ package com.example.codegymfoods.service.employee.impl;
 
 
 import com.example.codegymfoods.model.employee.Employee;
+import com.example.codegymfoods.model.login.AppRole;
+import com.example.codegymfoods.model.login.AppUser;
+import com.example.codegymfoods.model.login.UserRole;
 import com.example.codegymfoods.repository.employee.IEmployeeRepository;
+import com.example.codegymfoods.service.customer.IUserRoleService;
 import com.example.codegymfoods.service.employee.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,14 +14,20 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+
+import static com.example.codegymfoods.utils.EncrytedPasswordUtils.encrytePassword;
 
 @Service
 public class EmployeeService implements IEmployeeService {
 
     @Autowired
     private IEmployeeRepository employeeRepository;
+
+    @Autowired
+    private IUserRoleService userRoleService;
 
     @Override
     public List<Employee> getEmployee() {
@@ -44,9 +54,14 @@ public class EmployeeService implements IEmployeeService {
         return this.employeeRepository.findById(id);
     }
 
+    @Transactional
     @Override
     public void save(Employee employee) {
-        this.employeeRepository.save(employee);
+        employee.getAppUser().setEncrytedPassword(encrytePassword(employee.getAppUser().getEncrytedPassword()));
+        AppRole appRole = new AppRole(1, "ROLE_ADMIN");
+        employee = this.employeeRepository.save(employee);
+
+        this.userRoleService.saveUserRole(new UserRole(employee.getAppUser(), appRole));
     }
 
     @Override

@@ -26,7 +26,7 @@ public class Employee {
     @JoinColumn(name = "position_id", referencedColumnName = "id")
     private Position position;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "app_user_id", referencedColumnName = "user_id", nullable = false)
     private AppUser appUser;
 
