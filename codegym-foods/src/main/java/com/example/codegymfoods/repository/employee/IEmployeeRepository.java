@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
     Page<Employee> findAllByNameContainingAndPositionId(String name, Integer id, Pageable pageable);
-
+    
     Page<Employee> findAllByNameContaining(String name, Pageable pageable);
 
     boolean existsByEmail(String email);

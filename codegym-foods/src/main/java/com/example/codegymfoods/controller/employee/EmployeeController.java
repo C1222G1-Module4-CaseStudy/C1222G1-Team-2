@@ -2,9 +2,6 @@ package com.example.codegymfoods.controller.employee;
 
 import com.example.codegymfoods.dto.employee.EmployeeDTO;
 import com.example.codegymfoods.model.employee.Employee;
-import com.example.codegymfoods.model.login.AppRole;
-import com.example.codegymfoods.model.login.AppUser;
-import com.example.codegymfoods.model.login.UserRole;
 import com.example.codegymfoods.service.customer.IUserRoleService;
 import com.example.codegymfoods.service.employee.IEmployeeService;
 import com.example.codegymfoods.service.employee.IPositionService;
@@ -23,10 +20,6 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.codegymfoods.utils.EncrytedPasswordUtils.encrytePassword;
-
-//import static com.example.codegymfoods.utils.EncrytedPasswordUtils.encrytePassword;
-
 @Controller
 @RequestMapping("/admin/employee")
 public class EmployeeController {
@@ -34,8 +27,6 @@ public class EmployeeController {
     private IEmployeeService employeeService;
     @Autowired
     private IPositionService positionService;
-    @Autowired
-    private IUserRoleService userRoleService;
 
     @GetMapping("")
     public String getEmployee(@RequestParam(defaultValue = "", required = false) String search,
@@ -95,11 +86,7 @@ public class EmployeeController {
         } else {
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDTO, employee);
-            employee.getAppUser().setEncrytedPassword(encrytePassword(employee.getAppUser().getEncrytedPassword()));
             employeeService.save(employee);
-            AppUser appUser = employee.getAppUser();
-            AppRole appRole = new AppRole(1, "ROLE_ADMIN");
-            userRoleService.saveUserRole(new UserRole(appUser, appRole));
             redirectAttributes.addFlashAttribute("message", "Thêm mới thành công");
             return "redirect:/admin/employee";
         }
