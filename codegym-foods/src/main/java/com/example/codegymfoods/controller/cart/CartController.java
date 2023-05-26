@@ -42,6 +42,7 @@ public class CartController {
         model.addAttribute("productList", productList);
         return "/index";
     }
+
     @GetMapping("/addToCart/{id}")
     public String addToCart(@PathVariable(name = "id") int id, @SessionAttribute(name = "cartDTO") CartDTO cartDTO, Model model) {
         Product product = productService.getById(id);
