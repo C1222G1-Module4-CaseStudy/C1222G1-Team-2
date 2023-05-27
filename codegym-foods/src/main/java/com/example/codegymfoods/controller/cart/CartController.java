@@ -3,50 +3,62 @@ package com.example.codegymfoods.controller.cart;
 
 import com.example.codegymfoods.dto.cart.CartDTO;
 import com.example.codegymfoods.dto.product.ProductFromCartDTO;
+import com.example.codegymfoods.model.bill.Bill;
+import com.example.codegymfoods.model.bill.BillDetail;
+import com.example.codegymfoods.model.customer.Customer;
 import com.example.codegymfoods.model.product.Product;
 import com.example.codegymfoods.model.product.ProductType;
+import com.example.codegymfoods.service.bill.IBillDetailService;
+import com.example.codegymfoods.service.bill.IBillService;
 import com.example.codegymfoods.service.cart.ICartService;
 import com.example.codegymfoods.service.cart.IProductFromCartService;
+import com.example.codegymfoods.service.customer.ICustomerService;
 import com.example.codegymfoods.service.product.IProductService;
 import com.example.codegymfoods.service.product.IProductTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/cart")
 public class CartController {
+    @Autowired
+    private ICustomerService customerService;
+    @Autowired
+    private ICartService cartService;
+    @Autowired
+    private IProductService productService;
+    @Autowired
+    private IProductTypeService productTypeService;
+    @Autowired
+    private IBillService billService;
+    @Autowired
+    private IBillDetailService billDetailService;
 
-    @Autowired
-   private ICartService cartService;
-    @Autowired
-  private   IProductService productService;
-    @Autowired
-   private IProductTypeService productTypeService;
     @GetMapping("")
     public String disPlayBlog(Model model, @PageableDefault() Pageable pageable) {
         Page<Product> productList = productService.getBlogPage(pageable);
         List<ProductType> productTypeList = productTypeService.getAll();
         model.addAttribute("productTypeList", productTypeList);
         model.addAttribute("productList", productList);
-        return "/index";
+        return "redirect:/home/success";
     }
 
     @GetMapping("/addToCart/{id}")
     public String addToCart(@PathVariable(name = "id") int id, @SessionAttribute(name = "cartDTO") CartDTO cartDTO, Model model) {
         Product product = productService.getById(id);
-        cartService.addToCart(product,cartDTO);
+        cartService.addToCart(product, cartDTO);
         return "redirect:/cart";
     }
 
@@ -57,12 +69,14 @@ public class CartController {
         cartService.changeQuantity(id, quantity, cartDTO);
         return "redirect:/cart/home";
     }
+
     @GetMapping("/deleteInCart")
-    public String delete(@RequestParam(value = "idDelete") int id,@SessionAttribute(name = "cartDTO") CartDTO cartDTO) {
-        Map<Integer,Integer> cartMap = cartDTO.getSelectedProducts();
+    public String delete(@RequestParam(value = "idDelete") int id, @SessionAttribute(name = "cartDTO") CartDTO cartDTO) {
+        Map<Integer, Integer> cartMap = cartDTO.getSelectedProducts();
         cartMap.remove(id);
         return "redirect:/cart/home";
     }
+
     @GetMapping("/home")
     public String getProductsFromCart(@SessionAttribute(name = "cartDTO") CartDTO cartDTO, Model model) {
         Set<Integer> productsIds = cartDTO.getSelectedProducts().keySet();
@@ -73,11 +87,49 @@ public class CartController {
                         mapProducts.get(e.getKey()).getName(),
                         mapProducts.get(e.getKey()).getPrice(),
                         e.getValue(),
-                        mapProducts.get(e.getKey()).getPrice()*e.getValue()))
+                        mapProducts.get(e.getKey()).getPrice() * e.getValue()))
                 .collect(Collectors.toCollection(LinkedList::new));
-        long totalBill = cartService.totalBill(productFromCartDTOList);
-        model.addAttribute("totalBill",totalBill);
+        double totalBill = cartService.totalBill(productFromCartDTOList);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Customer customer = customerService.findByUsername(user.getUsername());
+        model.addAttribute("customer", customer.getName());
+        model.addAttribute("totalBill", totalBill);
         model.addAttribute("productFromCartDTOList", productFromCartDTOList);
         return "/cart";
     }
+
+    @GetMapping("/payment/{totalPrice}")
+    String payment(@PathVariable(value = "totalPrice") double totalPrice, @SessionAttribute(name = "cartDTO") CartDTO cartDTO) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Customer customer = customerService.findByUsername(user.getUsername());
+        Date date = new Date();
+        Bill bill = new Bill(date, true, totalPrice, customer);
+        billService.saveBill(bill);
+        Map<Integer, Integer> cartMap = cartDTO.getSelectedProducts();
+        cartMap.clear();
+        return "redirect:/home/success";
+    }
+
+    @GetMapping("/saveBill/{totalPrice}")
+    String saveBill(@PathVariable(value = "totalPrice") double totalPrice, @SessionAttribute(name = "cartDTO") CartDTO cartDTO) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Customer customer = customerService.findByUsername(user.getUsername());
+        Date date = new Date();
+        Bill bill = new Bill(date, false, totalPrice, customer);
+        billService.saveBill(bill);
+        Map<Integer, Integer> cartMap = cartDTO.getSelectedProducts();
+        cartMap.clear();
+        return "redirect:/home/success";
+    }
+
+    @GetMapping("/paymentAfter/{id}")
+    String paymentAfter(@PathVariable(value = "id") int id ,@SessionAttribute(name = "cartDTO") CartDTO cartDTO) {
+        Bill bill = billService.getBillById(id);
+        bill.setStatus(true);
+        billService.saveBill(bill);
+        Map<Integer, Integer> cartMap = cartDTO.getSelectedProducts();
+        cartMap.clear();
+        return "redirect:/user/detail";
+    }
+
 }

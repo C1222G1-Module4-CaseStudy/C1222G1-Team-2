@@ -4,6 +4,7 @@ import com.example.codegymfoods.model.customer.Customer;
 import com.example.codegymfoods.model.employee.Employee;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -23,8 +24,21 @@ public class Bill {
     public Bill() {
     }
 
+    public Bill(Date purchaseDate, Double totalPrice, Customer customer) {
+        this.purchaseDate = purchaseDate;
+        this.totalPrice = totalPrice;
+        this.customer = customer;
+    }
+
     public Bill(Integer id, Date purchaseDate, Boolean status, Double totalPrice, Customer customer) {
         this.id = id;
+        this.purchaseDate = purchaseDate;
+        this.status = status;
+        this.totalPrice = totalPrice;
+        this.customer = customer;
+    }
+
+    public Bill(Date purchaseDate, Boolean status, Double totalPrice, Customer customer) {
         this.purchaseDate = purchaseDate;
         this.status = status;
         this.totalPrice = totalPrice;

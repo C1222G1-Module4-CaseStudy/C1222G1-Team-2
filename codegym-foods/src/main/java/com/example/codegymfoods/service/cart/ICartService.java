@@ -11,5 +11,5 @@ public interface ICartService {
     void addToCart(Product product, CartDTO cartDTO);
     void changeQuantity(int id, int quantity, CartDTO cartDTO);
 
-    long totalBill(List<ProductFromCartDTO> productFromCartDTOList);
+    double totalBill(List<ProductFromCartDTO> productFromCartDTOList);
 }

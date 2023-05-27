@@ -1,54 +1,96 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <title>Create Blog</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-</head>
-<body class="container">
-<h2>NEW BLOG</h2>
-<form action="/blog/createBlog" method="post" th:object="${blogs}">
-    <div class="input-group">
-        <label for="id">#</label>
-        <input type="number"
-               class="form-control" name="" id="id" aria-describedby="helpId"
-               placeholder="Nhập id mới" th:field="*{id}">
-        <label for="title">Tiêu đề bài đăng</label>
-        <input type="text"
-               class="form-control" name="" id="title" aria-describedby="helpId"
-               placeholder="Nhập tiêu đề mới" th:field="*{title}">
-        <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
-        <label for="dateNow">Ngày đăng</label>
-        <input type="text"
-               class="form-control" name="" id="dateNow" aria-describedby="helpId"
-               placeholder="Nhập ngày đăng mới" th:field="*{dateNow}">
-        <p th:if="${#fields.hasErrors('dateNow')}" th:errors="*{dateNow}"></p>
-        <label for="imgUrl">Ảnh</label>
-        <input type="text"
-               class="form-control" name="" id="imgUrl" aria-describedby="helpId"
-               placeholder="Thêm hình mới" th:field="*{imgUrl}">
-        <p th:if="${#fields.hasErrors('imgUrl')}" th:errors="*{imgUrl}"></p>
-        <label for="content">Nội dung</label>
-        <input type="text"
-               class="form-control" name="" id="content" aria-describedby="helpId"
-               placeholder="Nhập nội dung mới" th:field="*{content}">
-        <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p>
-        <label >Employee</label>
-        <select th:field="*{employee}">
-            <option th:each="blog :${employee}" th:value="${blog.getId()}">
-                <p th:text="${blog.getName()}"></p>
-            </option>
-        </select>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
+    <!-- Favicons -->
+    <link rel="icon" th:href="@{/home/assets/img/favicon.png}">
+    <link rel="apple-touch-icon" th:href="@{/home/assets/img/apple-touch-icon.png}">
 
-        <button type="submit" class="btn btn-primary">Save</button>
+    <!-- Google Fonts -->
+    <link rel="stylesheet"
+          th:href="@{https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i}">
+
+    <!-- Vendor CSS Files -->
+    <link rel="stylesheet" th:href="@{/home/assets/vendor/animate.css/animate.min.css}">
+    <link rel="stylesheet}" th:href="@{/home/assets/vendor/aos/aos.css}">
+    <link rel="stylesheet" th:href="@{/home/assets/vendor/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/home/assets/vendor/bootstrap-icons/bootstrap-icons.css}">
+    <link rel="stylesheet" th:href="@{/home/assets/vendor/boxicons/css/boxicons.min.css}">
+    <link rel="stylesheet" th:href="@{/home/assets/vendor/glightbox/css/glightbox.min.css}">
+    <link rel="stylesheet" th:href="@{/home/assets/vendor/swiper/swiper-bundle.min.css}">
+
+    <!-- Template Main CSS File -->
+    <link rel="stylesheet" th:href="@{/home/assets/css/style.css}">
+</head>
+<body>
+<div th:replace="layout-index::navba-top"></div><!-- End Header -->
+<div class="row">
+    <div class="col-lg-3">
+
     </div>
-</form>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    <div class="col-lg-6" style="margin-top: 110px">
+        <h3 style="text-align: center">Thêm mới tin tức</h3>
+        <form action="/blog/createBlog" method="post" th:object="${blogs}">
+            <input aria-describedby="helpId"
+                   class="form-control" id="id" name="" placeholder="Nhập id mới"
+                   th:field="*{id}" type="hidden">
+            <div>
+                <label for="title">Tiêu đề bài đăng</label>
+                <input aria-describedby="helpId"
+                       class="form-control" id="title" name="" placeholder="Nhập tiêu đề mới"
+                       th:field="*{title}" type="text">
+                <p th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></p>
+            </div>
+            <div>
+                <label for="dateNow">Ngày đăng</label>
+                <input aria-describedby="helpId"
+                       class="form-control" id="dateNow" name="" placeholder="Nhập ngày đăng mới"
+                       th:field="*{dateNow}" type="date">
+                <p th:errors="*{dateNow}" th:if="${#fields.hasErrors('dateNow')}"></p>
+            </div>
+            <div>
+                <label for="imgUrl">Ảnh</label>
+                <input aria-describedby="helpId"
+                       class="form-control" id="imgUrl" name="" placeholder="Thêm hình mới"
+                       th:field="*{imgUrl}" type="text">
+                <p th:errors="*{imgUrl}" th:if="${#fields.hasErrors('imgUrl')}"></p>
+            </div>
+            <div>
+                <label for="content">Nội dung</label>
+                <textarea aria-describedby="helpId" class="form-control"
+                          id="content" name="" placeholder="Nhập nội dung mới" rows="10"
+                          th:field="*{content}" type="text"></textarea>
+                <p th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
+            </div>
+            <div class="input-group">
+                <label style="margin-right: 10px">Người đăng</label>
+                <select th:field="*{employee}">
+                    <option th:each="blog :${employee}" th:value="${blog.getId()}">
+                        <p th:text="${blog.getName()}"></p>
+                    </option>
+                </select>
+            </div>
+            <div>
+                <button class="btn btn-primary" type="submit">Tạo</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-3">
+
+    </div>
+</div>
+<!-- ======= Footer ======= -->
+<div th:replace="layout-index::footer"></div>
+<!-- End Footer -->
+<script crossorigin="anonymous"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js">
+</script>
 </body>
 </html>

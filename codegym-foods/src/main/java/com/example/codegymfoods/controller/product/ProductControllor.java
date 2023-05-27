@@ -61,7 +61,7 @@ public class ProductControllor {
 
     public String deleteProduct(@RequestParam(value = "id") int id) {
         productService.delete(id);
-        return "redirect:/";
+        return "redirect:/home/success";
     }
 
     @GetMapping("/creatProduct")
@@ -86,7 +86,7 @@ public class ProductControllor {
         Product product = new Product();
         BeanUtils.copyProperties(productDto, product);
         productService.creat(product);
-        return "redirect:/";
+        return "redirect:/home/success";
     }
 
     @GetMapping("/updateProduct/{id}")
@@ -113,7 +113,7 @@ public class ProductControllor {
         Product product = new Product();
         BeanUtils.copyProperties(productDto, product);
         productService.updateById(product);
-        return "redirect:/";
+        return "redirect:/home/success";
     }
 
 }

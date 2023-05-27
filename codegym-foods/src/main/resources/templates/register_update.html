@@ -1,30 +1,25 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <div th:replace="layout-index::head-config"></div>
     <style>
         body {
             align-items: center;
             background-color: #000;
-            display: flex;
+            display: inherit;
             justify-content: center;
-            height: 90vh;
+            height: 72vh;
+            margin-top: 5vh;
         }
 
         .form {
+            /*display: -webkit-inline-flex;*/
             background-color: #15172b;
             border-radius: 20px;
             box-sizing: border-box;
             height: 162%;
             padding: 20px;
-            width: 564px;
+            /*width: 564px;*/
         }
 
         .title {
@@ -34,6 +29,7 @@
             font-weight: 600;
             margin-top: 199px;
         }
+
         .subtitle {
             color: #eee;
             font-family: sans-serif;
@@ -133,87 +129,110 @@
         .submit:active {
             background-color: #06b;
         }
+
+        .pt-2 {
+            margin-top: 28px;
+            background-color: #15172b;
+            color: #eee;
+        }
+    </style>
     </style>
 </head>
 <body>
+<div th:replace="layout-index::navba-top"></div>
+
 <div class="form">
     <div class="title">Chỉnh sửa thông tin tài khoản</div>
-    <form id="myForm" name="myForm" action="/user/update" method="post" th:object="${customerDto}">
-        <div hidden="hidden" class="input-container ic1">
-            <input th:field="*{id}" id="id" class="input" type="hidden" placeholder=" "/>
-            <div class="cut"></div>
-            <label for="id" class="placeholder">Id</label>
-            <p style="color: red" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></p>
-        </div>
-        <div class="input-container ic1">
-            <input th:field="*{name}" id="name" class="input" type="text" placeholder=" "/>
-            <div class="cut"></div>
-            <label for="name" class="placeholder">Tên</label>
-            <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
-        </div>
-        <div class="input-container ic2">
-            <input th:field="*{dateOfBirth}" id="dateOfBirth" class="input" type="text" placeholder=" "/>
-            <div class="cut"></div>
-            <label for="dateOfBirth" class="placeholder">Ngày Sinh</label>
-            <p style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></p>
-        </div>
-        <div class="input-container ic2">
-            <input th:field="*{address}" id="address" class="input" type="text" placeholder=" "/>
-            <div class="cut cut-short"></div>
-            <label for="address" class="placeholder">Địa chỉ</label>
-            <p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
-        </div>
-        <div class="input-container ic2">
-            <input th:field="*{email}" id="email" class="input" type="text" placeholder=" "/>
-            <div class="cut cut-short"></div>
-            <label for="email" class="placeholder">Email</label>
-            <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
-            <span style="color: red" th:text="${message}"></span>
-        </div>
-        <div class="input-container ic2">
-            <input th:field="*{phoneNumber}" id="phoneNumber" class="input" type="text" placeholder=" "/>
-            <div class="cut cut-short"></div>
-            <label for="phoneNumber" class="placeholder">Số điện thoại</label>
-            <p style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>
-            <span style="color: red" th:text="${message1}"></span>
-        </div>
-        <div class="input-container ic2">
-            <input th:field="*{avatar}" id="avatar" class="input" type="text" placeholder=" "/>
-            <div class="cut cut-short"></div>
-            <label for="avatar" class="placeholder">Ảnh đại diện</label>
-            <p style="color: red" th:if="${#fields.hasErrors('avatar')}" th:errors="*{avatar}"></p>
-        </div>
-        <div class="input-container ic2">
-            <input th:field="*{appUser.userName}" id="username" class="input" type="text" placeholder=" "/>
-            <div class="cut cut-short"></div>
-            <label for="username" class="placeholder">Tên đăng nhâp</label>
-            <p style="color: red" th:if="${#fields.hasErrors('appUser.userName')}" th:errors="*{appUser.userName}"></p>
-            <span style="color: red" th:text="${message2}"></span>
-        </div>
+    <form action="/user/update" id="myForm" method="post" name="myForm" th:object="${customerDto}">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-12" style="margin:-10px">
+                    <div class="input-container ic1" hidden="hidden">
+                        <input class="input" id="id" placeholder=" " th:field="*{id}" type="hidden"/>
+                        <div class="cut"></div>
+                        <label class="placeholder" for="id">Id</label>
+                        <p style="color: red" th:errors="*{id}" th:if="${#fields.hasErrors('id')}"></p>
+                    </div>
+                    <div class="input-container ic1">
+                        <input class="input" id="name" placeholder=" " th:field="*{name}" type="text"/>
+                        <div class="cut"></div>
+                        <label class="placeholder" for="name">Tên</label>
+                        <p style="color: red" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></p>
+                    </div>
+                    <div class="input-container ic2">
+                        <input class="input" id="dateOfBirth" placeholder=" " th:field="*{dateOfBirth}" type="text"/>
+                        <div class="cut"></div>
+                        <label class="placeholder" for="dateOfBirth">Ngày Sinh</label>
+                        <p style="color: red" th:errors="*{dateOfBirth}"
+                           th:if="${#fields.hasErrors('dateOfBirth')}"></p>
+                    </div>
+                    <div class="input-container ic2">
+                        <input class="input" id="address" placeholder=" " th:field="*{address}" type="text"/>
+                        <div class="cut cut-short"></div>
+                        <label class="placeholder" for="address">Địa chỉ</label>
+                        <p style="color: red" th:errors="*{address}" th:if="${#fields.hasErrors('address')}"></p>
+                    </div>
+                    <div class="input-container ic2">
+                        <input class="input" id="email" placeholder=" " th:field="*{email}" type="text"/>
+                        <div class="cut cut-short"></div>
+                        <label class="placeholder" for="email">Email</label>
+                        <p style="color: red" th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></p>
+                        <span style="color: red" th:text="${message}"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-container ic2">
+                        <input class="input" id="phoneNumber" placeholder=" " th:field="*{phoneNumber}" type="text"/>
+                        <div class="cut cut-short"></div>
+                        <label class="placeholder" for="phoneNumber">Số điện thoại</label>
+                        <p style="color: red" th:errors="*{phoneNumber}"
+                           th:if="${#fields.hasErrors('phoneNumber')}"></p>
+                        <span style="color: red" th:text="${message1}"></span>
+                    </div>
+                    <div class="input-container ic2">
+                        <input class="input" id="avatar" placeholder=" " th:field="*{avatar}" type="text"/>
+                        <div class="cut cut-short"></div>
+                        <label class="placeholder" for="avatar">Ảnh đại diện</label>
+                        <p style="color: red" th:errors="*{avatar}" th:if="${#fields.hasErrors('avatar')}"></p>
+                    </div>
+                    <div class="input-container ic2">
+                        <input class="input" id="username" placeholder=" " th:field="*{appUser.userName}" type="text"/>
+                        <div class="cut cut-short"></div>
+                        <label class="placeholder" for="username">Tên đăng nhâp</label>
+                        <p style="color: red" th:errors="*{appUser.userName}"
+                           th:if="${#fields.hasErrors('appUser.userName')}"></p>
+                        <span style="color: red" th:text="${message2}"></span>
+                    </div>
 
-        <input type="hidden" th:field="*{appUser.id}"/>
+                    <input th:field="*{appUser.id}" type="hidden"/>
 
-        <div class="input-container ic2">
-            <input id="password" th:field="*{appUser.encrytedPassword}" class="input" type="password" placeholder=" "/>
-            <div class="cut cut-short"></div>
-            <label for="password" class="placeholder">Mật khẩu</label>
-            <p style="color: red" th:if="${#fields.hasErrors('appUser.encrytedPassword')}" th:errors="*{appUser.encrytedPassword}"></p>
+                    <div class="input-container ic2">
+                        <input class="input" id="password" placeholder=" " th:field="*{appUser.encrytedPassword}"
+                               type="password"/>
+                        <div class="cut cut-short"></div>
+                        <label class="placeholder" for="password">Mật khẩu</label>
+                        <p style="color: red" th:errors="*{appUser.encrytedPassword}"
+                           th:if="${#fields.hasErrors('appUser.encrytedPassword')}"></p>
+                    </div>
+                    <div id="error-text" style="color: red;"></div>
+                    <div class="input-container ic2">
+                        <input class="input" id="confirmPassword" placeholder=" " type="password"/>
+                        <div class="cut cut-short"></div>
+                        <label class="placeholder" for="confirmPassword">Nhập lại mật khẩu</label>
+                    </div>
+                </div>
+                <button class="submit" id="button" name="submit" type="submit" value="submit">Lưu</button>
+            </div>
         </div>
-        <div id="error-text" style="color: red;"></div>
-        <div class="input-container ic2">
-            <input id="confirmPassword" class="input" type="password" placeholder=" "/>
-            <div class="cut cut-short"></div>
-            <label for="confirmPassword" class="placeholder">Nhập lại mật khẩu</label>
-        </div>
-        <button type="submit" id="button" name="submit" value="submit" class="submit">Lưu</button>
     </form>
 </div>
+<div th:replace="layout-index::footer"></div>
 <script>
     var password = document.getElementById("password")
         , confirmPassword = document.getElementById("confirmPassword");
 
-    function validatePassword(){
-        if(password.value != confirmPassword.value) {
+    function validatePassword() {
+        if (password.value != confirmPassword.value) {
             confirmPassword.setCustomValidity("Mật khẩu không đúng, vui lòng nhập lại");
         } else {
             confirmPassword.setCustomValidity('');
@@ -225,15 +244,15 @@
 </script>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+<script crossorigin="anonymous"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script crossorigin="anonymous"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </body>
 </html>

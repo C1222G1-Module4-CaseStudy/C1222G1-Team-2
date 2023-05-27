@@ -13,7 +13,7 @@ import java.util.Map;
 public class CartService implements ICartService {
 
     @Override
-    public long totalBill(List<ProductFromCartDTO> productFromCartDTOList) {
+    public double totalBill(List<ProductFromCartDTO> productFromCartDTOList) {
         long totalBill =0;
         for (int i = 0; i < productFromCartDTOList.size(); i++) {
             totalBill+= productFromCartDTOList.get(i).getTotalPrice();

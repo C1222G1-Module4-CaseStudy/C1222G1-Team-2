@@ -1,8 +1,11 @@
 package com.example.codegymfoods.controller.customer.user;
 
 import com.example.codegymfoods.dto.customer.CustomerDTO;
+import com.example.codegymfoods.model.bill.Bill;
 import com.example.codegymfoods.model.customer.Customer;
+import com.example.codegymfoods.service.bill.IBillService;
 import com.example.codegymfoods.service.customer.impl.CustomerService;
+import com.example.codegymfoods.service.employee.impl.EmployeeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +18,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
+import java.util.List;
+
 import static com.example.codegymfoods.utils.EncrytedPasswordUtils.encrytePassword;
 
 @Controller
@@ -22,10 +27,19 @@ import static com.example.codegymfoods.utils.EncrytedPasswordUtils.encrytePasswo
 public class UserController {
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private EmployeeService employeeService;
+    @Autowired
+    private IBillService billService;
 
     @GetMapping("/detail")
     public String showDetail(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Customer customer =customerService.findByUsername(user.getUsername());
+        int idOfCustomer = customer.getId();
+        List<Bill> billList = billService.getBillByIdUser(idOfCustomer);
+        model.addAttribute("billList",billList);
+        model.addAttribute("employeeList", employeeService.findByUsername(user.getUsername()));
         model.addAttribute("customerList", customerService.findByUsername(user.getUsername()));
         return "userInfoPage";
     }

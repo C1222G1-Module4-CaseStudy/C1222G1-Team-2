@@ -55,7 +55,10 @@ public class ProductService implements IProductService {
         return productRepository.findAllById(productsIds);
     }
 
-
+    @Override
+    public Product getProductByName(String nameProductFromCartDTO) {
+        return productRepository.findByName(nameProductFromCartDTO);
+    }
 
 
 }

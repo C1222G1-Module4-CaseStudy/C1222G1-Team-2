@@ -253,7 +253,6 @@
                                             <th>Chức vụ</th>
                                             <th>Ngày sinh</th>
                                             <th>Ảnh</th>
-                                            <th>Hành động</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -276,19 +275,7 @@
                                             <td th:text="${list.position?.name}"></td>
                                             <td th:text="${list.dateOfBirth}"></td>
                                             <td>
-                                                <img alt="image" th:src="${list.avatar}"/>
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-danger"
-                                                   th:href="@{/admin/employee/edit/{id}(id=${list.id})}"><i
-                                                        class="fa fa-pencil-square"
-                                                        style="margin: 0 auto"></i></a>
-                                                <button class="btn btn-warning" data-bs-target="#exampleModal"
-                                                        data-bs-toggle="modal"
-                                                        th:attr="onclick=|upload('${list.id}','${list.name}')|"
-                                                        type="button">
-                                                    <i class=" fa fa-trash-o" style="margin: 0 auto"></i>
-                                                </button>
+                                                <img alt="image" th:src="${list.avatar}" style="width: 4rem" />
                                             </td>
                                         </tr>
                                         </tbody>
@@ -318,33 +305,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade"
-     id="exampleModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Hộp thoại xác nhận hành động </h5>
-                <button aria-label="Close" class="btn-close text-white" data-bs-dismiss="modal"
-                        type="button">&times;
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Bạn chắc chắn muốn xoá <span class="text-reddit text-warning" id="name"></span> không?</p>
-            </div>
-            <div class="modal-footer">
-                <form action="/admin/employee/delete" method="get">
-                    <button class="btn btn-secondary" data-bs-dismiss="modal"
-                            type="button">Huỷ
-                    </button>
-                    <input class="btn btn-secondary" id="id" name="idDelete"
-                           type="hidden">
-                    <input class="btn btn-secondary" style="background: red" type="submit"
-                           value="Xoá">
-                </form>
             </div>
         </div>
     </div>

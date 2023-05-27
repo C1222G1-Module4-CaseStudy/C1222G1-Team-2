@@ -47,7 +47,7 @@ public class BlogController {
         BeanUtils.copyProperties(blogDTO, blog);
         iBlogService.save(blog);
         redirectAttributes.addAttribute("mess", "Create successful !");
-        return "redirect:/blog";
+        return "redirect:/home/success";
     }
     @GetMapping("/{id}/update")
     public String update(@PathVariable Integer id, Model model) {
@@ -67,7 +67,7 @@ public class BlogController {
         BeanUtils.copyProperties(blogDTO, blog);
         iBlogService.update(blog);
         redirectAttributes.addAttribute("mess", "Create successful !");
-        return "redirect:/blog";
+        return "redirect:/home/success";
     }
     @GetMapping("/{id}/detail")
     public String detail(@PathVariable Integer id, Model model) {
@@ -77,9 +77,9 @@ public class BlogController {
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam Integer idDelete, RedirectAttributes redirectAttributes) {
-        iBlogService.delete(idDelete);
+    public String delete(@RequestParam Integer idDeleteBlog, RedirectAttributes redirectAttributes) {
+        iBlogService.delete(idDeleteBlog);
         redirectAttributes.addFlashAttribute("mess", "Delete successful!");
-        return "redirect:/blog";
+        return "redirect:/home/success";
     }
 }

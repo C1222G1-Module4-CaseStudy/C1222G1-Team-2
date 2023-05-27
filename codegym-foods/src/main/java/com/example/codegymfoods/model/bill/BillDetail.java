@@ -28,6 +28,12 @@ public class BillDetail {
         this.product = product;
     }
 
+    public BillDetail(Integer quantityBuy, Bill bill, Product product) {
+        this.quantityBuy = quantityBuy;
+        this.bill = bill;
+        this.product = product;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -59,4 +65,6 @@ public class BillDetail {
     public void setProduct(Product product) {
         this.product = product;
     }
+
+
 }

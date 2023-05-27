@@ -27,4 +27,5 @@ public interface IProductService {
     List<Product> getProductsById(Set<Integer> productsIds);
 
 
+    Product getProductByName(String nameProductFromCartDTO);
 }

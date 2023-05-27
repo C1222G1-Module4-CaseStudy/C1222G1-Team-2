@@ -82,7 +82,7 @@
                                                th:field="*{picture}">
                                     </div>
                                     <div>
-                                        <select th:field="*{productType}">
+                                        <select class="form-control" th:field="*{productType}">
                                             <option th:each="type,inter:${productTypeList}" th:value="${type.id}">
                                                 <span th:text="${type.name}"></span>
                                             </option>
