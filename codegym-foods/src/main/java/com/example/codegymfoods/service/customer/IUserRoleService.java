@@ -7,12 +7,8 @@ import java.util.List;
 
 public interface IUserRoleService {
     List<UserRole> findAllUserRole();
-
     void saveUserRole(UserRole userRole);
-
     void findById(Integer id);
-
     void deleteUserRole(UserRole userRole);
-
     UserRole findUserRoleByAppUser(AppUser appUser);
 }

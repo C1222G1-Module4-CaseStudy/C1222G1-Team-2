@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 
 import javax.transaction.Transactional;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,8 +61,10 @@ public class EmployeeService implements IEmployeeService {
     public void save(Employee employee) {
         employee.getAppUser().setEncrytedPassword(encrytePassword(employee.getAppUser().getEncrytedPassword()));
         AppRole appRole = new AppRole(1, "ROLE_ADMIN");
-        employee = this.employeeRepository.save(employee);
-
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        Date date = dateFormat.parse(employee.getDateOfBirth());
+//        employee.setDateOfBirth(date);
+        this.employeeRepository.save(employee);
         this.userRoleService.saveUserRole(new UserRole(employee.getAppUser(), appRole));
     }
 

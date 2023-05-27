@@ -1,6 +1,7 @@
 package com.example.codegymfoods.service.customer.impl;
 
 import com.example.codegymfoods.model.customer.Customer;
+import com.example.codegymfoods.model.login.AppUser;
 import com.example.codegymfoods.repository.customer.ICustomerRepository;
 import com.example.codegymfoods.service.customer.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,6 @@ public class CustomerService implements ICustomerService {
     public void saveCustomer(Customer customer) {
         customerRepository.save(customer);
     }
-
     @Override
     public void deleteCustomer(Integer idCustomer) {
         customerRepository.deleteById(idCustomer);

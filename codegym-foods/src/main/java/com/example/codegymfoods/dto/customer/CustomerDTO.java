@@ -1,42 +1,46 @@
 package com.example.codegymfoods.dto.customer;
 
-import com.example.codegymfoods.model.employee.Position;
+//import com.example.codegymfoods.model.customer.CustomerType;
 import com.example.codegymfoods.model.login.AppUser;
 
-import javax.persistence.*;
-import javax.validation.constraints.Email;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 public class CustomerDTO {
     private Integer id;
-    @NotBlank(message = "Không được để trống")
+    @NotBlank(message = "Tên không được để trống")
     private String name;
-    @NotBlank(message = "Không được để trống")
-    private String address;
-    @NotBlank(message = "Không được để trống")
-    private String phoneNumber;
-    @NotBlank(message = "Không được để trống")
-    @Email(message = "Email chưa đúng định dạng. Vui lòng kiểm tra lại")
-    private String email;
-    @NotBlank(message = "Không được để trống")
+
+    @NotBlank(message = "Ngày sinh không được để trống")
     private String dateOfBirth;
+    @NotBlank(message = " Đia chỉ không được để trống")
+    private String address;
+    @NotBlank(message = "Email không được để trống")
+    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", message = "Không đúng định dạng example@xxxx.com")
+    private String email;
+    @NotBlank(message = "Số điện thoai không được để trống")
+//    @Pattern(regexp = "^\\d{9,10}$", message = "Số điện thoại phải từ 9 đến 10 số")
+    private String phoneNumber;
+
     private String avatar;
+
+//    private CustomerType customerType;
+    @Valid
     private AppUser appUser;
-    private Position position;
 
     public CustomerDTO() {
     }
 
-    public CustomerDTO(Integer id, String name, String address, String phoneNumber, String email, String dateOfBirth, String avatar, AppUser appUser, Position position) {
+    public CustomerDTO(Integer id, String name, String dateOfBirth, String address, String email, String phoneNumber, String avatar, AppUser appUser) {
         this.id = id;
         this.name = name;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
         this.dateOfBirth = dateOfBirth;
+        this.address = address;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
         this.avatar = avatar;
         this.appUser = appUser;
-        this.position = position;
     }
 
     public Integer getId() {
@@ -55,20 +59,20 @@ public class CustomerDTO {
         this.name = name;
     }
 
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {
@@ -79,12 +83,12 @@ public class CustomerDTO {
         this.email = email;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getAvatar() {
@@ -101,13 +105,5 @@ public class CustomerDTO {
 
     public void setAppUser(AppUser appUser) {
         this.appUser = appUser;
-    }
-
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
     }
 }
