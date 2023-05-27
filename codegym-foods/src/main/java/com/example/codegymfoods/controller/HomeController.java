@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -35,12 +36,13 @@ public class HomeController {
     private IProductTypeService productTypeService;
     @GetMapping("")
     public String index(Model model,
-                        @PageableDefault() Pageable pageable) {
+                        @PageableDefault() Pageable pageable, HttpServletRequest request) {
         model.addAttribute("blogList", this.iBlogService.getBlog(pageable));
         Page<Product> productList = productService.getBlogPage(pageable);
         List<ProductType> productTypeList = productTypeService.getAll();
         model.addAttribute("productTypeList", productTypeList);
         model.addAttribute("productList", productList);
+        model.addAttribute("request",request);
         return "index";
     }
 }

@@ -25,16 +25,16 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link rel="stylesheet" th:href="@{/home/assets/vendor/animate.css/animate.min.css}">
-    <link rel="stylesheet}" th:href="@{/home/assets/vendor/aos/aos.css}">
-    <link rel="stylesheet" th:href="@{/home/assets/vendor/bootstrap/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/home/assets/vendor/bootstrap-icons/bootstrap-icons.css}">
-    <link rel="stylesheet" th:href="@{/home/assets/vendor/boxicons/css/boxicons.min.css}">
-    <link rel="stylesheet" th:href="@{/home/assets/vendor/glightbox/css/glightbox.min.css}">
-    <link rel="stylesheet" th:href="@{/home/assets/vendor/swiper/swiper-bundle.min.css}">
+    <link th:href="@{/home/assets/vendor/animate.css/animate.min.css}" rel="stylesheet">
+    <link th:href="@{/home/assets/vendor/aos/aos.css}" rel="stylesheet}">
+    <link th:href="@{/home/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/home/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+    <link th:href="@{/home/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+    <link th:href="@{/home/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+    <link th:href="@{/home/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link rel="stylesheet" th:href="@{/home/assets/css/style.css}">
+    <link th:href="@{/home/assets/css/style.css}" rel="stylesheet">
 </head>
 
 <body>
@@ -78,15 +78,84 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                             style="font-size: 24px "></i></span>
         </a>
 
-        <a class="book-a-table-btn scrollto d-none d-lg-flex" href="/account/login">Đăng nhập
-        </a>
+        <!--        <a href="/account/login" class="book-a-table-btn scrollto d-none d-lg-flex">Đăng nhập-->
+
+        <!--        </a>-->
+        <div th:if="${request != null}" class="d-flex justify-content-between align-items-center">
+            <div th:if="${#request.userPrincipal != null}">
+                <form>
+                    <div class="user-info d-flex align-items-center" th:if="${#request.userPrincipal != null}">
+                        <ul>
+                            <li class="nav-item dropdown" style="list-style: none">
+                                <a class="nav-link" data-bs-toggle="dropdown" href="#" id="profileDropdown">
+                                    <div class="navbar-profile">
+                                        <form class="d-flex" role="search">
+                                            <div class="user-info">
+                                                <img alt=""
+                                                     class="img-xs rounded-circle"
+                                                     src="${customerList.avatar}">
+                                                <!--                                        <span class="mb-0 font-weight-normal text-light m-2"-->
+                                                <!--                                              th:utext="${#request.userPrincipal.getName()}"></span>-->
+                                            </div>
+                                            <!-- Button trigger modal -->
+                                            <button class="btn btn-outline-success" type="button" style="border: none">
+                                                <img class="img-xs rounded-circle"
+                                                     src="https://andy.codegym.vn/storage/images/avatars/eaf3a049a40db2776e366e2d3a464464.jpg"
+                                                     width="46px" alt="">
+                                            </button>
+                                        </form>
+                                    </div>
+                                </a>
+                                <div aria-labelledby="profileDropdown"
+                                     class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list">
+                                    <h6 class="p-3 mb-0">Profile</h6>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-dark rounded-circle">
+                                                <i class="mdi mdi-settings text-success"></i>
+                                            </div>
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <a class="preview-subject mb-1" th:href="@{/user/detail}">Thông tin tài
+                                                khoản</a>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-dark rounded-circle">
+                                                <i class="mdi mdi-logout text-danger"></i>
+                                            </div>
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <p class="preview-subject mb-1" data-bs-toggle="modal"
+                                               data-bs-target="#staticBackdrop">
+                                                Đăng xuất
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <p class="p-3 mb-0 text-center">Cài đặt</p>
+                                </div>
+                            </li>
+                        </ul>
+
+
+                    </div>
+                </form>
+            </div>
+            <div th:if="${#request.userPrincipal == null}">
+                <a class="book-a-table-btn scrollto d-none d-lg-flex" onclick="location.href = '/account/login'"><span>Đăng nhập</span></a>
+            </div>
+        </div>
+        <!--        Đăng nhập-->
 
 
     </div>
 </header><!-- End Header -->
 
 <!-- ======= Hero Section ======= -->
-<section class="d-flex align-items-center" id="hero">
+<section id="hero" class="d-flex align-items-center">
     <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
         <div class="row">
             <div class="col-lg-8">
@@ -94,13 +163,13 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                 <h2>Thiên đường đồ ăn vặt</h2>
 
                 <div class="btns">`
-                    <a class="btn-menu animated fadeInUp scrollto" href="#menu">Sản phẩm</a>
-                    <a class="btn-book animated fadeInUp scrollto" href="/account/register">Đăng ký thành viên</a>
+                    <a href="#menu" class="btn-menu animated fadeInUp scrollto">Sản phẩm</a>
+                    <a href="/account/register" class="btn-book animated fadeInUp scrollto">Đăng ký thành viên</a>
                 </div>
             </div>
             <div class="col-lg-4 d-flex align-items-center justify-content-center position-relative" data-aos="zoom-in"
                  data-aos-delay="200">
-                <a class="glightbox play-btn" href="https://www.youtube.com/watch?v=BY6d9xw1Ivs"></a>
+                <a href="https://www.youtube.com/watch?v=BY6d9xw1Ivs" class="glightbox play-btn"></a>
             </div>
 
         </div>
@@ -110,13 +179,13 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 <main id="main">
 
     <!-- ======= About Section ======= -->
-    <section class="about" id="about">
+    <section id="about" class="about">
         <div class="container" data-aos="fade-up">
 
             <div class="row">
                 <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
                     <div class="about-img">
-                        <img alt="" src="/home/assets/img/about.jpg">
+                        <img src="/home/assets/img/about.jpg" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
@@ -150,7 +219,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
     </section><!-- End About Section -->
 
     <!-- ======= Why Us Section ======= -->
-    <section class="why-us" id="why-us">
+    <section id="why-us" class="why-us">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
@@ -200,14 +269,14 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
     </section><!-- End Why Us Section -->
 
     <!-- ======= Menu Section ======= -->
-    <section class="menu section-bg" id="menu">
+    <section id="menu" class="menu section-bg">
         <div class="container" data-aos="fade-up">
             <div class="section-title">
                 <h2>Danh sách</h2>
                 <p>Đồ ăn vặt
                     <span th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                    <a role="button"
-                       th:href="@{/creatProduct}"><i class="bi bi-patch-plus-fill"></i></a>
+                    <a th:href="@{/creatProduct}"
+                       role="button"><i class="bi bi-patch-plus-fill"></i></a>
                 </span>
                 </p>
             </div>
@@ -224,7 +293,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 
             <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
                 <div class="col-lg-6 menu-item " th:each="product,inter:${productList}">
-                    <img alt="" class="menu-img" th:src="${product.picture}">
+                    <img th:src="${product.picture}" class="menu-img" alt="">
                     <div class="menu-content">
                         <a href="#" th:text="${product.name}"></a><span th:text="${product.price + 'đ'}"></span>
                         <a th:href="@{/cart/addToCart/{id}(id=${product.id})}"><i class="bi bi-bag-plus-fill"></i> </a>
@@ -234,12 +303,11 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                     </div>
                     <div class="section-title">
                         <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                            <a role="button"
-                               th:href="@{/updateProduct/{id}(id=${product.id})}"><i class="bi bi-gear-fill"
-                                                                                     style="color: aliceblue"></i></a>
-                            <i class="bi bi-trash-fill" data-bs-target="#modelId" data-bs-toggle="modal"
-                               th:onclick="|deleteByID(${product.id})|"
-                               type="button"></i>
+                            <a th:href="@{/updateProduct/{id}(id=${product.id})}"
+                               role="button"><i class="bi bi-gear-fill" style="color: aliceblue"></i></a>
+                            <i class="bi bi-trash-fill" th:onclick="|deleteByID(${product.id})|" type="button"
+                               data-bs-toggle="modal"
+                               data-bs-target="#modelId"></i>
                         </div>
                     </div>
                 </div>
@@ -274,8 +342,8 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                 </div>
                 <div class="col-lg-9 mt-4 mt-lg-0">
                     <div class="tab-content">
-                        <div class="tab-pane" th:class="${itemIndex == 0 ? 'active show' : ''}"
-                             th:each="item, itemIndex : ${blogList}" th:id="'tab-' + ${itemIndex}">
+                        <div class="tab-pane" th:each="item, itemIndex : ${blogList}"
+                             th:class="${itemIndex == 0 ? 'active show' : ''}" th:id="'tab-' + ${itemIndex}">
                             <div class="row">
                                 <div class="col-lg-8 details order-2 order-lg-1">
                                     <h3 th:text="${item.title}"></h3>
@@ -310,82 +378,30 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                                 <img alt="" class="img-fluid" src="/home/assets/img/event-birthday.jpg">
                             </div>
                             <div class="col-lg-6 pt-4 pt-lg-0 content">
-                                <h3>Các sản phẩm bán chạy</h3>
+                                <h3>Birthday Parties</h3>
                                 <div class="price">
-                                    <p><span>🌟 Khô Gà và Khô Mực - Chất lượng và Thơm ngon! 🌟</span></p>
+                                    <p><span>$189</span></p>
                                 </div>
                                 <p class="fst-italic">
-                                    Khô Gà - Sự hòa quyện của vị thịt tươi ngon và độ giòn hấp dẫn.
-                                    Khô Mực - Điểm nhấn tinh tế trong ẩm thực đặc sản.
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore
+                                    magna aliqua.
                                 </p>
                                 <ul>
-                                    <li><i class="bi bi-check-circled"></i> Khô Gà và Khô Mực - Sự kết hợp hoàn hảo cho
-                                        những bữa tiệc và dịp đặc biệt. Tận hưởng sự đa dạng của thịt gà khô thơm ngon
-                                        và vị đặc trưng của mực khô giòn rụm. Đây là món quà tuyệt vời dành cho bạn bè,
-                                        người thân và đối tác kinh doanh.
+                                    <li><i class="bi bi-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea
+                                        commodo consequat.
+                                    </li>
+                                    <li><i class="bi bi-check-circled"></i> Duis aute irure dolor in reprehenderit in
+                                        voluptate velit.
+                                    </li>
+                                    <li><i class="bi bi-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea
+                                        commodo consequat.
                                     </li>
                                 </ul>
                                 <p>
-                                    Khô Gà và Khô Mực - Sự lựa chọn hàng đầu của người yêu ẩm thực. Với hương vị đậm đà
-                                    và mùi thơm hấp dẫn
-                                </p>
-                            </div>
-                        </div>
-                    </div><!-- End testimonial item -->
-
-                    <div class="swiper-slide">
-                        <div class="row event-item">
-                            <div class="col-lg-6">
-                                <img alt="" class="img-fluid" src="/home/assets/img/event-private.jpg">
-                            </div>
-                            <div class="col-lg-6 pt-4 pt-lg-0 content">
-                                <h3>Khuyến mãi đồ ăn vặt hot Tiktok</h3>
-                                <div class="price">
-                                    <p><span>🌟 Tận hưởng Đồ Ăn Vặt Hot TikTok - bởi Nguyễn Hà Linh! 🌟</span></p>
-                                </div>
-                                <p class="fst-italic">
-                                    🍿 Bạn yêu thích thử những món đồ ăn vặt đang hot trên TikTok? Hãy đến với chúng tôi,
-                                    Nguyễn Hà Linh, để khám phá thế giới đầy thú vị của đồ ăn vặt nổi tiếng trên mạng xã
-                                    hội hàng đầu này.
-                                </p>
-                                <ul>
-                                    <li><i class="bi bi-check-circled"></i> 🍟 Bạn có biết rằng chúng tôi chuyên cung cấp
-                                        những món đồ ăn vặt đang gây sốt trên TikTok?
-                                    </li>
-                                </ul>
-                                <p>
-                                    ⭐ Đừng quên theo dõi chúng tôi trên TikTok để cập nhật những video thú vị và những
-                                    món đồ ăn vặt hot nhất từ Nguyễn Hà Linh! ⭐️
-                                </p>
-                            </div>
-                        </div>
-                    </div><!-- End testimonial item -->
-
-                    <div class="swiper-slide">
-                        <div class="row event-item">
-                            <div class="col-lg-6">
-                                <img alt="" class="img-fluid" src="/home/assets/img/event-custom.jpg">
-                            </div>
-                            <div class="col-lg-6 pt-4 pt-lg-0 content">
-                                <h3>Riview đồ ăn vặt Trung Quốc</h3>
-                                <div class="price">
-                                    <p>
-                                        <span>🌟 Khám phá Vị Độc Đáo - Đồ Ăn Vặt Trung Quốc - Review bởi Ninh Tito! 🌟</span>
-                                    </p>
-                                </div>
-                                <p class="fst-italic">
-                                    Ninh Tito đã thử và đánh giá những món đồ ăn vặt Trung Quốc tuyệt vời tại chúng tôi.
-                                </p>
-                                <ul>
-                                    <li><i class="bi bi-check-circled"></i> Đồ ăn vặt Trung Quốc - Bí quyết của sự thú
-                                        vị! Ninh Tito đã khám phá vô số loại bánh ngọt, như bánh hành phi, bánh gai, và
-                                        bánh bao nhân trứng thơm ngon. Hãy đến và khám phá một thế giới mới của vị ngon
-                                        đặc trưng Trung Quốc!
-                                    </li>
-                                </ul>
-                                <p>
-                                    Đánh giá tuyệt vời từ Ninh Tito về đồ ăn vặt Trung Quốc tại web bán hàng của chúng
-                                    tôi!
+                                    Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                    reprehenderit in voluptate
+                                    velit esse cillum dolore eu fugiat nulla pariatur
                                 </p>
                             </div>
                         </div>
@@ -398,8 +414,9 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
         </div>
     </section><!-- End Events Section -->
 
+
     <!-- ======= Testimonials Section ======= -->
-    <section class="testimonials section-bg" id="testimonials">
+    <section id="testimonials" class="testimonials section-bg">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
@@ -418,7 +435,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                                 và nước ngọt đặc biệt của họ. Nhân viên cũng rất thân thiện và phục vụ nhanh chóng.
                                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                             </p>
-                            <img alt="" class="testimonial-img" src="/home/assets/img/testimonials/testimonials-1.jpg">
+                            <img src="/home/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
                             <h3>Bill Gates</h3>
                             <h4>Ceo &amp; Founder Microsoft</h4>
                         </div>
@@ -432,7 +449,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                                 giòn vừa béo ngon, và các loại kem đá xay có hương vị tuyệt vời. Giá cả cũng rất hợp lý.
                                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                             </p>
-                            <img alt="" class="testimonial-img" src="/home/assets/img/testimonials/testimonials-2.jpg">
+                            <img src="/home/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
                             <h3>Sara Wilsson</h3>
                             <h4>Designer</h4>
                         </div>
@@ -447,7 +464,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                                 trải nghiệm tốt.
                                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                             </p>
-                            <img alt="" class="testimonial-img" src="/home/assets/img/testimonials/testimonials-3.jpg">
+                            <img src="/home/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
                             <h3>Jena Karlis</h3>
                             <h4>Store Owner</h4>
                         </div>
@@ -462,7 +479,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                                 giá cả phải chăng.
                                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                             </p>
-                            <img alt="" class="testimonial-img" src="/home/assets/img/testimonials/testimonials-4.jpg">
+                            <img src="/home/assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
                             <h3>Matt Brandon</h3>
                             <h4>Freelancer</h4>
                         </div>
@@ -477,7 +494,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                                 lựa chọn. Tôi đã trở thành một khách hàng thường xuyên của họ.
                                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                             </p>
-                            <img alt="" class="testimonial-img" src="/home/assets/img/testimonials/testimonials-5.jpg">
+                            <img src="/home/assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
                             <h3>John Larson</h3>
                             <h4>Entrepreneur</h4>
                         </div>
@@ -491,12 +508,12 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
     </section><!-- End Testimonials Section -->
 
     <!-- ======= Gallery Section ======= -->
-    <section class="gallery" id="gallery">
+    <section id="gallery" class="gallery">
 
         <div class="container" data-aos="fade-up">
             <div class="section-title">
-                <h2>Hình ảnh</h2>
-                <p>Một số hình ảnh của CodeGym Foods</p>
+                <h2>Gallery</h2>
+                <p>Some photos from Our CodeGym Foods</p>
             </div>
         </div>
 
@@ -506,72 +523,72 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 
                 <div class="col-lg-3 col-md-4">
                     <div class="gallery-item">
-                        <a class="gallery-lightbox" data-gall="gallery-item"
-                           href="/home/assets/img/gallery/gallery-1.jpg">
-                            <img alt="" class="img-fluid" src="/home/assets/img/gallery/gallery-1.jpg">
+                        <a href="/home/assets/img/gallery/gallery-1.jpg" class="gallery-lightbox"
+                           data-gall="gallery-item">
+                            <img src="/home/assets/img/gallery/gallery-1.jpg" alt="" class="img-fluid">
                         </a>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-4">
                     <div class="gallery-item">
-                        <a class="gallery-lightbox" data-gall="gallery-item"
-                           href="/home/assets/img/gallery/gallery-2.jpg">
-                            <img alt="" class="img-fluid" src="/home/assets/img/gallery/gallery-2.jpg">
+                        <a href="/home/assets/img/gallery/gallery-2.jpg" class="gallery-lightbox"
+                           data-gall="gallery-item">
+                            <img src="/home/assets/img/gallery/gallery-2.jpg" alt="" class="img-fluid">
                         </a>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-4">
                     <div class="gallery-item">
-                        <a class="gallery-lightbox" data-gall="gallery-item"
-                           href="/home/assets/img/gallery/gallery-3.jpg">
-                            <img alt="" class="img-fluid" src="/home/assets/img/gallery/gallery-3.jpg">
+                        <a href="/home/assets/img/gallery/gallery-3.jpg" class="gallery-lightbox"
+                           data-gall="gallery-item">
+                            <img src="/home/assets/img/gallery/gallery-3.jpg" alt="" class="img-fluid">
                         </a>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-4">
                     <div class="gallery-item">
-                        <a class="gallery-lightbox" data-gall="gallery-item"
-                           href="/home/assets/img/gallery/gallery-4.jpg">
-                            <img alt="" class="img-fluid" src="/home/assets/img/gallery/gallery-4.jpg">
+                        <a href="/home/assets/img/gallery/gallery-4.jpg" class="gallery-lightbox"
+                           data-gall="gallery-item">
+                            <img src="/home/assets/img/gallery/gallery-4.jpg" alt="" class="img-fluid">
                         </a>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-4">
                     <div class="gallery-item">
-                        <a class="gallery-lightbox" data-gall="gallery-item"
-                           href="/home/assets/img/gallery/gallery-5.jpg">
-                            <img alt="" class="img-fluid" src="/home/assets/img/gallery/gallery-5.jpg">
+                        <a href="/home/assets/img/gallery/gallery-5.jpg" class="gallery-lightbox"
+                           data-gall="gallery-item">
+                            <img src="/home/assets/img/gallery/gallery-5.jpg" alt="" class="img-fluid">
                         </a>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-4">
                     <div class="gallery-item">
-                        <a class="gallery-lightbox" data-gall="gallery-item"
-                           href="/home/assets/img/gallery/gallery-6.jpg">
-                            <img alt="" class="img-fluid" src="/home/assets/img/gallery/gallery-6.jpg">
+                        <a href="/home/assets/img/gallery/gallery-6.jpg" class="gallery-lightbox"
+                           data-gall="gallery-item">
+                            <img src="/home/assets/img/gallery/gallery-6.jpg" alt="" class="img-fluid">
                         </a>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-4">
                     <div class="gallery-item">
-                        <a class="gallery-lightbox" data-gall="gallery-item"
-                           href="/home/assets/img/gallery/gallery-7.jpg">
-                            <img alt="" class="img-fluid" src="/home/assets/img/gallery/gallery-7.jpg">
+                        <a href="/home/assets/img/gallery/gallery-7.jpg" class="gallery-lightbox"
+                           data-gall="gallery-item">
+                            <img src="/home/assets/img/gallery/gallery-7.jpg" alt="" class="img-fluid">
                         </a>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-4">
                     <div class="gallery-item">
-                        <a class="gallery-lightbox" data-gall="gallery-item"
-                           href="/home/assets/img/gallery/gallery-8.jpg">
-                            <img alt="" class="img-fluid" src="/home/assets/img/gallery/gallery-8.jpg">
+                        <a href="/home/assets/img/gallery/gallery-8.jpg" class="gallery-lightbox"
+                           data-gall="gallery-item">
+                            <img src="/home/assets/img/gallery/gallery-8.jpg" alt="" class="img-fluid">
                         </a>
                     </div>
                 </div>
@@ -582,7 +599,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
     </section><!-- End Gallery Section -->
 
     <!-- ======= Chefs Section ======= -->
-    <section class="chefs" id="chefs">
+    <section id="chefs" class="chefs">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
@@ -594,7 +611,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 
                 <div class="col-lg-3 col-md-6">
                     <div class="member" data-aos="zoom-in" data-aos-delay="100">
-                        <img alt="" class="img-fluid" src="/home/assets/img/chefs/chefs-1.jpg">
+                        <img src="/home/assets/img/chefs/chefs-1.jpg" class="img-fluid" alt="">
                         <div class="member-info">
                             <div class="member-info-content">
                                 <h4>Nguyễn Tiến Đạt</h4>
@@ -611,7 +628,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 
                 <div class="col-lg-3 col-md-6">
                     <div class="member" data-aos="zoom-in" data-aos-delay="200">
-                        <img alt="" class="img-fluid" src="/home/assets/img/chefs/chefs-2.jpg">
+                        <img src="/home/assets/img/chefs/chefs-2.jpg" class="img-fluid" alt="">
                         <div class="member-info">
                             <div class="member-info-content">
                                 <h4>Ngô Tiến Hưng</h4>
@@ -627,7 +644,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 
                 <div class="col-lg-3 col-md-6">
                     <div class="member" data-aos="zoom-in" data-aos-delay="300">
-                        <img alt="" class="img-fluid" src="/home/assets/img/chefs/chefs-3.jpg">
+                        <img src="/home/assets/img/chefs/chefs-3.jpg" class="img-fluid" alt="">
                         <div class="member-info">
                             <div class="member-info-content">
                                 <h4>Châu Hoàng Tố Trinh</h4>
@@ -645,7 +662,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 
                 <div class="col-lg-3 col-md-6">
                     <div class="member" data-aos="zoom-in" data-aos-delay="300">
-                        <img alt="" class="img-fluid" src="/home/assets/img/chefs/chefs-4.jpg">
+                        <img src="/home/assets/img/chefs/chefs-4.jpg" class="img-fluid" alt="">
                         <div class="member-info">
                             <div class="member-info-content">
                                 <h4>Nguyễn Hữu Huy</h4>
@@ -667,7 +684,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
     </section><!-- End Chefs Section -->
 
     <!-- ======= Contact Section ======= -->
-    <section class="contact" id="contact">
+    <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
@@ -677,10 +694,9 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
         </div>
 
         <div data-aos="fade-up">
-            <iframe allowfullscreen
-                    frameborder="0"
+            <iframe style="border:0; width: 100%; height: 350px;"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.2065620400426!2d108.22781327180523!3d16.05476730586307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219a486b7f699%3A0xae6269b629a63e82!2zQ29kZUd5bSDEkMOgIE7hurVuZw!5e0!3m2!1sen!2s!4v1684899875884!5m2!1sen!2s"
-                    style="border:0; width: 100%; height: 350px;"></iframe>
+                    frameborder="0" allowfullscreen></iframe>
         </div>
 
         <div class="container" data-aos="fade-up">
@@ -775,11 +791,11 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                             <strong>Email:</strong> codegym-foods@codegym.com.vn<br>
                         </p>
                         <div class="social-links mt-3">
-                            <a class="twitter" href="#"><i class="bx bxl-twitter"></i></a>
-                            <a class="facebook" href="#"><i class="bx bxl-facebook"></i></a>
-                            <a class="instagram" href="#"><i class="bx bxl-instagram"></i></a>
-                            <a class="google-plus" href="#"><i class="bx bxl-skype"></i></a>
-                            <a class="linkedin" href="#"><i class="bx bxl-linkedin"></i></a>
+                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
                         </div>
                     </div>
                 </div>
@@ -799,7 +815,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                     <h4>Bản tin của chúng tôi</h4>
                     <p>Đăng ký để nhận những thông báo sớm nhất các chương trình của chúng tôi</p>
                     <form action="" method="post">
-                        <input name="email" type="email"><input type="submit" value="Subscribe">
+                        <input type="email" name="email"><input type="submit" value="Subscribe">
                     </form>
 
                 </div>
@@ -823,7 +839,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 </footer><!-- End Footer -->
 
 <div id="preloader"></div>
-<a class="back-to-top d-flex align-items-center justify-content-center" href="#"><i
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
@@ -838,12 +854,12 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 <script th:src="@{/home/assets/js/main.js}"></script>
 
 
-<div aria-hidden="true" aria-labelledby="modelTitleId" class="modal fade" id="modelId" role="dialog" tabindex="-1">
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="modelTitleId"></h4>
-                <button aria-label="Close" class="close" data-bs-dismiss="modal" type="button">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -852,9 +868,9 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
             </div>
             <div class="modal-footer">
                 <form action="/deleteProduct">
-                    <input th:id="idDelete" th:name="id" type="hidden">
-                    <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Đóng</button>
-                    <button class="btn btn-danger" type="submit">Xóa</button>
+                    <input type="hidden" th:id="idDelete" th:name="id">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-danger">Xóa</button>
                 </form>
             </div>
         </div>
@@ -865,21 +881,37 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
         document.getElementById("idDelete").value = id;
     }
 </script>
-<script>
-    function findByName(nameToSearch) {
-        nameToSearch = $('#search').val()
-        $.ajax({
-            url: `http://localhost:8080/cart/addToCart/${nameToSearch}`,
-            type: "get",
-            success: function (blogList) {
 
-                //
-                $('#Listblog').html(blogListStr)
 
-            }
-        })
-    }
-</script>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Hôp thoại đăng xuất</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn <span class="mb-0 text-danger font-weight-medium m-2" th:if="${#request.userPrincipal != null}"
+                          th:text="${#request.userPrincipal.getName()}"></span> có chắc chắn muốn đăng xuất?
+            </div>
+            <div class="modal-footer">
+                <form action="/account/logout" method="get">
+                    <button type="submit" class="btn btn-primary">Đăng xuất</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+
 </body>
 
 </html>

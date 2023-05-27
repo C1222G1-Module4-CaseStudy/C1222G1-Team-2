@@ -93,7 +93,7 @@ public class LoginController extends EncrytedPasswordUtils {
     public String logoutSuccessfulPage(Model model, RedirectAttributes redirect) {
 //        model.addAttribute("message", "Đăng xuất thành công");
         redirect.addFlashAttribute("message", "Đăng xuất thành công");
-        return "redirect:/login";
+        return "redirect:/account/login";
     }
 
 
