@@ -1,5 +1,6 @@
 package com.example.codegymfoods.service.employee.impl;
 
+
 import com.example.codegymfoods.model.employee.Employee;
 import com.example.codegymfoods.repository.employee.IEmployeeRepository;
 import com.example.codegymfoods.service.employee.IEmployeeService;
@@ -7,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class EmployeeService implements IEmployeeService {
+
     @Autowired
     private IEmployeeRepository employeeRepository;
 
@@ -43,6 +44,6 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public void save(Employee employee) {
-
+        this.employeeRepository.save(employee);
     }
 }

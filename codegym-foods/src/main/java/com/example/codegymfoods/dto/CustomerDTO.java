@@ -1,7 +1,8 @@
-package com.example.codegymfoods.dto;
+package com.example.codegymfoods.dto.employee;
 
 import com.example.codegymfoods.model.login.AppUser;
 import javax.validation.Valid;
+import com.example.codegymfoods.service.employee.annotation.YearOldValid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -12,6 +13,15 @@ public class CustomerDTO {
     private String name;
 
     @NotBlank(message = "Ngày sinh không được để trống")
+    @NotBlank(message = "Không được để trống")
+    private String address;
+    @NotBlank(message = "Không được để trống")
+    private String phoneNumber;
+    @NotBlank(message = "Không được để trống")
+    @Email(message = "Email chưa đúng định dạng. Vui lòng kiểm tra lại")
+    private String email;
+    @NotBlank(message = "Không được để trống")
+    @YearOldValid
     private String dateOfBirth;
     @NotBlank(message = " Đia chỉ không được để trống")
     private String address;
