@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,7 +61,6 @@ public class EmployeeService implements IEmployeeService {
         employee.getAppUser().setEncrytedPassword(encrytePassword(employee.getAppUser().getEncrytedPassword()));
         AppRole appRole = new AppRole(1, "ROLE_ADMIN");
         employee = this.employeeRepository.save(employee);
-
         this.userRoleService.saveUserRole(new UserRole(employee.getAppUser(), appRole));
     }
 

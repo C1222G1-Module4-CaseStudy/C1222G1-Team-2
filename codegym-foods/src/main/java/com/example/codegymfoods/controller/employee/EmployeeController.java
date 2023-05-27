@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -70,7 +73,7 @@ public class EmployeeController {
     public String createEmployee(@Valid @ModelAttribute("employeeCreateDTO") EmployeeDTO employeeDTO,
                                  BindingResult bindingResult,
                                  RedirectAttributes redirectAttributes, Model model
-    ) {
+    ) throws ParseException {
         model.addAttribute("position", this.positionService.findAll());
         if (bindingResult.hasErrors()) {
             return "/employee/create-employee";
@@ -86,6 +89,8 @@ public class EmployeeController {
         } else {
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDTO, employee);
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            employee.setDateOfBirth(formatter.parse(employeeDTO.getDateOfBirth()));
             employeeService.save(employee);
             redirectAttributes.addFlashAttribute("message", "Thêm mới thành công");
             return "redirect:/admin/employee";
