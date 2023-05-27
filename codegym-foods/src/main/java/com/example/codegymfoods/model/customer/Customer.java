@@ -22,7 +22,7 @@ public class Customer {
     private String email;
     private String avatar;
 
-    @OneToOne
+    @OneToOne (cascade = CascadeType.PERSIST)
     @JoinColumn(name = "app_user_id", referencedColumnName = "user_id", nullable = false)
     private AppUser appUser;
 

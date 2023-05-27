@@ -6,6 +6,8 @@ import com.example.codegymfoods.service.employee.annotation.YearOldValid;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.xml.crypto.Data;
+import java.util.Date;
 
 public class EmployeeDTO {
     private Integer id;
@@ -18,7 +20,6 @@ public class EmployeeDTO {
     @NotBlank(message = "Không được để trống")
     @Email(message = "Email chưa đúng định dạng. Vui lòng kiểm tra lại")
     private String email;
-    @NotBlank(message = "Không được để trống")
     @YearOldValid
     private String dateOfBirth;
     private String avatar;

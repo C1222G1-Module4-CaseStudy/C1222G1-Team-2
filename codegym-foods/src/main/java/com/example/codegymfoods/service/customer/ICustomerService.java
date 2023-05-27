@@ -1,6 +1,7 @@
 package com.example.codegymfoods.service.customer;
 
 import com.example.codegymfoods.model.customer.Customer;
+import com.example.codegymfoods.model.login.AppUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
