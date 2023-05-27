@@ -324,11 +324,12 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
     </section><!-- End Menu Section -->
 
     <!-- ======= Specials Section ======= -->
-    <section class="specials" id="specials">
+    <section id="specials" class="specials">
         <div class="container" data-aos="fade-up">
             <div class="section-title">
                 <h2>Tin tức</h2>
-                <p>Những thông tin chia sẻ</p>
+                <p>Những thông tin chia sẻ <a role="button"
+                                              th:href="@{/blog/create-form}"><i class="bi bi-patch-plus-fill"></i></a></p>
             </div>
 
             <div class="row" data-aos="fade-up" data-aos-delay="100">
@@ -347,10 +348,28 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                             <div class="row">
                                 <div class="col-lg-8 details order-2 order-lg-1">
                                     <h3 th:text="${item.title}"></h3>
-                                    <p class="fst-italic" th:text="${item.content}">Content</p>
+                                    <div class="dropdown">
+                                        <button class="bg-black dropdown-toggle spinner-border-sm" type="button"
+                                                id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="text-black text-decoration-none dropdown-item"
+                                                   th:href="@{/blog/{id}/update(id=${item.id})}">Sửa</a></li>
+                                            <li><a th:attr="onclick=|deleteId('${item.getId()}', '${item.getTitle()}')|"
+                                                   data-bs-toggle="modal"
+                                                   data-bs-target="#modelId1" class="text-black dropdown-item"
+                                                   th:href="@{/delete/__${item.id}__}">Xóa</a></li>
+                                            <li><a class="text-black text-decoration-none dropdown-item"
+                                                   th:href="@{/blog/{id}/detail(id=${item.id})}">Chi tiết</a></li>
+                                        </ul>
+                                    </div>
+                                    <p class="fst-italic" th:text="${item.dateNow}"></p>
+                                    <p class="fst-italic" th:text="${item.content}"></p>
                                 </div>
                                 <div class="col-lg-4 text-center order-1 order-lg-2">
-                                    <img alt="" class="img-fluid m-2" th:src="${item.imgUrl}">
+                                    <img alt="" class="img-fluid" th:src="${item.imgUrl}" style="margin-top: 12px">
                                 </div>
                             </div>
                         </div>
@@ -358,10 +377,36 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                 </div>
             </div>
         </div>
-    </section><!-- End Specials Section -->
+        <div class="modal fade" id="modelId1" tabindex="-1" role="dialog" aria-labelledby="modelTitleI1"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modelTitleId2"></h4>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="color: #0b0b0b">
+                        Bạn có muốn xóa tin <span class="text-danger" id="nameDelete"></span> ?
+                    </div>
+                    <div class="modal-footer">
+                        <form action="/blog/delete" method="get">
+                            <div class="input-group">
+                                <input type="hidden" id="idDelete" name="idDelete">
+                            </div>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Specials Section -->
 
     <!-- ======= Events Section ======= -->
-    <section class="events" id="events">
+    <section id="events" class="events">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
@@ -375,33 +420,86 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                     <div class="swiper-slide">
                         <div class="row event-item">
                             <div class="col-lg-6">
-                                <img alt="" class="img-fluid" src="/home/assets/img/event-birthday.jpg">
+                                <img src="/home/assets/img/event-birthday.jpg" class="img-fluid" alt="">
                             </div>
                             <div class="col-lg-6 pt-4 pt-lg-0 content">
-                                <h3>Birthday Parties</h3>
+                                <h3>Các sản phẩm bán chạy</h3>
                                 <div class="price">
-                                    <p><span>$189</span></p>
+                                    <p><span>🌟 Khô Gà và Khô Mực - Chất lượng và Thơm ngon! 🌟</span></p>
                                 </div>
                                 <p class="fst-italic">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore
-                                    magna aliqua.
+                                    Khô Gà - Sự hòa quyện của vị thịt tươi ngon và độ giòn hấp dẫn.
+                                    Khô Mực - Điểm nhấn tinh tế trong ẩm thực đặc sản.
                                 </p>
                                 <ul>
-                                    <li><i class="bi bi-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea
-                                        commodo consequat.
-                                    </li>
-                                    <li><i class="bi bi-check-circled"></i> Duis aute irure dolor in reprehenderit in
-                                        voluptate velit.
-                                    </li>
-                                    <li><i class="bi bi-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea
-                                        commodo consequat.
+                                    <li><i class="bi bi-check-circled"></i> Khô Gà và Khô Mực - Sự kết hợp hoàn
+                                        hảo cho những bữa tiệc và dịp đặc biệt. Tận hưởng sự đa dạng của thịt gà
+                                        khô thơm ngon và vị đặc trưng của mực khô giòn rụm. Đây là món quà tuyệt
+                                        vời dành cho bạn bè, người thân và đối tác kinh doanh.
                                     </li>
                                 </ul>
                                 <p>
-                                    Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                    reprehenderit in voluptate
-                                    velit esse cillum dolore eu fugiat nulla pariatur
+                                    Khô Gà và Khô Mực - Sự lựa chọn hàng đầu của người yêu ẩm thực. Với hương vị
+                                    đậm đà và mùi thơm hấp dẫn
+                                </p>
+                            </div>
+                        </div>
+                    </div><!-- End testimonial item -->
+
+                    <div class="swiper-slide">
+                        <div class="row event-item">
+                            <div class="col-lg-6">
+                                <img src="/home/assets/img/event-private.jpg" class="img-fluid" alt="">
+                            </div>
+                            <div class="col-lg-6 pt-4 pt-lg-0 content">
+                                <h3>Khuyến mãi đồ ăn vặt hot Tiktok</h3>
+                                <div class="price">
+                                    <p><span>🌟 Tận hưởng Đồ Ăn Vặt Hot TikTok - bởi Nguyễn Hà Linh! 🌟</span></p>
+                                </div>
+                                <p class="fst-italic">
+                                    🍿 Bạn yêu thích thử những món đồ ăn vặt đang hot trên TikTok? Hãy đến với
+                                    chúng tôi, Nguyễn Hà Linh, để khám phá thế giới đầy thú vị của đồ ăn vặt nổi
+                                    tiếng trên mạng xã hội hàng đầu này.
+                                </p>
+                                <ul>
+                                    <li><i class="bi bi-check-circled"></i> 🍟 Bạn có biết rằng chúng tôi chuyên
+                                        cung cấp những món đồ ăn vặt đang gây sốt trên TikTok?
+                                    </li>
+                                </ul>
+                                <p>
+                                    ⭐ Đừng quên theo dõi chúng tôi trên TikTok để cập nhật những video thú vị và
+                                    những món đồ ăn vặt hot nhất từ Nguyễn Hà Linh! ⭐️
+                                </p>
+                            </div>
+                        </div>
+                    </div><!-- End testimonial item -->
+
+                    <div class="swiper-slide">
+                        <div class="row event-item">
+                            <div class="col-lg-6">
+                                <img src="/home/assets/img/event-custom.jpg" class="img-fluid" alt="">
+                            </div>
+                            <div class="col-lg-6 pt-4 pt-lg-0 content">
+                                <h3>Riview đồ ăn vặt Trung Quốc</h3>
+                                <div class="price">
+                                    <p>
+                                        <span>🌟 Khám phá Vị Độc Đáo - Đồ Ăn Vặt Trung Quốc - Review bởi Ninh Tito! 🌟</span>
+                                    </p>
+                                </div>
+                                <p class="fst-italic">
+                                    Ninh Tito đã thử và đánh giá những món đồ ăn vặt Trung Quốc tuyệt vời tại
+                                    chúng tôi.
+                                </p>
+                                <ul>
+                                    <li><i class="bi bi-check-circled"></i> Đồ ăn vặt Trung Quốc - Bí quyết của
+                                        sự thú vị! Ninh Tito đã khám phá vô số loại bánh ngọt, như bánh hành
+                                        phi, bánh gai, và bánh bao nhân trứng thơm ngon. Hãy đến và khám phá một
+                                        thế giới mới của vị ngon đặc trưng Trung Quốc!
+                                    </li>
+                                </ul>
+                                <p>
+                                    Đánh giá tuyệt vời từ Ninh Tito về đồ ăn vặt Trung Quốc tại web bán hàng của
+                                    chúng tôi!
                                 </p>
                             </div>
                         </div>

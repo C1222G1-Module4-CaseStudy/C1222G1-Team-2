@@ -3,6 +3,7 @@ package com.example.codegymfoods.controller.cart;
 
 import com.example.codegymfoods.dto.cart.CartDTO;
 import com.example.codegymfoods.dto.product.ProductFromCartDTO;
+import com.example.codegymfoods.model.customer.Customer;
 import com.example.codegymfoods.model.product.Product;
 import com.example.codegymfoods.model.product.ProductType;
 import com.example.codegymfoods.service.cart.ICartService;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -78,6 +81,7 @@ public class CartController {
         long totalBill = cartService.totalBill(productFromCartDTOList);
         model.addAttribute("totalBill",totalBill);
         model.addAttribute("productFromCartDTOList", productFromCartDTOList);
+
         return "/cart";
     }
 }
