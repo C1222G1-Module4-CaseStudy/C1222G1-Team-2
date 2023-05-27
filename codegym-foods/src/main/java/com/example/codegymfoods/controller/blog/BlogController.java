@@ -25,11 +25,10 @@ public class BlogController {
     private IEmployeeService iEmployeeService;
 
     @GetMapping("")
-    public String listBlog(Model model,
-                           @PageableDefault(size = 3) Pageable pageable) {
-        model.addAttribute("blogList", this.iBlogService.getBlog(pageable));
-        return "/blog/viewBlog";
-//        return "/index";
+    public String listBlog(Model model) {
+        model.addAttribute("blogList", this.iBlogService.getBlog());
+//        return "/blog/viewBlog";
+        return "/index";
     }
     @GetMapping("/create-form")
     public String createFormBlog (Model model) {

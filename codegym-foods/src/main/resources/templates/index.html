@@ -8,21 +8,14 @@
     <title>CodeGym Foods</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
-<!--    cua modal 2 line cart-->
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
-<!--    <link th:href="@{/home/assets/css/style-modal-cart.css}" rel="stylesheet">-->
 
-    <script src="
-https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
-"></script>
     <!-- Favicons -->
     <link th:href="@{/home/assets/img/favicon.png}" rel="icon">
     <link th:href="@{/home/assets/img/apple-touch-icon.png}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    <link th:href="@{https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i}"
           rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
     <!-- Vendor CSS Files -->
     <link th:href="@{/home/assets/vendor/animate.css/animate.min.css}" rel="stylesheet">
@@ -72,91 +65,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
-        <a href="/cart/home" data-toggle="modal" data-target="#myModal" id="id" class="book-a-table-btn scrollto d-none d-lg-flex"><span><i class="bi bi-basket-fill"
-                                                                                         style="font-size: 24px "></i></span>
-        </a>
-<!--        giỏ hàng -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="popup">
-                <h2>Giỏ hàng của bạn</h2>
-                <div class="tableSection">
-                    <table class="table addCartTable">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th>Số lượng</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Loại sản phẩm</th>
-                            <th>Đơn giá</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="product,inter:${productFromCartDTOList}">
-                            <td>
-                                <img th:src="${product.picture}" class="menu-img" alt="">
-                            </td>
-                            <td>
-                                <!-- <input type="text" value="1" id="qty"> -->
-                                <input type="text" class="form-control" id="qty" value="1" th:text="${product.quantityProductFromCartDTO}">
-                            </td>
-                            <td th:text="${product.nameProductFromCartDTO}">
-                            </td>
-                            <td>
-                                <p><span class="price" th:text="${product.priceProductFromCartDTO}"></span></p>
-                                <span class="remove">Xoá</span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <a href="#" class="addmorebtn">+ Thêm lựa chọn kích cỡ sản phẩm</a>
-                <div class="paySection">
-                    <a href="#" class="btn btn-primary btn-lg checkoutbtn">Thanh Toán</a>
-                </div>
-                <div class="carroselSection">
-                    <h3>Thêm sản phẩm vào giỏ hàng</h3>
-                    <div class="carrosalinner">
-                        <div class="carrosalthumb">
-                            <div class="carrosalblock">
-                                <div class="imgSection">
-                                    <img src="http://www.gedachtegoed.nl/img/mobileimg1.png" alt="">
-                                </div>
-                                <div class="carrosaltextSection">
-                                    <h4>Gildan 8oz Heavy Blend Hoodie Black</h4>
-                                    <p class="price"><span class="orignal">$39.99</span><span class="discount" >$36.99</span></p>
-                                    <button class="add-product-button" data-discount="36.99" datat-select="Gildan 8oz Heavy Blend Hoodie Black">Add</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carrosalthumb">
-                            <div class="carrosalblock">
-                                <div class="imgSection">
-                                    <img src="http://www.gedachtegoed.nl/img/mobileimg1.png" alt="">
-                                </div>
-                                <div class="carrosaltextSection">
-                                    <h4>Hanes Tagless Tee Black</h4>
-                                    <p class="price"><span class="orignal">$22.99</span><span class="discount">$19.99</span></p>
-                                    <button class="add-product-button" data-discount="19.99" data-select="Hanes Tagless Tee Black">Add</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carrosalthumb">
-                            <div class="carrosalblock">
-                                <div class="imgSection">
-                                    <img src="http://www.gedachtegoed.nl/img/mobileimg1.png" alt="">
-                                </div>
-                                <div class="carrosaltextSection">
-                                    <h4>Gildan Women's Relaxed Tee Black</h4>
-                                    <p class="price"><span class="orignal">$22.99</span><span class="discount">$19.99</span></p>
-                                    <button class="add-product-button" data-discount="19.99" data-select="Gildan Women's Relaxed Tee Black">Add</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-default closemodal" data-dismiss="modal">&times;</button>
-            </div>
-        </div>
+        <a href="#book-a-table" class="book-a-table-btn scrollto d-none d-lg-flex"><span>Giỏ hàng</span> </a>
 
     </div>
 </header><!-- End Header -->
@@ -169,7 +78,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                 <h1>Chào mừng bạn đến với <span>CodeGym Foods</span></h1>
                 <h2>Thiên đường đồ ăn vặt</h2>
 
-                <div class="btns">`
+                <div class="btns">
                     <a href="#menu" class="btn-menu animated fadeInUp scrollto">Sản phẩm</a>
                     <a href="#book-a-table" class="btn-book animated fadeInUp scrollto">Đăng ký thành viên</a>
                 </div>
@@ -278,184 +187,206 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
     <!-- ======= Menu Section ======= -->
     <section id="menu" class="menu section-bg">
         <div class="container" data-aos="fade-up">
+
             <div class="section-title">
                 <h2>Danh sách</h2>
-                <p>Danh sách sản phẩm  <a th:href="@{/creatProduct}"
-                                          role="button"><i class="bi bi-patch-plus-fill" ></i></a> </p>
+                <p>Danh sách sản phẩm</p>
             </div>
 
             <div class="row" data-aos="fade-up" data-aos-delay="100">
                 <div class="col-lg-12 d-flex justify-content-center">
                     <ul id="menu-flters">
-                        <li class="filter-active">Tất cả</li>
-                        <li th:each="productType,inter:${productTypeList}" th:text="${productType.name}"
-                            ><a th:href="@{/find/{id}(id=${productType.id})}"></a></li>
+                        <li data-filter="*" class="filter-active">Tất cả</li>
+                        <li data-filter=".filter-starters">Bánh tráng</li>
+                        <li data-filter=".filter-salads">Nội địa trung</li>
+                        <li data-filter=".filter-specialty">Kẹo</li>
+                        <li data-filter=".filter-specialty">Đồ khô</li>
+                        <li data-filter=".filter-specialty">Snack</li>
+                        <li data-filter=".filter-specialty">Trái cây sấy</li>
                     </ul>
                 </div>
             </div>
 
             <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
-                <div class="col-lg-6 menu-item " th:each="product,inter:${productList}">
-                    <img th:src="${product.picture}" class="menu-img" alt="">
+
+                <div class="col-lg-6 menu-item filter-starters">
+                    <img src="/home/assets/img/menu/lobster-bisque.jpg" class="menu-img" alt="">
                     <div class="menu-content">
-                        <a href="#" th:text="${product.name}"></a><span th:text="${product.price + 'đ'}"></span>
-                        <a th:href="@{/cart/addToCart/{id}(id=${product.id})}"><i class="bi bi-bag-plus-fill"></i> </a>
+                        <a href="#">Lobster Bisque</a><span>$5.95</span>
                     </div>
                     <div class="menu-ingredients">
-                        <p th:text="${product.description}"></p>
-                    </div>
-                    <div class="section-title">
-                        <a th:href="@{/updateProduct/{id}(id=${product.id})}"
-                           role="button"><i class="bi bi-gear-fill" style="color: aliceblue"></i></a>
-                        <i class="bi bi-trash-fill" th:onclick="|deleteByID(${product.id})|" type="button"
-                           data-bs-toggle="modal"
-                           data-bs-target="#modelId"></i>
-
+                        Lorem, deren, trataro, filede, nerada
                     </div>
                 </div>
+
+                <div class="col-lg-6 menu-item filter-specialty">
+                    <img src="/home/assets/img/menu/bread-barrel.jpg" class="menu-img" alt="">
+                    <div class="menu-content">
+                        <a href="#">Bread Barrel</a><span>$6.95</span>
+                    </div>
+                    <div class="menu-ingredients">
+                        Lorem, deren, trataro, filede, nerada
+                    </div>
+                </div>
+
+                <div class="col-lg-6 menu-item filter-starters">
+                    <img src="/home/assets/img/menu/cake.jpg" class="menu-img" alt="">
+                    <div class="menu-content">
+                        <a href="#">Crab Cake</a><span>$7.95</span>
+                    </div>
+                    <div class="menu-ingredients">
+                        A delicate crab cake served on a toasted roll with lettuce and tartar sauce
+                    </div>
+                </div>
+
+                <div class="col-lg-6 menu-item filter-salads">
+                    <img src="/home/assets/img/menu/caesar.jpg" class="menu-img" alt="">
+                    <div class="menu-content">
+                        <a href="#">Caesar Selections</a><span>$8.95</span>
+                    </div>
+                    <div class="menu-ingredients">
+                        Lorem, deren, trataro, filede, nerada
+                    </div>
+                </div>
+
+                <div class="col-lg-6 menu-item filter-specialty">
+                    <img src="/home/assets/img/menu/tuscan-grilled.jpg" class="menu-img" alt="">
+                    <div class="menu-content">
+                        <a href="#">Tuscan Grilled</a><span>$9.95</span>
+                    </div>
+                    <div class="menu-ingredients">
+                        Grilled chicken with provolone, artichoke hearts, and roasted red pesto
+                    </div>
+                </div>
+
+                <div class="col-lg-6 menu-item filter-starters">
+                    <img src="/home/assets/img/menu/mozzarella.jpg" class="menu-img" alt="">
+                    <div class="menu-content">
+                        <a href="#">Mozzarella Stick</a><span>$4.95</span>
+                    </div>
+                    <div class="menu-ingredients">
+                        Lorem, deren, trataro, filede, nerada
+                    </div>
+                </div>
+
+                <div class="col-lg-6 menu-item filter-salads">
+                    <img src="/home/assets/img/menu/greek-salad.jpg" class="menu-img" alt="">
+                    <div class="menu-content">
+                        <a href="#">Greek Salad</a><span>$9.95</span>
+                    </div>
+                    <div class="menu-ingredients">
+                        Fresh spinach, crisp romaine, tomatoes, and Greek olives
+                    </div>
+                </div>
+
+                <div class="col-lg-6 menu-item filter-salads">
+                    <img src="/home/assets/img/menu/spinach-salad.jpg" class="menu-img" alt="">
+                    <div class="menu-content">
+                        <a href="#">Spinach Salad</a><span>$9.95</span>
+                    </div>
+                    <div class="menu-ingredients">
+                        Fresh spinach with mushrooms, hard boiled egg, and warm bacon vinaigrette
+                    </div>
+                </div>
+
+                <div class="col-lg-6 menu-item filter-specialty">
+                    <img src="/home/assets/img/menu/lobster-roll.jpg" class="menu-img" alt="">
+                    <div class="menu-content">
+                        <a href="#">Lobster Roll</a><span>$12.95</span>
+                    </div>
+                    <div class="menu-ingredients">
+                        Plump lobster meat, mayo and crisp lettuce on a toasted bulky roll
+                    </div>
+                </div>
+
             </div>
-            <div>
-                <a th:href="@{'/'(page=${productList.number - 1})}" th:if="${productList.hasPrevious()}">Trước
-                </a>
-                <span th:text="${productList.number + 1}"></span>/
-                <span th:text="${productList.totalPages}"></span>
-                <a th:href="@{'/'(page=${productList.number + 1})}" th:if="${productList.hasNext()}">Sau
-                </a>
-            </div>
+
         </div>
     </section><!-- End Menu Section -->
 
     <!-- ======= Specials Section ======= -->
     <section id="specials" class="specials">
         <div class="container" data-aos="fade-up">
-
-<<<<<<< HEAD
             <div class="section-title">
                 <h2>Tin tức</h2>
                 <p>Những thông tin chia sẻ</p>
-=======
-        <div class="section-title">
-          <h2>Tin tức</h2>
-          <p>Những thông tin chia sẻ</p>
-        </div>
-
-        <div class="row" data-aos="fade-up" data-aos-delay="100" >
-          <div class="col-lg-3">
-            <ul class="nav nav-tabs flex-column" >
-              <li class="nav-item" >
-                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">Unde prae</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-2">Unde praesentium sed</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-3">Pariatur explicabo vel</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-4">Nostrum qui quasi</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-5">Iusto ut expedita aut</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-lg-9 mt-4 mt-lg-0">
-            <div class="tab-content">
-              <div class="tab-pane active show" id="tab-1">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Architecto ut aperiam autem id</h3>
-                    <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
-                    <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="/home/assets/img/specials-1.png" alt="" class="img-fluid">
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="tab-2">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Et blanditiis nemo veritatis excepturi</h3>
-                    <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
-                    <p>Ea ipsum voluptatem consequatur quis est. Illum error ullam omnis quia et reiciendis sunt sunt est. Non aliquid repellendus itaque accusamus eius et velit ipsa voluptates. Optio nesciunt eaque beatae accusamus lerode pakto madirna desera vafle de nideran pal</p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="/home/assets/img/specials-2.png" alt="" class="img-fluid">
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="tab-3">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Impedit facilis occaecati odio neque aperiam sit</h3>
-                    <p class="fst-italic">Eos voluptatibus quo. Odio similique illum id quidem non enim fuga. Qui natus non sunt dicta dolor et. In asperiores velit quaerat perferendis aut</p>
-                    <p>Iure officiis odit rerum. Harum sequi eum illum corrupti culpa veritatis quisquam. Neque necessitatibus illo rerum eum ut. Commodi ipsam minima molestiae sed laboriosam a iste odio. Earum odit nesciunt fugiat sit ullam. Soluta et harum voluptatem optio quae</p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="/home/assets/img/specials-3.png" alt="" class="img-fluid">
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="tab-4">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Fuga dolores inventore laboriosam ut est accusamus laboriosam dolore</h3>
-                    <p class="fst-italic">Totam aperiam accusamus. Repellat consequuntur iure voluptas iure porro quis delectus</p>
-                    <p>Eaque consequuntur consequuntur libero expedita in voluptas. Nostrum ipsam necessitatibus aliquam fugiat debitis quis velit. Eum ex maxime error in consequatur corporis atque. Eligendi asperiores sed qui veritatis aperiam quia a laborum inventore</p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="/home/assets/img/specials-4.png" alt="" class="img-fluid">
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="tab-5">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Est eveniet ipsam sindera pad rone matrelat sando reda</h3>
-                    <p class="fst-italic">Omnis blanditiis saepe eos autem qui sunt debitis porro quia.</p>
-                    <p>Exercitationem nostrum omnis. Ut reiciendis repudiandae minus. Omnis recusandae ut non quam ut quod eius qui. Ipsum quia odit vero atque qui quibusdam amet. Occaecati sed est sint aut vitae molestiae voluptate vel</p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="/home/assets/img/specials-5.png" alt="" class="img-fluid">
-                  </div>
-                </div>
-              </div>
->>>>>>> 046544bbd8cb5f097289fdb0c6c95d0bc5edb572
             </div>
-
+            <div>
+                <a th:href="@{/blog/create-form}" class="book-a-table-btn scrollto d-none d-lg-flex text-center"><span>Tạo tin tức mới</span>
+                </a>
+            </div>
             <div class="row" data-aos="fade-up" data-aos-delay="100">
                 <div class="col-lg-3">
                     <ul class="nav nav-tabs flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">Modi sit est</a>
+                        <li class="nav-item" th:each="item, itemIndex : ${blogList}">
+                            <a class="nav-link" th:class="${itemIndex == 0 ? 'active show' : ''}"
+                               th:data-bs-toggle="tab" th:href="'#tab-' + ${itemIndex}">[[${item.title}]]</a>
                         </li>
                     </ul>
                 </div>
                 <div class="col-lg-9 mt-4 mt-lg-0">
                     <div class="tab-content">
-                        <div class="tab-pane active show" id="tab-1">
+                        <div class="tab-pane" th:each="item, itemIndex : ${blogList}"
+                             th:class="${itemIndex == 0 ? 'active show' : ''}" th:id="'tab-' + ${itemIndex}">
                             <div class="row">
                                 <div class="col-lg-8 details order-2 order-lg-1">
-                                    <h3>Architecto ut aperiam autem id</h3>
-                                    <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila
-                                        parde sonata raqer a videna mareta paulona marka</p>
-                                    <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum
-                                        eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat
-                                        minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui
-                                        similique accusamus nostrum rem vero</p>
+                                    <h3 th:text="${item.title}"></h3>
+                                    <div class="dropdown">
+                                        <button class="bg-black dropdown-toggle spinner-border-sm" type="button"
+                                                id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="text-black text-decoration-none dropdown-item"
+                                                   th:href="@{/blog/{id}/update(id=${item.id})}">Sửa</a></li>
+                                            <li><a th:attr="onclick=|deleteId('${item.getId()}', '${item.getTitle()}')|"
+                                                   data-bs-toggle="modal"
+                                                   data-bs-target="#modelId" class="text-black dropdown-item"
+                                                   th:href="@{/delete/__${item.id}__}">Xóa</a></li>
+                                            <li><a class="text-black text-decoration-none dropdown-item"
+                                                   th:href="@{/blog/{id}/detail(id=${item.id})}">Chi tiết</a></li>
+                                        </ul>
+                                    </div>
+                                    <p class="fst-italic" th:text="${item.dateNow}"></p>
+                                    <p class="fst-italic" th:text="${item.content}"></p>
                                 </div>
                                 <div class="col-lg-4 text-center order-1 order-lg-2">
-                                    <img src="/home/assets/img/specials-1.png" alt="" class="img-fluid">
+                                    <img alt="" class="img-fluid" th:src="${item.imgUrl}" style="margin-top: 12px">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-    </section><!-- End Specials Section -->
+        <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modelTitleId"></h4>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="color: #0b0b0b">
+                        Bạn có muốn xóa tin <span class="text-danger" id="nameDelete"></span> ?
+                    </div>
+                    <div class="modal-footer">
+                        <form action="/blog/delete" method="get">
+                            <div class="input-group">
+                                <input type="hidden" id="idDelete" name="idDelete">
+                            </div>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Specials Section -->
 
     <!-- ======= Events Section ======= -->
     <section id="events" class="events">
@@ -475,30 +406,83 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                                 <img src="/home/assets/img/event-birthday.jpg" class="img-fluid" alt="">
                             </div>
                             <div class="col-lg-6 pt-4 pt-lg-0 content">
-                                <h3>Birthday Parties</h3>
+                                <h3>Các sản phẩm bán chạy</h3>
                                 <div class="price">
-                                    <p><span>$189</span></p>
+                                    <p><span>🌟 Khô Gà và Khô Mực - Chất lượng và Thơm ngon! 🌟</span></p>
                                 </div>
                                 <p class="fst-italic">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore
-                                    magna aliqua.
+                                    Khô Gà - Sự hòa quyện của vị thịt tươi ngon và độ giòn hấp dẫn.
+                                    Khô Mực - Điểm nhấn tinh tế trong ẩm thực đặc sản.
                                 </p>
                                 <ul>
-                                    <li><i class="bi bi-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea
-                                        commodo consequat.
-                                    </li>
-                                    <li><i class="bi bi-check-circled"></i> Duis aute irure dolor in reprehenderit in
-                                        voluptate velit.
-                                    </li>
-                                    <li><i class="bi bi-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea
-                                        commodo consequat.
+                                    <li><i class="bi bi-check-circled"></i> Khô Gà và Khô Mực - Sự kết hợp hoàn
+                                        hảo cho những bữa tiệc và dịp đặc biệt. Tận hưởng sự đa dạng của thịt gà
+                                        khô thơm ngon và vị đặc trưng của mực khô giòn rụm. Đây là món quà tuyệt
+                                        vời dành cho bạn bè, người thân và đối tác kinh doanh.
                                     </li>
                                 </ul>
                                 <p>
-                                    Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                    reprehenderit in voluptate
-                                    velit esse cillum dolore eu fugiat nulla pariatur
+                                    Khô Gà và Khô Mực - Sự lựa chọn hàng đầu của người yêu ẩm thực. Với hương vị
+                                    đậm đà và mùi thơm hấp dẫn
+                                </p>
+                            </div>
+                        </div>
+                    </div><!-- End testimonial item -->
+
+                    <div class="swiper-slide">
+                        <div class="row event-item">
+                            <div class="col-lg-6">
+                                <img src="/home/assets/img/event-private.jpg" class="img-fluid" alt="">
+                            </div>
+                            <div class="col-lg-6 pt-4 pt-lg-0 content">
+                                <h3>Khuyến mãi đồ ăn vặt hot Tiktok</h3>
+                                <div class="price">
+                                    <p><span>🌟 Tận hưởng Đồ Ăn Vặt Hot TikTok - bởi Nguyễn Hà Linh! 🌟</span></p>
+                                </div>
+                                <p class="fst-italic">
+                                    🍿 Bạn yêu thích thử những món đồ ăn vặt đang hot trên TikTok? Hãy đến với
+                                    chúng tôi, Nguyễn Hà Linh, để khám phá thế giới đầy thú vị của đồ ăn vặt nổi
+                                    tiếng trên mạng xã hội hàng đầu này.
+                                </p>
+                                <ul>
+                                    <li><i class="bi bi-check-circled"></i> 🍟 Bạn có biết rằng chúng tôi chuyên
+                                        cung cấp những món đồ ăn vặt đang gây sốt trên TikTok?
+                                    </li>
+                                </ul>
+                                <p>
+                                    ⭐ Đừng quên theo dõi chúng tôi trên TikTok để cập nhật những video thú vị và
+                                    những món đồ ăn vặt hot nhất từ Nguyễn Hà Linh! ⭐️
+                                </p>
+                            </div>
+                        </div>
+                    </div><!-- End testimonial item -->
+
+                    <div class="swiper-slide">
+                        <div class="row event-item">
+                            <div class="col-lg-6">
+                                <img src="/home/assets/img/event-custom.jpg" class="img-fluid" alt="">
+                            </div>
+                            <div class="col-lg-6 pt-4 pt-lg-0 content">
+                                <h3>Riview đồ ăn vặt Trung Quốc</h3>
+                                <div class="price">
+                                    <p>
+                                        <span>🌟 Khám phá Vị Độc Đáo - Đồ Ăn Vặt Trung Quốc - Review bởi Ninh Tito! 🌟</span>
+                                    </p>
+                                </div>
+                                <p class="fst-italic">
+                                    Ninh Tito đã thử và đánh giá những món đồ ăn vặt Trung Quốc tuyệt vời tại
+                                    chúng tôi.
+                                </p>
+                                <ul>
+                                    <li><i class="bi bi-check-circled"></i> Đồ ăn vặt Trung Quốc - Bí quyết của
+                                        sự thú vị! Ninh Tito đã khám phá vô số loại bánh ngọt, như bánh hành
+                                        phi, bánh gai, và bánh bao nhân trứng thơm ngon. Hãy đến và khám phá một
+                                        thế giới mới của vị ngon đặc trưng Trung Quốc!
+                                    </li>
+                                </ul>
+                                <p>
+                                    Đánh giá tuyệt vời từ Ninh Tito về đồ ăn vặt Trung Quốc tại web bán hàng của
+                                    chúng tôi!
                                 </p>
                             </div>
                         </div>
@@ -510,65 +494,6 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 
         </div>
     </section><!-- End Events Section -->
-
-    <!-- ======= Book A Table Section ======= -->
-    <section id="book-a-table" class="book-a-table">
-        <div class="container" data-aos="fade-up">
-
-            <div class="section-title">
-                <h2>Đăng ký</h2>
-                <p>Thông tin đăng ký thành viên</p>
-            </div>
-
-            <form action="/home/forms/book-a-table.php" method="post" role="form" class="php-email-form"
-                  data-aos="fade-up" data-aos-delay="100">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 form-group">
-                        <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
-                               data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                        <div class="validate"></div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email"
-                               data-rule="email" data-msg="Please enter a valid email">
-                        <div class="validate"></div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                        <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Phone"
-                               data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                        <div class="validate"></div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 form-group mt-3">
-                        <input type="text" name="date" class="form-control" id="date" placeholder="Date"
-                               data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                        <div class="validate"></div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 form-group mt-3">
-                        <input type="text" class="form-control" name="time" id="time" placeholder="Time"
-                               data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                        <div class="validate"></div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 form-group mt-3">
-                        <input type="number" class="form-control" name="people" id="people" placeholder="# of people"
-                               data-rule="minlen:1" data-msg="Please enter at least 1 chars">
-                        <div class="validate"></div>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Your booking request was sent. We will call back or send an Email to
-                        confirm your reservation. Thank you!
-                    </div>
-                </div>
-                <div class="text-center">
-                    <button type="submit">Book a Table</button>
-                </div>
-            </form>
-
-        </div>
-    </section><!-- End Book A Table Section -->
 
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="testimonials section-bg">
@@ -586,11 +511,14 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                         <div class="testimonial-item">
                             <p>
                                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                Đồ ăn vặt ở cửa hàng này rất ngon. Tôi thích các loại bánh tráng cuốn, khoai tây chiên
-                                và nước ngọt đặc biệt của họ. Nhân viên cũng rất thân thiện và phục vụ nhanh chóng.
+                                Đồ ăn vặt ở cửa hàng này rất ngon. Tôi thích các loại bánh tráng cuốn, khoai tây
+                                chiên
+                                và nước ngọt đặc biệt của họ. Nhân viên cũng rất thân thiện và phục vụ nhanh
+                                chóng.
                                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                             </p>
-                            <img src="/home/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                            <img src="/home/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img"
+                                 alt="">
                             <h3>Bill Gates</h3>
                             <h4>Ceo &amp; Founder Microsoft</h4>
                         </div>
@@ -600,11 +528,14 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                         <div class="testimonial-item">
                             <p>
                                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                Đây là điểm đến ưa thích của tôi để thưởng thức các món ăn vặt. Bắp rang bơ ở đây vừa
-                                giòn vừa béo ngon, và các loại kem đá xay có hương vị tuyệt vời. Giá cả cũng rất hợp lý.
+                                Đây là điểm đến ưa thích của tôi để thưởng thức các món ăn vặt. Bắp rang bơ ở
+                                đây vừa
+                                giòn vừa béo ngon, và các loại kem đá xay có hương vị tuyệt vời. Giá cả cũng rất
+                                hợp lý.
                                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                             </p>
-                            <img src="/home/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+                            <img src="/home/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img"
+                                 alt="">
                             <h3>Sara Wilsson</h3>
                             <h4>Designer</h4>
                         </div>
@@ -614,12 +545,15 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                         <div class="testimonial-item">
                             <p>
                                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                Mỗi lần ghé cửa hàng này, tôi không thể bỏ qua các món khoai lang chiên. Chúng rất thơm
-                                ngon và tẩm bột giòn tan. Đội ngũ nhân viên rất vui vẻ và luôn đảm bảo rằng tôi có một
+                                Mỗi lần ghé cửa hàng này, tôi không thể bỏ qua các món khoai lang chiên. Chúng
+                                rất thơm
+                                ngon và tẩm bột giòn tan. Đội ngũ nhân viên rất vui vẻ và luôn đảm bảo rằng tôi
+                                có một
                                 trải nghiệm tốt.
                                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                             </p>
-                            <img src="/home/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+                            <img src="/home/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img"
+                                 alt="">
                             <h3>Jena Karlis</h3>
                             <h4>Store Owner</h4>
                         </div>
@@ -629,12 +563,15 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                         <div class="testimonial-item">
                             <p>
                                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                Tôi đã mua đồ ăn vặt ở đây và được bất ngờ với sự đa dạng của menu. Họ có mọi thứ từ
-                                bánh mì kẹp đến bánh tráng trộn và đặc biệt là các loại nước ép tươi. Đồ ăn thơm ngon và
+                                Tôi đã mua đồ ăn vặt ở đây và được bất ngờ với sự đa dạng của menu. Họ có mọi
+                                thứ từ
+                                bánh mì kẹp đến bánh tráng trộn và đặc biệt là các loại nước ép tươi. Đồ ăn thơm
+                                ngon và
                                 giá cả phải chăng.
                                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                             </p>
-                            <img src="/home/assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+                            <img src="/home/assets/img/testimonials/testimonials-4.jpg" class="testimonial-img"
+                                 alt="">
                             <h3>Matt Brandon</h3>
                             <h4>Freelancer</h4>
                         </div>
@@ -644,12 +581,15 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                         <div class="testimonial-item">
                             <p>
                                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                Đây là một nơi tuyệt vời để trò chuyện và thưởng thức đồ ăn vặt. Tôi thích không gian
-                                thoải mái và sự lựa chọn rộng rãi của menu. Họ cũng có các loại đồ uống nóng và lạnh để
+                                Đây là một nơi tuyệt vời để trò chuyện và thưởng thức đồ ăn vặt. Tôi thích không
+                                gian
+                                thoải mái và sự lựa chọn rộng rãi của menu. Họ cũng có các loại đồ uống nóng và
+                                lạnh để
                                 lựa chọn. Tôi đã trở thành một khách hàng thường xuyên của họ.
                                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                             </p>
-                            <img src="/home/assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+                            <img src="/home/assets/img/testimonials/testimonials-5.jpg" class="testimonial-img"
+                                 alt="">
                             <h3>John Larson</h3>
                             <h4>Entrepreneur</h4>
                         </div>
@@ -904,7 +844,8 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                             </div>
                         </div>
                         <div class="form-group mt-3">
-                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
+                            <input type="text" class="form-control" name="subject" id="subject"
+                                   placeholder="Subject"
                                    required>
                         </div>
                         <div class="form-group mt-3">
@@ -928,15 +869,11 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
         </div>
     </section><!-- End Contact Section -->
 
-</main><!-- End #main -->
+</main>
+<!-- End #main -->
 
-<<<<<<< HEAD
 <!-- ======= Footer ======= -->
 <footer id="footer">
-=======
-  <!-- =======ter ======= -->
-  <footer id="footer">
->>>>>>> 046544bbd8cb5f097289fdb0c6c95d0bc5edb572
     <div class="footer-top">
         <div class="container">
             <div class="row">
@@ -961,10 +898,10 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                 </div>
 
                 <div class="col-lg-2 col-md-6 footer-links">
-                    <h4>Liên kết hữu ích</h4>
+                    <h4>Useful Links</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Trang chủ</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Giới thiệu</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-md-6 footer-links">
@@ -1001,7 +938,12 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 <div id="preloader"></div>
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
-
+<script>
+    function deleteId(id, name) {
+        document.getElementById("idDelete").value = id;
+        document.getElementById("nameDelete").innerText = name;
+    }
+</script>
 <!-- Vendor JS Files -->
 <script th:src="@{/home/assets/vendor/aos/aos.js}"></script>
 <script th:src="@{/home/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
@@ -1013,49 +955,6 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 <!-- Template Main JS File -->
 <script th:src="@{/home/assets/js/main.js}"></script>
 
-
-<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="modelTitleId"></h4>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <span style="color: red"> Bạn có muốn xóa sản phẩm này không ?</span>
-            </div>
-            <div class="modal-footer">
-                <form action="/deleteProduct">
-                    <input type="hidden" th:id="idDelete" th:name="id">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-danger">Xóa</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    function deleteByID(id) {
-        document.getElementById("idDelete").value = id;
-    }
-</script>
-<script>
-    function findByName(nameToSearch) {
-        nameToSearch = $('#search').val()
-        $.ajax({
-            url: `http://localhost:8080/cart/addToCart/${nameToSearch}`,
-            type: "get",
-            success: function (blogList) {
-
-                //
-                $('#Listblog').html(blogListStr)
-
-            }
-        })
-    }
-</script>
 </body>
 
 </html>

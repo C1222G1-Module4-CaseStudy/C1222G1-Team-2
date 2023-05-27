@@ -1,9 +1,10 @@
 package com.example.codegymfoods.model.login;
 
-import com.example.codegymfoods.model.customer.Customer;
-import com.example.codegymfoods.model.employee.Employee;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "app_user", //
@@ -12,42 +13,57 @@ import javax.persistence.*;
 public class AppUser {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
-    private Integer id;
-
+    private Integer userId;
 
     @Column(name = "user_name", length = 36, nullable = false)
+    @NotBlank(message = "Tài khoản không được để trống")
     private String userName;
 
-    @Column(name = "encrypt_password", length = 128, nullable = false)
+    @Column(name = "encryted_password", length = 128, nullable = false)
+    @NotBlank(message = "Mật khẩu không được để trống")
+    @Size(min = 6, message = "Mật khẩu phải trên 6 ký tự")
     private String encrytedPassword;
 
     @Column(name = "enabled", length = 1, nullable = false)
+    @Value("${some.key: true}")
     private boolean enabled;
-    @OneToOne(mappedBy = "appUser")
-    private Employee employee;
-    @OneToOne(mappedBy = "appUser")
-    private Customer customer;
+
+
     public AppUser() {
     }
 
-
-    public AppUser(Integer id, String userName, String encrytedPassword, boolean enabled, Employee employee, Customer customer) {
-        this.id = id;
+    public AppUser(String userName, String encrytedPassword, boolean enabled) {
         this.userName = userName;
         this.encrytedPassword = encrytedPassword;
         this.enabled = enabled;
-        this.employee = employee;
-        this.customer = customer;
     }
 
-    public Integer getId() {
-        return id;
+    public AppUser(Integer userId, String userName, String encrytedPassword) {
+        this.userId = userId;
+        this.userName = userName;
+        this.encrytedPassword = encrytedPassword;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public AppUser(String userName, String encrytedPassword) {
+        this.userName = userName;
+        this.encrytedPassword = encrytedPassword;
+    }
+
+    public AppUser(Integer userId, String userName, String encrytedPassword, boolean enabled) {
+        this.userId = userId;
+        this.userName = userName;
+        this.encrytedPassword = encrytedPassword;
+        this.enabled = enabled;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
@@ -74,19 +90,4 @@ public class AppUser {
         this.enabled = enabled;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 }

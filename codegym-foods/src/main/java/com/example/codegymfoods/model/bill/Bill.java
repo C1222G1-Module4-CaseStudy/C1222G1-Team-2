@@ -1,7 +1,6 @@
 package com.example.codegymfoods.model.bill;
 
 import com.example.codegymfoods.model.customer.Customer;
-import com.example.codegymfoods.model.employee.Employee;
 
 import javax.persistence.*;
 import java.util.Date;

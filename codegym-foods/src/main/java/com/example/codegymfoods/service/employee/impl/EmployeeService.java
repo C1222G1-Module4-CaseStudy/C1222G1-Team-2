@@ -1,46 +1,27 @@
-<<<<<<< HEAD
-package com.example.codegymfoods.service.impl.employee;
-
-import com.example.codegymfoods.model.employee.Employee;
-import com.example.codegymfoods.repository.employee.IEmployeeRepository;
-import com.example.codegymfoods.service.employee.IEmployyeService;
-=======
 package com.example.codegymfoods.service.employee.impl;
 
 import com.example.codegymfoods.model.employee.Employee;
 import com.example.codegymfoods.repository.employee.IEmployeeRepository;
 import com.example.codegymfoods.service.employee.IEmployeeService;
->>>>>>> 046544bbd8cb5f097289fdb0c6c95d0bc5edb572
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
-import java.util.Objects;
-import java.util.Optional;
-
-@Service
-public class EmployeeService implements IEmployyeService {
-=======
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class EmployeeService implements IEmployeeService {
->>>>>>> 046544bbd8cb5f097289fdb0c6c95d0bc5edb572
     @Autowired
     private IEmployeeRepository employeeRepository;
 
     @Override
-<<<<<<< HEAD
-=======
     public List<Employee> getEmployee() {
         return employeeRepository.findAll();
     }
 
     @Override
->>>>>>> 046544bbd8cb5f097289fdb0c6c95d0bc5edb572
     public Page<Employee> findAllByName(String name, Pageable pageable) {
         return this.employeeRepository.findAllByNameContaining(name,pageable);
     }

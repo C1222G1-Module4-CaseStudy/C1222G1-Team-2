@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class AppRole {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id", nullable = false)
     private Integer roleId;
 
@@ -17,6 +17,11 @@ public class AppRole {
     private String roleName;
 
     public AppRole() {
+    }
+
+    public AppRole(Integer roleId, String roleName) {
+        this.roleId = roleId;
+        this.roleName = roleName;
     }
 
     public Integer getRoleId() {

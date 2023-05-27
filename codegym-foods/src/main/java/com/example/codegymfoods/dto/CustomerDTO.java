@@ -1,43 +1,40 @@
-package com.example.codegymfoods.model.customer;
+package com.example.codegymfoods.dto;
 
 import com.example.codegymfoods.model.login.AppUser;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
-import javax.persistence.*;
-
-@Entity
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+public class CustomerDTO {
     private Integer idCustomer;
-    @Column(name = "name_customer")
+    @NotBlank(message = "Tên không được để trống")
     private String name;
-    @Column(name = "date_of_birth")
-    private String dateOfBirth;
-    @Column(name = "address")
-    private String address;
-    @Column(name = "phone_number")
-    private String phoneNumber;
-    @Column(name = "email_customer")
-    private String email;
-    @Column(name = "avatar_customer")
-    private String avatar;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @NotBlank(message = "Ngày sinh không được để trống")
+    private String dateOfBirth;
+    @NotBlank(message = " Đia chỉ không được để trống")
+    private String address;
+    @NotBlank(message = "Email không được để trống")
+    @Email
+    private String email;
+    @NotBlank(message = "Số điện thoai không được để trống")
+    @Pattern(regexp = "^0\\d{9}$", message = "Số điện thoại có 10 số")
+    private String phoneNumber;
+
+    @Valid
     private AppUser appUser;
 
-    public Customer() {
+    public CustomerDTO() {
     }
 
-    public Customer(Integer idCustomer, String name, String dateOfBirth, String address, String phoneNumber, String email, String avatar, AppUser appUser) {
+    public CustomerDTO(Integer idCustomer, String name, String dateOfBirth, String address, String email, String phoneNumber, AppUser appUser) {
         this.idCustomer = idCustomer;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
-        this.phoneNumber = phoneNumber;
         this.email = email;
-        this.avatar = avatar;
+        this.phoneNumber = phoneNumber;
         this.appUser = appUser;
     }
 
@@ -73,14 +70,6 @@ public class Customer {
         this.address = address;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -89,12 +78,12 @@ public class Customer {
         this.email = email;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public AppUser getAppUser() {

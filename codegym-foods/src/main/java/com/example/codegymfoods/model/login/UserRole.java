@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class UserRole {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -22,6 +22,17 @@ public class UserRole {
     private AppRole appRole;
 
     public UserRole() {
+    }
+
+    public UserRole(AppUser appUser, AppRole appRole) {
+        this.appUser = appUser;
+        this.appRole = appRole;
+    }
+
+    public UserRole(Integer id, AppUser appUser, AppRole appRole) {
+        this.id = id;
+        this.appUser = appUser;
+        this.appRole = appRole;
     }
 
     public Integer getId() {

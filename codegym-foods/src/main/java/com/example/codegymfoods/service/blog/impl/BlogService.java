@@ -8,13 +8,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BlogService implements IBlogService {
     @Autowired
     private IBlogRepository iBlogRepository;
     @Override
-    public Page<Blog> getBlog(Pageable pageable) {
-        return this.iBlogRepository.findAll(pageable);
+    public List<Blog> getBlog() {
+        return (List<Blog>) this.iBlogRepository.findAll();
     }
 
     @Override
