@@ -3,6 +3,7 @@ package com.example.codegymfoods.controller.customer.user;
 import com.example.codegymfoods.dto.customer.CustomerDTO;
 import com.example.codegymfoods.model.customer.Customer;
 import com.example.codegymfoods.service.customer.impl.CustomerService;
+import com.example.codegymfoods.service.employee.impl.EmployeeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,10 +23,13 @@ import static com.example.codegymfoods.utils.EncrytedPasswordUtils.encrytePasswo
 public class UserController {
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private EmployeeService employeeService;
 
     @GetMapping("/detail")
     public String showDetail(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("employeeList", employeeService.findByUsername(user.getUsername()));
         model.addAttribute("customerList", customerService.findByUsername(user.getUsername()));
         return "userInfoPage";
     }

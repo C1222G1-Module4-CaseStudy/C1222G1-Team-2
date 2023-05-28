@@ -38,7 +38,8 @@
 <!--Phần này nhúng Navbar -->
 <!-- ======= Top Bar ======= -->
 <div th:fragment="navba-top">
-    <div class="d-flex align-items-center fixed-top" id="topbar">
+    <!-- ======= Top Bar ======= -->
+    <div id="topbar" class="d-flex align-items-center fixed-top">
         <div class="container d-flex justify-content-center justify-content-md-between">
 
             <div class="contact-info d-flex align-items-center">
@@ -49,14 +50,14 @@
     </div>
 
     <!-- ======= Header ======= -->
-    <header class="fixed-top d-flex align-items-cente" id="header">
+    <header id="header" class="fixed-top d-flex align-items-cente">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
 
-            <h1 class="logo me-auto me-lg-0"><a href="/home">CodeGym Foods</a></h1>
+            <h1 class="logo me-auto me-lg-0"><a href="index.html">CodeGym Foods</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-            <nav class="navbar order-last order-lg-0" id="navbar">
+            <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
                     <li><a class="nav-link scrollto active" href="#hero">Trang chủ</a></li>
                     <li><a class="nav-link scrollto" href="#about">Giới thiệu</a></li>
@@ -70,108 +71,84 @@
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
-            <a class="book-a-table-btn scrollto d-none d-lg-flex" data-target="#myModal" data-toggle="modal"
-               href="/cart/home"
-               id="id"><span><i class="bi bi-basket-fill"
-                                style="font-size: 24px "></i></span>
+            <a href="/cart/home" data-toggle="modal" data-target="#myModal" id="id"
+               class="book-a-table-btn scrollto d-none d-lg-flex"><span><i class="bi bi-basket-fill"
+                                                                           style="font-size: 24px "></i></span>
             </a>
-            <!--        giỏ hàng -->
-            <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="myModal" role="dialog"
-                 tabindex="-1">
-                <div class="popup">
-                    <h2>Giỏ hàng của bạn</h2>
-                    <div class="tableSection">
-                        <table class="table addCartTable">
-                            <thead>
-                            <tr>
-                                <th></th>
-                                <th>Số lượng</th>
-                                <th>Tên sản phẩm</th>
-                                <th>Loại sản phẩm</th>
-                                <th>Đơn giá</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="product,inter:${productFromCartDTOList}">
-                                <td>
-                                    <img alt="" class="menu-img" th:src="${product.picture}">
-                                </td>
-                                <td>
-                                    <!-- <input type="text" value="1" id="qty"> -->
-                                    <input class="form-control" id="qty" th:text="${product.quantityProductFromCartDTO}"
-                                           type="text"
-                                           value="1">
-                                </td>
-                                <td th:text="${product.nameProductFromCartDTO}">
-                                </td>
-                                <td>
-                                    <p><span class="price" th:text="${product.priceProductFromCartDTO}"></span></p>
-                                    <span class="remove">Xoá</span>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <a class="addmorebtn" href="#">+ Thêm lựa chọn kích cỡ sản phẩm</a>
-                    <div class="paySection">
-                        <a class="btn btn-primary btn-lg checkoutbtn" href="#">Thanh Toán</a>
-                    </div>
-                    <div class="carroselSection">
-                        <h3>Thêm sản phẩm vào giỏ hàng</h3>
-                        <div class="carrosalinner">
-                            <div class="carrosalthumb">
-                                <div class="carrosalblock">
-                                    <div class="imgSection">
-                                        <img alt="" src="http://www.gedachtegoed.nl/img/mobileimg1.png">
+
+            <!--        <a href="/account/login" class="book-a-table-btn scrollto d-none d-lg-flex">Đăng nhập-->
+
+            <!--        </a>-->
+            <div th:if="${request != null}" class="d-flex justify-content-between align-items-center">
+                <div th:if="${#request.userPrincipal != null}">
+                    <form>
+                        <div class="user-info d-flex align-items-center" th:if="${#request.userPrincipal != null}">
+                            <ul>
+                                <li class="nav-item dropdown" style="list-style: none">
+                                    <a class="nav-link" data-bs-toggle="dropdown" href="#" id="profileDropdown">
+                                        <div class="navbar-profile">
+                                            <form class="d-flex" role="search">
+                                                <!-- Button trigger modal -->
+                                                <button class="btn btn-outline-success" type="button" style="border: none" th:if="${#request.userPrincipal != null}">
+
+                                                    <img th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" class="img-xs rounded-circle"
+                                                         th:src="${employee.avatar}"
+                                                         width="46px" alt="">
+                                                    <img th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" class="img-xs rounded-circle"
+                                                         th:src="${customer.avatar}"
+                                                         width="46px" alt="">
+
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </a>
+                                    <div aria-labelledby="profileDropdown"
+                                         class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list">
+                                        <h6 class="p-3 mb-0">Profile</h6>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item preview-item">
+                                            <div class="preview-thumbnail">
+                                                <div class="preview-icon bg-dark rounded-circle">
+                                                    <i class="mdi mdi-settings text-success"></i>
+                                                </div>
+                                            </div>
+                                            <div class="preview-item-content">
+                                                <a class="preview-subject mb-1" th:href="@{/user/detail}">Thông tin tài
+                                                    khoản</a>
+                                            </div>
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item preview-item">
+                                            <div class="preview-thumbnail">
+                                                <div class="preview-icon bg-dark rounded-circle">
+                                                    <i class="mdi mdi-logout text-danger"></i>
+                                                </div>
+                                            </div>
+                                            <div class="preview-item-content">
+                                                <p class="preview-subject mb-1" data-bs-toggle="modal"
+                                                   data-bs-target="#staticBackdrop">
+                                                    Đăng xuất
+                                            </div>
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <p class="p-3 mb-0 text-center">Cài đặt</p>
                                     </div>
-                                    <div class="carrosaltextSection">
-                                        <h4>Gildan 8oz Heavy Blend Hoodie Black</h4>
-                                        <p class="price"><span class="orignal">$39.99</span><span
-                                                class="discount">$36.99</span></p>
-                                        <button class="add-product-button" data-discount="36.99"
-                                                datat-select="Gildan 8oz Heavy Blend Hoodie Black">Add
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carrosalthumb">
-                                <div class="carrosalblock">
-                                    <div class="imgSection">
-                                        <img alt="" src="http://www.gedachtegoed.nl/img/mobileimg1.png">
-                                    </div>
-                                    <div class="carrosaltextSection">
-                                        <h4>Hanes Tagless Tee Black</h4>
-                                        <p class="price"><span class="orignal">$22.99</span><span
-                                                class="discount">$19.99</span></p>
-                                        <button class="add-product-button" data-discount="19.99"
-                                                data-select="Hanes Tagless Tee Black">Add
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carrosalthumb">
-                                <div class="carrosalblock">
-                                    <div class="imgSection">
-                                        <img alt="" src="http://www.gedachtegoed.nl/img/mobileimg1.png">
-                                    </div>
-                                    <div class="carrosaltextSection">
-                                        <h4>Gildan Women's Relaxed Tee Black</h4>
-                                        <p class="price"><span class="orignal">$22.99</span><span
-                                                class="discount">$19.99</span></p>
-                                        <button class="add-product-button" data-discount="19.99"
-                                                data-select="Gildan Women's Relaxed Tee Black">Add
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                                </li>
+                            </ul>
+
+
                         </div>
-                    </div>
-                    <button class="btn btn-default closemodal" data-dismiss="modal" type="button">&times;</button>
+                    </form>
+                </div>
+                <div th:if="${#request.userPrincipal == null}">
+                    <a class="book-a-table-btn scrollto d-none d-lg-flex" onclick="location.href = '/account/login'"><span>Đăng nhập</span></a>
                 </div>
             </div>
+            <!--        Đăng nhập-->
+
 
         </div>
-    </header><!-- End Header -->
+    </header><!-- End Header --><!-- End Header -->
 </div>
 <!-- ======= Hero Section ======= -->
 <section class="d-flex align-items-center" id="hero">

@@ -223,17 +223,14 @@
                             </form>
                         </div>
                         <div class="col" style="color:black" th:text="${product.priceProductFromCartDTO + 'đ'}"><span
-                                class="close" style="color:black">&#10005;</span></div>
+                                class="close" style="color:black" data-bs-target="#modelId" data-bs-toggle="modal"
+                                th:onclick="|deleteById(${product.id})|">&#10005;</span></div>
                         <span style="color:black"><strong>Đơn giá của sản phẩm</strong></span>-->
                         <p class="card-text" style="color:black" th:text="${product.totalPrice + 'đ'}"></p>
-                        <div>
-                            <i class="btn btn-primary" data-bs-target="#modelId" data-bs-toggle="modal"
-                               th:onclick="|deleteById(${product.id})|">Xóa</i>
-                        </div>
                     </div>
                 </div>
             </div>
-            <div class="back-to-shop"><a href="#">&leftarrow;</a><a class="text-muted" th:href="@{/home}">Quay lại trang
+            <div class="back-to-shop"><a href="#">&leftarrow;</a><a class="text-muted" th:href="@{/home/success}">Quay lại trang
                 chủ</a>
             </div>
         </div>

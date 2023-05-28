@@ -142,13 +142,12 @@
             background-color: #15172b;
             color: #eee;
         }
-
-
     </style>
     <div th:replace="layout-index::head-config"></div>
 
 </head>
 <body>
+<div th:replace="layout-index::navba-top"></div>
 <div class="form">
     <div class="title">Chào mừng</div>
     <div class="subtitle">Hãy tạo tài khoản của bạn!</div>
@@ -232,7 +231,7 @@
 </div>
 
 
-<div th:replace="layout-index::navba-top"></div>
+
 
 <script>
     document.querySelector("#button").onclick = function () {
