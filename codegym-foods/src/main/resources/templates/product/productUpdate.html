@@ -32,52 +32,52 @@
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example7" style="color: black">Tên sản phẩm <span
-                                                style="color: red">*</span></label>
+                                                >*</span></label>
                                         <input type="text" id="form3Example7" class="form-control form-control-lg"
                                                th:field="*{name}"/>
-                                        <span th:if="${#fields.hasErrors()}" th:errors="*{name}"
-                                              style="color: red"></span>
+                                        <span th:if="${#fields.hasErrors()}" style="color:red" th:errors="*{name}"
+                                              ></span>
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example" style="color: black">Giá <span
-                                                style="color: red">*</span></label>
+                                                >*</span></label>
                                         <input type="text" id="form3Example" class="form-control form-control-lg"
                                                th:field="*{price}"/>
-                                        <span th:if="${#fields.hasErrors()}" th:errors="*{price}"
-                                              style="color: red"></span>
+                                        <span th:if="${#fields.hasErrors()}" style="color:red" th:errors="*{price}"
+                                              ></span>
                                     </div>
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example81" style="color: black">Số lượng <span
-                                                style="color: red">*</span></label>
+                                                >*</span></label>
                                         <input type="number" id="form3Example81" class="form-control form-control-lg"
                                                th:field="*{quantity}"/>
-                                        <span th:if="${#fields.hasErrors()}" th:errors="*{quantity}"
-                                              style="color: red"></span>
+                                        <span th:if="${#fields.hasErrors()}" style="color:red" th:errors="*{quantity}"
+                                              ></span>
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example90" style="color: black">Hạn sử dụng <span
-                                                style="color: red">*</span></label>
+                                                >*</span></label>
                                         <input type="date" id="form3Example90" class="form-control form-control-lg"
                                                th:field="*{dateExpiration}">
-                                        <span th:if="${#fields.hasErrors()}" th:errors="*{dateExpiration}"
-                                              style="color: red"></span>
+                                        <span th:if="${#fields.hasErrors()}" style="color:red" th:errors="*{dateExpiration}"
+                                              ></span>
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="floatingTextarea2" style="color: black">MÔ TẢ <span
-                                                style="color: red">*</span></label>
+                                                >*</span></label>
                                         <textarea class="form-control" placeholder="Leave a comment here"
                                                   id="floatingTextarea2"
                                                   style="height: 100px" th:field="*{description}"></textarea>
-                                        <span th:if="${#fields.hasErrors()}" th:errors="*{description}"
-                                              style="color: red"></span>
+                                        <span th:if="${#fields.hasErrors()}" style="color:red" th:errors="*{description}"
+                                              ></span>
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example971" style="color: black">URL ẢNH <span
-                                                style="color: red">*</span></label>
+                                                >*</span></label>
                                         <input type="text" id="form3Example971" class="form-control form-control-lg"
                                                th:field="*{picture}">
                                     </div>

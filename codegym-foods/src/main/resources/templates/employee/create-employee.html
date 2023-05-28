@@ -263,10 +263,10 @@
 <div class="container-scroller">
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-            <a class="sidebar-brand brand-logo" href="../index.html"><img alt="logo"
+            <a class="sidebar-brand brand-logo"  href="/home/success"><img alt="logo"
                                                                           style="height: 58px"
                                                                           th:src="@{/admin/assets/images/logo.png}"/></a>
-            <a class="sidebar-brand brand-logo-mini" href="../index.html"><img
+            <a class="sidebar-brand brand-logo-mini"  href="/home/success"><img
                     alt="logo"
                     th:src="@{/admin/assets/images/logo-mini.png}"/></a>
         </div>
@@ -334,27 +334,11 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="pages/tables/basic-table.html">
-              <span class="menu-icon">
-                <i class="mdi mdi-account-circle"></i>
-              </span>
-                    <span class="menu-title">Tài khoản</span>
-                </a>
-            </li>
-            <li class="nav-item menu-items">
                 <a class="nav-link" onclick="location.href = '/admin/employee' ">
               <span class="menu-icon">
                 <i class="mdi mdi-account-multiple"></i>
               </span>
                     <span class="menu-title">Nhân viên</span>
-                </a>
-            </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" onclick="location.href = '/admin/product' ">
-              <span class="menu-icon">
-                <i class="mdi mdi-account-multiple"></i>
-              </span>
-                    <span class="menu-title">Sản phẩm</span>
                 </a>
             </li>
         </ul>
@@ -364,7 +348,7 @@
         <div th:replace="layout-list:: nav-top"></div>
         <nav class="navbar p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo-mini" href="../index.html"><img alt="logo"
+                <a class="navbar-brand brand-logo-mini"  href="/home/success"><img alt="logo"
                                                                                   src="assets/images/logo-mini.png"/></a>
             </div>
             <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
@@ -477,7 +461,7 @@
                                                           th:field="*{name}"
                                                           type="text">
                             </div>
-                            <p style="color: red" th:errors="*{name}"
+                            <p style="color:red" th:errors="*{name}"
                                th:if="${#fields.hasErrors('name')}"></p>
                         </div>
                         <div class="col-12"><p class="m-2">Ngày sinh nhân viên</p>
@@ -485,8 +469,7 @@
                                                     th:field="*{dateOfBirth}"
                                                     type="date">
                             </div>
-                            <p style="color: red"
-                               th:errors="*{dateOfBirth}" th:if="${#fields.hasErrors('dateOfBirth')}"></p>
+                            <p style="color:red" th:errors="*{dateOfBirth}" th:if="${#fields.hasErrors('dateOfBirth')}"></p>
 
                         </div>
                         <div class="col-12"><p class="m-2">Số điện thoại nhân viên</p>
@@ -497,7 +480,7 @@
                             </div>
                             <span style="color: red" th:text="${message1}"></span>
                             <p style="color: red"
-                               th:errors="*{phoneNumber}" th:if="${#fields.hasErrors('phoneNumber')}"></p>
+                                th:errors="*{phoneNumber}" th:if="${#fields.hasErrors('phoneNumber')}"></p>
 
                         </div>
                         <div class="col-12"><p class="m-2">Email nhân viên</p>
@@ -516,7 +499,7 @@
                                                     type="text">
                             </div>
                             <p style="color: red"
-                               th:errors="*{address}" th:if="${#fields.hasErrors('address')}"></p>
+                                th:errors="*{address}" th:if="${#fields.hasErrors('address')}"></p>
 
                         </div>
                         <div class="col-12"><p class="m-2">Chức vụ nhân viên</p>
@@ -526,7 +509,7 @@
                                         th:value="${list.getId()}">Chức vụ nhân viên:
                                 </option>
                             </select>
-                            <p style="color: red" th:errors="*{position}"
+                            <p style="color:red" th:errors="*{position}"
                                th:if="${#fields.hasErrors('position')}"></p>
 
                         </div>
@@ -537,7 +520,7 @@
                             </div>
                             <input id="file-input" type="file">
                         </div>
-                        <p style="color: red" th:errors="*{avatar}"
+                        <p style="color:red" th:errors="*{avatar}"
                            th:if="${#fields.hasErrors('avatar')}"></p>
 
                         <div class="col-12">

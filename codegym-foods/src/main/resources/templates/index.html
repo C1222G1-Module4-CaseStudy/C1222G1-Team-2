@@ -69,10 +69,34 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                 <li><a class="nav-link scrollto" href="#gallery">Hình ảnh</a></li>
 
                 <li><a class="nav-link scrollto" href="#contact">Liên hệ</a></li>
+                <li class="nav-item dropdown border-left" style="list-style: none">
+                    <a class="nav-link count-indicator dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                       id="notificationDropdown">
+                        <i class="mdi mdi-bell"></i>
+                        <span class="count bg-danger"></span>
+                    </a>
+                    <div aria-labelledby="messageDropdown"
+                         class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                         th:classappend="${message} ? 'show' : ''">
+                        <h6 class="p-3 mb-0">Thông báo</h6>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <img alt="image"
+                                     class="rounded-circle profile-pic"
+                                     src="https://phunugioi.com/wp-content/uploads/2020/03/anh-hot-girl-trung-quoc-cuc-tinh-y-451x600.jpg" width="2rem">
+                            </div>
+                            <div th:class="${message} ? 'preview-item-content message-visible' : 'preview-item-content'">
+                                <p class="preview-subject ellipsis mb-1 text-danger" th:text="${message}"></p>
+                                <p class="text-muted mb-0" id="currentTime"></p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
-        <a href="/cart/home" data-toggle="modal" data-target="#myModal" id="id"
+        <a th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" href="/cart/home" data-toggle="modal" data-target="#myModal" id="id"
            class="book-a-table-btn scrollto d-none d-lg-flex"><span><i class="bi bi-basket-fill"
                                                                        style="font-size: 24px "></i></span>
         </a>
@@ -108,7 +132,6 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                                 </a>
                                 <div aria-labelledby="profileDropdown"
                                      class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list">
-                                    <!--                                    <h6 class="p-3 mb-0">Profile</h6>-->
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item preview-item">
                                         <div class="preview-thumbnail">
@@ -299,7 +322,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                     <img th:src="${product.picture}" class="menu-img" alt="">
                     <div class="menu-content">
                         <a href="#" th:text="${product.name}"></a><span th:text="${product.price + 'đ'}"></span>
-                        <a th:href="@{/cart/addToCart/{id}(id=${product.id})}"><i class="bi bi-bag-plus-fill"></i> </a>
+                        <a th:href="@{/cart/addToCart/{id}(id=${product.id})}"><i th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" class="bi bi-bag-plus-fill"></i> </a>
                     </div>
                     <div class="menu-ingredients">
                         <p th:text="${product.description}"></p>
@@ -1024,6 +1047,19 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
         document.getElementById("nameDelete").innerText = name;
     }
 
+    $(document).ready(function() {
+        $('body').on('mouseup', function (e) {
+            if (!$(e.target).hasClass("dropdown-menu")) {
+                $(".dropdown-menu").each(function () {
+                    $(this).removeClass("show");
+                });
+            }
+        });
+    });
+
+    var currentTime = new Date();
+    var formattedTime = currentTime.toLocaleString('vi-VN', {hour12: false});
+    document.getElementById('currentTime').innerHTML = formattedTime;
 </script>
 </body>
 

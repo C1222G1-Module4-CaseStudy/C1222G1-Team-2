@@ -89,8 +89,8 @@ public class EmployeeController {
         } else {
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDTO, employee);
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            employee.setDateOfBirth(formatter.parse(employeeDTO.getDateOfBirth()));
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//            employee.setDateOfBirth(String.valueOf(formatter.parse(employeeDTO.getDateOfBirth())));
             employeeService.save(employee);
             redirectAttributes.addFlashAttribute("message", "Thêm mới thành công");
             return "redirect:/admin/employee";

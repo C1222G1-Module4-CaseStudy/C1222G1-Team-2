@@ -24,16 +24,12 @@ public class BlogController {
     @Autowired
     private IEmployeeService iEmployeeService;
 
-//    @GetMapping("")
-//    public String listBlog(Model model,
-//                           @PageableDefault(size = 3) Pageable pageable) {
-//        model.addAttribute("blogList", this.iBlogService.getBlog(pageable));
-//        return "/index";
-//    }
     @GetMapping("/create-form")
     public String createFormBlog (Model model) {
         model.addAttribute("blogs", new BlogDTO());
         model.addAttribute("employee", this.iEmployeeService.getEmployee());
+
+
         return "/blog/createBlog";
     }
     @PostMapping("/createBlog")
@@ -46,7 +42,7 @@ public class BlogController {
         Blog blog = new Blog();
         BeanUtils.copyProperties(blogDTO, blog);
         iBlogService.save(blog);
-        redirectAttributes.addAttribute("mess", "Create successful !");
+        redirectAttributes.addFlashAttribute("message", "Thêm bài viết thành công");
         return "redirect:/home/success";
     }
     @GetMapping("/{id}/update")
@@ -66,7 +62,7 @@ public class BlogController {
         Blog blog = new Blog();
         BeanUtils.copyProperties(blogDTO, blog);
         iBlogService.update(blog);
-        redirectAttributes.addAttribute("mess", "Create successful !");
+        redirectAttributes.addFlashAttribute("message", "Cập nhật bài viết thành công");
         return "redirect:/home/success";
     }
     @GetMapping("/{id}/detail")
@@ -79,7 +75,7 @@ public class BlogController {
     @GetMapping("/delete")
     public String delete(@RequestParam Integer idDeleteBlog, RedirectAttributes redirectAttributes) {
         iBlogService.delete(idDeleteBlog);
-        redirectAttributes.addFlashAttribute("mess", "Delete successful!");
+        redirectAttributes.addFlashAttribute("message", "Xoá bài viết thành công");
         return "redirect:/home/success";
     }
 }

@@ -3,6 +3,7 @@ package com.example.codegymfoods.controller.customer.user;
 import com.example.codegymfoods.dto.customer.CustomerDTO;
 import com.example.codegymfoods.model.bill.Bill;
 import com.example.codegymfoods.model.customer.Customer;
+import com.example.codegymfoods.model.employee.Employee;
 import com.example.codegymfoods.service.bill.IBillService;
 import com.example.codegymfoods.service.customer.impl.CustomerService;
 import com.example.codegymfoods.service.employee.impl.EmployeeService;
@@ -36,11 +37,14 @@ public class UserController {
     public String showDetail(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Customer customer =customerService.findByUsername(user.getUsername());
-        int idOfCustomer = customer.getId();
-        List<Bill> billList = billService.getBillByIdUser(idOfCustomer);
-        model.addAttribute("billList",billList);
-        model.addAttribute("employeeList", employeeService.findByUsername(user.getUsername()));
-        model.addAttribute("customerList", customerService.findByUsername(user.getUsername()));
+        Employee employee = employeeService.findByUsername(user.getUsername());
+        if (customer!=null) {
+            int idOfCustomer = customer.getId();
+            List<Bill> billList = billService.getBillByIdUser(idOfCustomer);
+            model.addAttribute("billList", billList);
+        }
+        model.addAttribute("employeeList", employee);
+        model.addAttribute("customerList",customer );
         return "userInfoPage";
     }
 

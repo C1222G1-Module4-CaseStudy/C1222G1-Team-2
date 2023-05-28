@@ -82,6 +82,6 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public Employee findByUsername(String username) {
-        return employeeRepository.findCustomerByAppUser_UserName(username);
+        return employeeRepository.findByUsername(username);
     }
 }

@@ -13,7 +13,7 @@ public class Customer {
     @Column(columnDefinition = "Varchar(40)")
     private String name;
     @Column(columnDefinition = "date")
-    private Date dateOfBirth;
+    private String dateOfBirth;
     @Column(columnDefinition = "Varchar(40)")
     private String address;
     @Column(columnDefinition = "Varchar(15)")
@@ -29,7 +29,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(Integer id, String name, Date dateOfBirth, String address, String phoneNumber, String email, String avatar, AppUser appUser) {
+    public Customer(Integer id, String name, String dateOfBirth, String address, String phoneNumber, String email, String avatar, AppUser appUser) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -56,11 +56,11 @@ public class Customer {
         this.name = name;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

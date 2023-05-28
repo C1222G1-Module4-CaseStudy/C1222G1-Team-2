@@ -53,7 +53,7 @@
     <header id="header" class="fixed-top d-flex align-items-cente">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
 
-            <h1 class="logo me-auto me-lg-0"><a href="index.html">CodeGym Foods</a></h1>
+            <h1 class="logo me-auto me-lg-0"><a href="/home/success">CodeGym Foods</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -68,6 +68,30 @@
                     <li><a class="nav-link scrollto" href="#gallery"></a></li>
 
                     <li><a class="nav-link scrollto" href="#contact"></a></li>
+                    <li class="nav-item dropdown border-left" style="list-style: none">
+                        <a class="nav-link count-indicator dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                           id="notificationDropdown">
+                            <i class="mdi mdi-bell"></i>
+                            <span class="count bg-danger"></span>
+                        </a>
+                        <div aria-labelledby="messageDropdown"
+                             class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                             th:classappend="${message} ? 'show' : ''">
+                            <h6 class="p-3 mb-0">Thông báo</h6>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <img alt="image"
+                                         class="rounded-circle profile-pic"
+                                         src="https://phunugioi.com/wp-content/uploads/2020/03/anh-hot-girl-trung-quoc-cuc-tinh-y-451x600.jpg" width="2rem">
+                                </div>
+                                <div th:class="${message} ? 'preview-item-content message-visible' : 'preview-item-content'">
+                                    <p class="preview-subject ellipsis mb-1 text-danger" th:text="${message}"></p>
+                                    <p class="text-muted mb-0" id="currentTime"></p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -225,6 +249,21 @@
 
     <!-- Template Main JS File -->
     <script th:src="@{/home/assets/js/main.js}"></script>
+    <script>
+        $(document).ready(function() {
+            $('body').on('mouseup', function (e) {
+                if (!$(e.target).hasClass("dropdown-menu")) {
+                    $(".dropdown-menu").each(function () {
+                        $(this).removeClass("show");
+                    });
+                }
+            });
+        });
+
+        var currentTime = new Date();
+        var formattedTime = currentTime.toLocaleString('vi-VN', {hour12: false});
+        document.getElementById('currentTime').innerHTML = formattedTime;
+    </script>
 </div>
 </body>
 
