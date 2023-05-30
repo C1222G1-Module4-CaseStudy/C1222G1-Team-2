@@ -13,7 +13,7 @@ public class Blog {
     @Column(columnDefinition = "Varchar(40)")
     private String title;
     @Column(columnDefinition = "date")
-    private Date dateNow;
+    private String dateNow;
     private String imgUrl;
     private String content;
 
@@ -24,8 +24,7 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(Integer id, String title, Date dateNow, String imgUrl, String content, Employee employee) {
-
+    public Blog(Integer id, String title, String dateNow, String imgUrl, String content, Employee employee) {
         this.id = id;
         this.title = title;
         this.dateNow = dateNow;
@@ -50,11 +49,11 @@ public class Blog {
         this.title = title;
     }
 
-    public Date getDateNow() {
+    public String getDateNow() {
         return dateNow;
     }
 
-    public void setDateNow(Date dateNow) {
+    public void setDateNow(String dateNow) {
         this.dateNow = dateNow;
     }
 

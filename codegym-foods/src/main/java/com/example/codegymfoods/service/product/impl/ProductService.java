@@ -1,5 +1,6 @@
 package com.example.codegymfoods.service.product.impl;
 
+import com.example.codegymfoods.dto.product.ProductFromCartDTO;
 import com.example.codegymfoods.model.product.Product;
 import com.example.codegymfoods.repository.product.IProductRepository;
 import com.example.codegymfoods.service.product.IProductService;
@@ -58,6 +59,29 @@ public class ProductService implements IProductService {
     @Override
     public Product getProductByName(String nameProductFromCartDTO) {
         return productRepository.findByName(nameProductFromCartDTO);
+    }
+
+    @Override
+    public List<Product> findByName(String nameProduct) {
+        return productRepository.findByNameProduct(nameProduct);
+    }
+
+    @Override
+    public void reduceQauntity(List<ProductFromCartDTO> productFromCartDTOList) {
+        for (int i = 0; i < productFromCartDTOList.size(); i++) {
+            Product product = productRepository.findById(productFromCartDTOList.get(i).getId()).get();
+            product.setQuantity(product.getQuantity()-productFromCartDTOList.get(i).getQuantityProductFromCartDTO());
+        }
+    }
+
+    @Override
+    public Page<Product> getProductPageName(String name, Pageable pageableProduct) {
+        return productRepository.findAllByNameContaining(name,pageableProduct);
+    }
+
+    @Override
+    public Page<Product> getProductByIdName(String search, Integer typeId, Pageable pageableProduct) {
+        return productRepository.findAllByNameContainingAndProductType_Id(search, typeId, pageableProduct);
     }
 
 

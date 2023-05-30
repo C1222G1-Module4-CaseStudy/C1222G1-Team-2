@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<th:block th:import="com.example.codegymfoods.utils.NumberFormatterUtils"></th:block>
+<th:block th:import="com.example.codegymfoods.utils.DateFormatterUtils"></th:block>
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -18,6 +19,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
     <!-- Favicons -->
     <link th:href="@{/home/assets/img/favicon.png}" rel="icon">
     <link th:href="@{/home/assets/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -54,7 +56,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 <header id="header" class="fixed-top d-flex align-items-cente">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
 
-        <h1 class="logo me-auto me-lg-0"><a href="index.html">CodeGym Foods</a></h1>
+        <h1 class="logo me-auto me-lg-0"><a href="/home/success">CodeGym Foods</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -69,10 +71,36 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                 <li><a class="nav-link scrollto" href="#gallery">Hình ảnh</a></li>
 
                 <li><a class="nav-link scrollto" href="#contact">Liên hệ</a></li>
+                <li class="nav-item dropdown border-left" style="list-style: none">
+                    <a class="nav-link count-indicator dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                       id="notificationDropdown">
+                        <i class="mdi mdi-bell"></i>
+                        <span class="count bg-danger"></span>
+                    </a>
+                    <div aria-labelledby="messageDropdown"
+                         class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                         th:classappend="${message} ? 'show' : ''">
+                        <h6 class="p-3 mb-0">Thông báo</h6>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <img alt="image"
+                                     class="rounded-circle profile-pic"
+                                     src="https://phunugioi.com/wp-content/uploads/2020/03/anh-hot-girl-trung-quoc-cuc-tinh-y-451x600.jpg"
+                                     width="2rem">
+                            </div>
+                            <div th:class="${message} ? 'preview-item-content message-visible' : 'preview-item-content'">
+                                <p class="preview-subject ellipsis mb-1 text-danger" style="padding-right: 1.5rem"  th:text="${message}"></p>
+                                <p class="text-muted mb-0" id="currentTime"></p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
-        <a href="/cart/home" data-toggle="modal" data-target="#myModal" id="id"
+        <a th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" href="/cart/home" data-toggle="modal"
+           data-target="#myModal" id="id"
            class="book-a-table-btn scrollto d-none d-lg-flex"><span><i class="bi bi-basket-fill"
                                                                        style="font-size: 24px "></i></span>
         </a>
@@ -87,7 +115,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                         <ul>
                             <li class="nav-item dropdown" style="list-style: none">
                                 <a class="nav-link" data-bs-toggle="dropdown" href="#" id="profileDropdown">
-                                    <div class="navbar-profile">
+                                    <div class="navbar-profile m-2">
                                         <form class="d-flex" role="search">
                                             <!-- Button trigger modal -->
                                             <button class="btn btn-outline-success" type="button" style="border: none"
@@ -108,7 +136,6 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                                 </a>
                                 <div aria-labelledby="profileDropdown"
                                      class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list">
-                                    <!--                                    <h6 class="p-3 mb-0">Profile</h6>-->
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item preview-item">
                                         <div class="preview-thumbnail">
@@ -116,14 +143,14 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                                                 <i class="mdi mdi-settings text-success"></i>
                                             </div>
                                         </div>
-                                        <div class="preview-item-content">
-                                            <a class="preview-subject mb-1" th:href="@{/user/detail}">Thông tin tài
+                                        <div class="preview-item-content m-1">
+                                            <a class="preview-subject mb-1 m-1 d-flex justify-content-lg-center"style="text-align: center;" th:href="@{/user/detail}">Thông tin tài
                                                 khoản</a>
                                         </div>
                                         <span th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
                                             <hr>
-                                             <div class="preview-item-content">
-                                            <a class="preview-subject mb-1" th:href="@{/admin/employee}">Admin</a>
+                                             <div class="preview-item-content ">
+                                            <a class="preview-subject mb-1 m-1 d-flex justify-content-lg-center" style="text-align: center;" th:href="@{/admin/employee}">Admin</a>
                                         </div>
                                         </span>
 
@@ -135,8 +162,8 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                                                 <i class="mdi mdi-logout text-danger"></i>
                                             </div>
                                         </div>
-                                        <div class="preview-item-content">
-                                            <p class="preview-subject mb-1" data-bs-toggle="modal"
+                                        <div class="preview-item-content m-1">
+                                            <p class="preview-subject mb-1 m-1 d-flex justify-content-lg-center" data-bs-toggle="modal"
                                                data-bs-target="#staticBackdrop">Đăng xuất</p>
                                         </div>
                                     </a>
@@ -167,7 +194,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
 
                 <div class="btns">`
                     <a href="#menu" class="btn-menu animated fadeInUp scrollto">Sản phẩm</a>
-                    <a href="/account/register" class="btn-book animated fadeInUp scrollto">Đăng ký thành viên</a>
+                    <a th:if="${#request.userPrincipal == null}" href="/account/register" class="btn-book animated fadeInUp scrollto">Đăng ký thành viên</a>
                 </div>
             </div>
             <div class="col-lg-4 d-flex align-items-center justify-content-center position-relative" data-aos="zoom-in"
@@ -283,49 +310,111 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                 </span>
                 </p>
             </div>
-
             <div class="row" data-aos="fade-up" data-aos-delay="100">
+                <form class="d-flex" method="get" role="search"
+                      th:action="${#request.userPrincipal == null} ? @{/home} : @{/home/success}">
+                    <div class="form-group mb-3 m-2">
+                        <!--                                <label>Khu vực tìm kiếm sản phẩm </label>-->
+                        <div class="container" style="">
+                            <div class="row">
+                                <div class="col-4"> <input aria-label="Search" class="form-control me-2"
+                                                           name="searchProduct" placeholder="Tên sản phẩm"
+                                                           style="color: black" th:value="${searchProduct}"
+                                                           type="search">
+                                </div>
+                                <div class="col-4">
+                                    <!--                                <label class="m-2">Loại sản phẩm</label>-->
+                                    <div class="form-dark">
+                                        <select aria-label="Default select example" class="form-select"
+                                                name="productID">
+                                            <option value="0">Tất cả</option>
+                                            <option th:each="st : ${productTypeList}"
+                                                    th:selected="${productID == st.getId()}"
+                                                    th:text="${st.getName()}"
+                                                    th:value="${st.getId()}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-4" style="margin-top: -7px">
+                                    <button class="btn btn-outline-success m-2" type="submit"><i class="bi bi-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <div class="col-lg-12 d-flex justify-content-center">
                     <ul id="menu-flters">
-                        <li class="filter-active">Tất cả</li>
-                        <li th:each="productType,inter:${productTypeList}" th:text="${productType.name}"
-                        ><a th:href="@{/find/{id}(id=${productType.id})}"></a></li>
+                        <thead>
                     </ul>
                 </div>
             </div>
 
+
+            <!--            <div class="input-group">-->
+            <!--                <form th:action="@{/home/find}">-->
+            <!--                <input type="search"  name="nameProduct">-->
+            <!--                <button type="submit" class="btn btn-outline-dark" style="border: none"><i class="bi bi-search-heart" style="color: whitesmoke"></i></button>-->
+            <!--                </form>-->
+            <!--            </div>-->
+
             <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
                 <div class="col-lg-6 menu-item " th:each="product,inter:${productList}">
-                    <img th:src="${product.picture}" class="menu-img" alt="">
+                    <img th:src="${product.picture}" class="menu-img m-4" alt="">
+                    <script>
+                        function setPrice(price) {
+                            let result = price.substring(1, 2)
+                            return
+                        }
+                    </script>
                     <div class="menu-content">
-                        <a href="#" th:text="${product.name}"></a><span th:text="${product.price + 'đ'}"></span>
-                        <a th:href="@{/cart/addToCart/{id}(id=${product.id})}"><i class="bi bi-bag-plus-fill"></i> </a>
+                        <a href="#" th:text="${product.name}"></a><span
+                            th:text="${T(com.example.codegymfoods.utils.NumberFormatterUtils).formatNumber(product.price) + 'đ'}"></span>
+                        <span th:if="${product.quantity > 0 }" >
+                        <a th:href="@{/cart/addToCart/{id}(id=${product.id})}"><i
+                                th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"
+                                class="bi bi-bag-plus-fill"></i> </a>
+                        </span>
+                    </div>
+                    <div class="menu-ingredients" th:if="${product.quantity <=0 }">
+                        <p style="color: yellow">Đã hết hàng</p>
                     </div>
                     <div class="menu-ingredients">
                         <p th:text="${product.description}"></p>
                     </div>
                     <div class="menu-ingredients">
-                        <p>HSD: <span th:text="${product.dateExpiration}"></span></p>
+                        <p>HSD: <span
+                                th:text="${T(com.example.codegymfoods.utils.DateFormatterUtils).formatDate(product.dateExpiration)}"></span></p>
                     </div>
-
                     <div class="section-title">
                         <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
                             <a th:href="@{/updateProduct/{id}(id=${product.id})}"
-                               role="button"><i class="bi bi-gear-fill" style="color: aliceblue"></i></a>
+                               role="button"><i class="bi bi-gear-fill" style="color: aliceblue;font-size: 30px"></i></a>
                             <i class="bi bi-trash-fill" th:onclick="|deleteByID(${product.id})|" type="button"
                                data-bs-toggle="modal"
-                               data-bs-target="#modelId"></i>
+                               data-bs-target="#modelId" style="font-size: 30px"></i>
                         </div>
                     </div>
                 </div>
             </div>
-            <div>
-                <a th:href="@{'/'(page=${productList.number - 1})}" th:if="${productList.hasPrevious()}">Trước
-                </a>
+            <div style="float: right">
+                <span th:if="${#request.userPrincipal == null}">
+                    <a th:href="@{'/home/'(page=${productList.number - 1})}"
+                       th:if="${productList.hasPrevious()}">Trước</a>
                 <span th:text="${productList.number + 1}"></span>/
                 <span th:text="${productList.totalPages}"></span>
-                <a th:href="@{'/'(page=${productList.number + 1})}" th:if="${productList.hasNext()}">Sau
+                <a th:href="@{'/home/'(page=${productList.number + 1})}" th:if="${productList.hasNext()}">Sau
                 </a>
+                </span>
+                <span th:if="${#request.userPrincipal != null}">
+                     <a th:href="@{'/home/success/'(page=${productList.number - 1})}"
+                        th:if="${productList.hasPrevious()}">Trước</a>
+                <span th:text="${productList.number + 1}"></span>/
+                <span th:text="${productList.totalPages}"></span>
+                <a th:href="@{'/home/success/'(page=${productList.number + 1})}" th:if="${productList.hasNext()}">Sau
+                </a>
+                </span>
             </div>
         </div>
     </section><!-- End Menu Section -->
@@ -335,11 +424,41 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
         <div class="container" data-aos="fade-up">
             <div class="section-title">
                 <h2>Tin tức</h2>
-                <p>Những thông tin chia sẻ <a role="button"
+                <p>Những thông tin chia sẻ
+                    <span th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                        <a role="button"
                                               th:href="@{/blog/create-form}"><i class="bi bi-patch-plus-fill"></i></a>
                 </p>
             </div>
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+                <form class="d-flex" method="get" role="search"  th:action="${#request.userPrincipal == null} ? @{/home} : @{/home/success}">
+                    <div class="form-group mb-3 m-2">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-4">
+                                    <!--                        <label>Khu vực tìm kiếm bài viết </label>-->
+                                    <input aria-label="Search" class="form-control me-2"
+                                           name="searchBlog" placeholder="Tên Blog"
+                                           style="color: black" th:value="${searchBlog}"
+                                           type="search">
+                                </div>
+                                <div class="col-4" style="margin-top: -7px">
+                                    <button class="btn btn-outline-success m-2" type="submit"><i class="bi bi-search"></i>
+                                    </button>
+                                </div>
+                                <div class="col-4"></div>
+                            </div>
+                        </div>
 
+                    </div>
+                </form>
+                <div class="col-lg-12 d-flex justify-content-center">
+                    <ul id="menu-flters11">
+
+                        <thead>
+                    </ul>
+                </div>
+            </div>
             <div class="row" data-aos="fade-up" data-aos-delay="100">
                 <div class="col-lg-3">
                     <ul class="nav nav-tabs flex-column">
@@ -358,10 +477,10 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                                     <h3 th:text="${item.title}"></h3>
                                     <span th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
                                     <div class="dropdown">
-                                            <button class="bg-black dropdown-toggle spinner-border-sm"
+                                            <button class="bg-black bi-gear-fill"
                                                     type="button"
                                                     id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                                    aria-expanded="false">Chỉnh sửa
+                                                    aria-expanded="false">
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <li><a class="text-black text-decoration-none dropdown-item"
@@ -404,12 +523,30 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                             <div class="input-group">
                                 <input type="hidden" id="idDeleteBlog" name="idDeleteBlog">
                             </div>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Delete</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button type="submit" class="btn btn-primary">Xóa</button>
                         </form>
                     </div>
                 </div>
             </div>
+        </div>
+        <div style="float: right">
+                <span th:if="${#request.userPrincipal == null}">
+                    <a th:href="@{'/home/'(page=${blogList.number - 1})}"
+                       th:if="${blogList.hasPrevious()}">Trước</a>
+                <span th:text="${blogList.number + 1}"></span>/
+                <span th:text="${blogList.totalPages}"></span>
+                <a th:href="@{'/home/'(page=${blogList.number + 1})}" th:if="${blogList.hasNext()}">Sau
+                </a>
+                </span>
+            <span th:if="${#request.userPrincipal != null}">
+                     <a th:href="@{'/home/success/'(page=${blogList.number - 1})}"
+                        th:if="${blogList.hasPrevious()}">Trước</a>
+                <span th:text="${blogList.number + 1}"></span>/
+                <span th:text="${blogList.totalPages}"></span>
+                <a th:href="@{'/home/success/'(page=${blogList.number + 1})}" th:if="${blogList.hasNext()}">Sau
+                </a>
+                </span>
         </div>
     </section>
     <!-- End Specials Section -->
@@ -1002,8 +1139,10 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
                 </button>
             </div>
             <div class="modal-body">
-                Bạn <span class="mb-0 text-danger font-weight-medium m-2" th:if="${#request.userPrincipal != null}"
-                          th:text="${#request.userPrincipal.getName()}"></span> có chắc chắn muốn đăng xuất?
+                <span style="color: black">Bạn</span><span class="mb-0 text-danger font-weight-medium m-2"
+                                                           th:if="${#request.userPrincipal != null}"
+                                                           th:text="${#request.userPrincipal.getName()}"></span><span
+                    style="color: black">có chắc chắn muốn đăng xuất?</span>
             </div>
             <div class="modal-footer">
                 <form action="/account/logout" method="get">
@@ -1024,6 +1163,19 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js
         document.getElementById("nameDelete").innerText = name;
     }
 
+    $(document).ready(function () {
+        $('body').on('mouseup', function (e) {
+            if (!$(e.target).hasClass("dropdown-menu")) {
+                $(".dropdown-menu").each(function () {
+                    $(this).removeClass("show");
+                });
+            }
+        });
+    });
+
+    var currentTime = new Date();
+    var formattedTime = currentTime.toLocaleString('vi-VN', {hour12: false});
+    document.getElementById('currentTime').innerHTML = formattedTime;
 </script>
 </body>
 

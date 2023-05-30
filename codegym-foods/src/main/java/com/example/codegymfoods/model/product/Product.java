@@ -15,7 +15,7 @@ public class Product {
     private int quantity;
     private String picture;
     @Column(columnDefinition = "date")
-    private Date dateExpiration;
+    private String dateExpiration;
     @ManyToOne
     @JoinColumn(name = "product_type_id", referencedColumnName = "id")
     private ProductType productType;
@@ -23,7 +23,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(Integer id, String name, String description, Double price, int quantity, String picture, Date dateExpiration, ProductType productType) {
+    public Product(Integer id, String name, String description, Double price, int quantity, String picture, String dateExpiration, ProductType productType) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -82,11 +82,11 @@ public class Product {
         this.picture = picture;
     }
 
-    public Date getDateExpiration() {
+    public String getDateExpiration() {
         return dateExpiration;
     }
 
-    public void setDateExpiration(Date dateExpiration) {
+    public void setDateExpiration(String dateExpiration) {
         this.dateExpiration = dateExpiration;
     }
 

@@ -10,18 +10,18 @@ import javax.validation.constraints.*;
 
 public class ProductDto {
     private Integer id;
-    @NotBlank
+    @NotBlank(message = "Không được để trống")
     private String name;
-    @NotBlank
+    @NotBlank(message = "Không được để trống")
     private String description;
     @DecimalMin("1.0")
     @NumberFormat()
     private Double price;
-    @Min(value = 1)
+    @Min(value = 1,message = "Không được để trống")
     private int quantity;
-    @NotBlank
+    @NotBlank (message = "Không được để trống")
     private String picture;
-    @NotBlank
+    @NotBlank (message = "Không được để trống")
     private String dateExpiration;
     private ProductType productType;
 

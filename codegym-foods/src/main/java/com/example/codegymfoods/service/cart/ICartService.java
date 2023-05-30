@@ -12,4 +12,6 @@ public interface ICartService {
     void changeQuantity(int id, int quantity, CartDTO cartDTO);
 
     double totalBill(List<ProductFromCartDTO> productFromCartDTOList);
+
+    boolean checkQuantity(int id, int quantity);
 }

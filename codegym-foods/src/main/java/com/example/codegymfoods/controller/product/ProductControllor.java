@@ -18,28 +18,19 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
 @Controller
 @RequestMapping("/")
-//@SessionAttributes(value = "cartDTO")
 public class ProductControllor {
-//    @ModelAttribute(name = "cartDTO")
-//    private CartDTO initCartDTO() {
-//        return new CartDTO();
-//    }
+
     @Autowired
    private IProductService productService;
     @Autowired
    private IProductTypeService productTypeService;
 
-    //    @GetMapping("")
-//    public String displayProduct(Model model) {
-//        List<Product> productList = productService.getALl();
-//        model.addAttribute("productList", productList);
-//        return "/index";
-//    }
     @GetMapping("")
     public String disPlayBlog(Model model, @PageableDefault() Pageable pageable) {
         Page<Product> productList = productService.getBlogPage(pageable);
@@ -59,8 +50,9 @@ public class ProductControllor {
 
     @GetMapping("/deleteProduct")
 
-    public String deleteProduct(@RequestParam(value = "id") int id) {
+    public String deleteProduct(@RequestParam(value = "id") int id, RedirectAttributes redirectAttributes) {
         productService.delete(id);
+        redirectAttributes.addFlashAttribute("message", "Xoá thành công");
         return "redirect:/home/success";
     }
 
@@ -76,7 +68,7 @@ public class ProductControllor {
     @GetMapping("/creat")
     public String creat(@Validated @ModelAttribute(value = "productDto") ProductDto productDto,
                         BindingResult bindingResult,
-                        Model model) {
+                        Model model, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             List<ProductType> productTypeList = productTypeService.getAll();
             model.addAttribute("productTypeList", productTypeList);
@@ -86,6 +78,7 @@ public class ProductControllor {
         Product product = new Product();
         BeanUtils.copyProperties(productDto, product);
         productService.creat(product);
+        redirectAttributes.addFlashAttribute("message", "Thêm sản phẩm thành công");
         return "redirect:/home/success";
     }
 
@@ -103,7 +96,7 @@ public class ProductControllor {
     @GetMapping("/update")
     public String update(@Validated @ModelAttribute(value = "productDto") ProductDto productDto,
                          BindingResult bindingResult,
-                         Model model) {
+                         Model model, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             List<ProductType> productTypeList = productTypeService.getAll();
             model.addAttribute("productTypeList", productTypeList);
@@ -113,6 +106,7 @@ public class ProductControllor {
         Product product = new Product();
         BeanUtils.copyProperties(productDto, product);
         productService.updateById(product);
+        redirectAttributes.addFlashAttribute("message", "Cập nhật sản phẩm thành công");
         return "redirect:/home/success";
     }
 

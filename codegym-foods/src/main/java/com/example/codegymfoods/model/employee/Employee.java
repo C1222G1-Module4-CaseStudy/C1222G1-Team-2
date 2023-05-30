@@ -19,7 +19,7 @@ public class Employee {
     @Column(columnDefinition = "Varchar(40)")
     private String email;
     @Column(columnDefinition = "date")
-    private Date dateOfBirth;
+    private String dateOfBirth;
     private String avatar;
 
     @ManyToOne
@@ -33,7 +33,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(Integer id, String name, String address, String phoneNumber, String email, Date dateOfBirth, String avatar, Position position, AppUser appUser) {
+    public Employee(Integer id, String name, String address, String phoneNumber, String email, String dateOfBirth, String avatar, Position position, AppUser appUser) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -85,11 +85,11 @@ public class Employee {
         this.email = email;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

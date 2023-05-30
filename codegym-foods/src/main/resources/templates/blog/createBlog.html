@@ -45,32 +45,32 @@
                 <input aria-describedby="helpId"
                        class="form-control" id="title" name="" placeholder="Nhập tiêu đề mới"
                        th:field="*{title}" type="text">
-                <p th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></p>
+                <p style="color:red" th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></p>
             </div>
             <div>
                 <label for="dateNow">Ngày đăng</label>
                 <input aria-describedby="helpId"
                        class="form-control" id="dateNow" name="" placeholder="Nhập ngày đăng mới"
                        th:field="*{dateNow}" type="date">
-                <p th:errors="*{dateNow}" th:if="${#fields.hasErrors('dateNow')}"></p>
+                <p style="color:red" th:errors="*{dateNow}" th:if="${#fields.hasErrors('dateNow')}"></p>
             </div>
             <div>
                 <label for="imgUrl">Ảnh</label>
                 <input aria-describedby="helpId"
                        class="form-control" id="imgUrl" name="" placeholder="Thêm hình mới"
                        th:field="*{imgUrl}" type="text">
-                <p th:errors="*{imgUrl}" th:if="${#fields.hasErrors('imgUrl')}"></p>
+                <p style="color:red" th:errors="*{imgUrl}" th:if="${#fields.hasErrors('imgUrl')}"></p>
             </div>
             <div>
                 <label for="content">Nội dung</label>
                 <textarea aria-describedby="helpId" class="form-control"
                           id="content" name="" placeholder="Nhập nội dung mới" rows="10"
                           th:field="*{content}" type="text"></textarea>
-                <p th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
+                <p style="color:red" th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
             </div>
             <div class="input-group">
-                <label style="margin-right: 10px">Người đăng</label>
-                <select th:field="*{employee}">
+                <label style="margin-right: 10px">Người phụ trách</label>
+                <select class="form-control" th:field="*{employee}">
                     <option th:each="blog :${employee}" th:value="${blog.getId()}">
                         <p th:text="${blog.getName()}"></p>
                     </option>

@@ -13,8 +13,8 @@ public class BlogService implements IBlogService {
     @Autowired
     private IBlogRepository iBlogRepository;
     @Override
-    public Page<Blog> getBlog(Pageable pageable) {
-        return this.iBlogRepository.findAll(pageable);
+    public Page<Blog> getBlog(String name,Pageable pageable) {
+        return this.iBlogRepository.findAllByTitleContaining(name,pageable);
     }
 
     @Override

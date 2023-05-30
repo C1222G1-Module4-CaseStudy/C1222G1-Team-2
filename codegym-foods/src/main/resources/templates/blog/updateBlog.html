@@ -47,29 +47,29 @@
                 <label for="exampleInputEmail1" class="form-label">Tiêu đề</label>
                 <input type="text" th:field="*{title}" class="form-control" id="exampleInputEmail1"
                        aria-describedby="emailHelp">
-                <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+                <p th:if="${#fields.hasErrors('title')}" style="color:red" th:errors="*{title}"></p>
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail2" class="form-label">Ngày đăng</label>
                 <input type="date" th:field="*{dateNow}" class="form-control" id="exampleInputEmail2"
                        aria-describedby="emailHelp">
-                <p th:if="${#fields.hasErrors('dateNow')}" th:errors="*{dateNow}"></p>
+                <p th:if="${#fields.hasErrors('dateNow')}" style="color:red" th:errors="*{dateNow}"></p>
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail5" class="form-label">Ảnh</label>
                 <input type="text" th:field="*{imgUrl}" class="form-control" id="exampleInputEmail5"
                        aria-describedby="emailHelp">
-                <p th:if="${#fields.hasErrors('imgUrl')}" th:errors="*{imgUrl}"></p>
+                <p th:if="${#fields.hasErrors('imgUrl')}" style="color:red" th:errors="*{imgUrl}"></p>
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail0" class="form-label">Nội dung</label>
                 <textarea type="text" rows="10" th:field="*{content}" class="form-control" id="exampleInputEmail0"
                           aria-describedby="emailHelp"></textarea>
-                <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p>
+                <p th:if="${#fields.hasErrors('content')}" style="color:red" th:errors="*{content}"></p>
             </div>
             <div class="input-group">
-                <label style="margin-right: 10px">Người đăng</label>
-                <select th:field="*{employee}">
+                <label style="margin-right: 10px">Người phụ trách</label>
+                <select class="form-control" th:field="*{employee}">
                     <option th:each="blog :${employee}" th:value="${blog.id}">
                         <p th:text="${blog.name}"></p>
                     </option>

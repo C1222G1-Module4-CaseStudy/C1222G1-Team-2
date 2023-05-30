@@ -37,7 +37,6 @@
             .btn,
             .btn:link,
             .btn:visited {
-                text-transform: uppercase;
                 text-decoration: none;
                 padding: 7px 15px;
                 display: inline-block;
@@ -72,7 +71,6 @@
             .btn,
             .btn:link,
             .btn:visited {
-                text-transform: uppercase;
                 text-decoration: none;
                 padding: 7px 15px;
                 display: inline-block;
@@ -109,7 +107,7 @@
 <div th:fragment="nav-top">
     <nav class="navbar p-0 fixed-top d-flex flex-row">
         <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo-mini" href="../index.html"><img alt="logo"
+            <a class="navbar-brand brand-logo-mini" href="/home/success"><img alt="logo"
                                                                               src="assets/images/logo-mini.png"/></a>
         </div>
         <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
@@ -236,7 +234,7 @@
                 <!--                          th:text="${#request.userPrincipal.getName()}"></span> có chắc chắn muốn đăng xuất?-->
                 <!--            </div>-->
                 <div class="modal-footer">
-                    <form action="/logout" method="get">
+                    <form action="/account/logout" method="get">
                         <button class="btn btn-secondary" data-bs-dismiss="modal"
                                 type="button">Huỷ
                         </button>

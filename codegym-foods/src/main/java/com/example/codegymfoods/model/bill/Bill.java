@@ -13,7 +13,7 @@ public class Bill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(columnDefinition = "date")
-    private Date purchaseDate;
+    private String purchaseDate;
     private Boolean status;
     private Double totalPrice;
     @ManyToOne
@@ -24,13 +24,7 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(Date purchaseDate, Double totalPrice, Customer customer) {
-        this.purchaseDate = purchaseDate;
-        this.totalPrice = totalPrice;
-        this.customer = customer;
-    }
-
-    public Bill(Integer id, Date purchaseDate, Boolean status, Double totalPrice, Customer customer) {
+    public Bill(Integer id, String purchaseDate, Boolean status, Double totalPrice, Customer customer) {
         this.id = id;
         this.purchaseDate = purchaseDate;
         this.status = status;
@@ -38,7 +32,7 @@ public class Bill {
         this.customer = customer;
     }
 
-    public Bill(Date purchaseDate, Boolean status, Double totalPrice, Customer customer) {
+    public Bill(String purchaseDate, Boolean status, Double totalPrice, Customer customer) {
         this.purchaseDate = purchaseDate;
         this.status = status;
         this.totalPrice = totalPrice;
@@ -53,11 +47,11 @@ public class Bill {
         this.id = id;
     }
 
-    public Date getPurchaseDate() {
+    public String getPurchaseDate() {
         return purchaseDate;
     }
 
-    public void setPurchaseDate(Date purchaseDate) {
+    public void setPurchaseDate(String purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
 

@@ -263,10 +263,10 @@
 <div class="container-scroller">
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-            <a class="sidebar-brand brand-logo" href="../index.html"><img alt="logo"
+            <a class="sidebar-brand brand-logo"  href="/home/success"><img alt="logo"
                                                                           style="height: 58px"
                                                                           th:src="@{/admin/assets/images/logo.png}"/></a>
-            <a class="sidebar-brand brand-logo-mini" href="../index.html"><img
+            <a class="sidebar-brand brand-logo-mini"  href="/home/success"><img
                     alt="logo"
                     th:src="@{/admin/assets/images/logo-mini.png}"/></a>
         </div>
@@ -325,36 +325,12 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="pages/forms/basic_elements.html">
-              <span class="menu-icon">
-                <i class="mdi mdi-postage-stamp"></i>
-              </span>
-                    <span class="menu-title">Blog</span>
-                </a>
-            </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="pages/tables/basic-table.html">
-              <span class="menu-icon">
-                <i class="mdi mdi-account-circle"></i>
-              </span>
-                    <span class="menu-title">Tài khoản</span>
-                </a>
-            </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" onclick="location.href = '/admin/employee' ">
+            <li class="nav-item menu-items active">
+                <a class="nav-link active" onclick="location.href = '/admin/employee' ">
               <span class="menu-icon">
                 <i class="mdi mdi-account-multiple"></i>
               </span>
                     <span class="menu-title">Nhân viên</span>
-                </a>
-            </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" onclick="location.href = '/admin/product' ">
-              <span class="menu-icon">
-                <i class="mdi mdi-account-multiple"></i>
-              </span>
-                    <span class="menu-title">Sản phẩm</span>
                 </a>
             </li>
         </ul>
@@ -364,7 +340,7 @@
         <div th:replace="layout-list:: nav-top"></div>
         <nav class="navbar p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo-mini" href="../index.html"><img alt="logo"
+                <a class="navbar-brand brand-logo-mini"  href="/home/success"><img alt="logo"
                                                                                   src="assets/images/logo-mini.png"/></a>
             </div>
             <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
@@ -382,9 +358,6 @@
                 </ul>
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item dropdown d-none d-lg-block">
-                        <a aria-expanded="false" class="nav-link btn btn-success create-new-button"
-                           data-bs-toggle="dropdown" id="createbuttonDropdown"
-                           onclick="location.href = '/admin/employee/create'">+ Thêm mới</a>
                     </li>
                     <li class="nav-item dropdown border-left">
                         <a class="nav-link count-indicator dropdown-toggle" data-bs-toggle="dropdown" href="#"
@@ -392,23 +365,6 @@
                             <i class="mdi mdi-bell"></i>
                             <span class="count bg-danger"></span>
                         </a>
-                        <div aria-labelledby="messageDropdown"
-                             class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                             th:classappend="${message} ? 'show' : ''">
-                            <h6 class="p-3 mb-0">Messages</h6>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <img alt="image"
-                                         class="rounded-circle profile-pic"
-                                         src="https://phunugioi.com/wp-content/uploads/2020/03/anh-hot-girl-trung-quoc-cuc-tinh-y-451x600.jpg">
-                                </div>
-                                <div th:class="${message} ? 'preview-item-content message-visible' : 'preview-item-content'">
-                                    <p class="preview-subject ellipsis mb-1" th:text="${message}"></p>
-                                    <p class="text-muted mb-0" id="currentTime"></p>
-                                </div>
-                            </a>
-                        </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-bs-toggle="dropdown" href="#" id="profileDropdown">
@@ -422,9 +378,6 @@
                                         <!--                                              th:utext="${#request.userPrincipal.getName()}"></span>-->
                                     </div>
                                     <!-- Button trigger modal -->
-                                    <button class="btn btn-outline-success" type="button">
-                                        Đăng xuất
-                                    </button>
                                 </form>
                             </div>
                         </a>
@@ -477,7 +430,7 @@
                                                           th:field="*{name}"
                                                           type="text">
                             </div>
-                            <p style="color: red" th:errors="*{name}"
+                            <p style="color:red" th:errors="*{name}"
                                th:if="${#fields.hasErrors('name')}"></p>
                         </div>
                         <div class="col-12"><p class="m-2">Ngày sinh nhân viên</p>
@@ -485,8 +438,7 @@
                                                     th:field="*{dateOfBirth}"
                                                     type="date">
                             </div>
-                            <p style="color: red"
-                               th:errors="*{dateOfBirth}" th:if="${#fields.hasErrors('dateOfBirth')}"></p>
+                            <p style="color:red" th:errors="*{dateOfBirth}" th:if="${#fields.hasErrors('dateOfBirth')}"></p>
 
                         </div>
                         <div class="col-12"><p class="m-2">Số điện thoại nhân viên</p>
@@ -497,7 +449,7 @@
                             </div>
                             <span style="color: red" th:text="${message1}"></span>
                             <p style="color: red"
-                               th:errors="*{phoneNumber}" th:if="${#fields.hasErrors('phoneNumber')}"></p>
+                                th:errors="*{phoneNumber}" th:if="${#fields.hasErrors('phoneNumber')}"></p>
 
                         </div>
                         <div class="col-12"><p class="m-2">Email nhân viên</p>
@@ -516,7 +468,7 @@
                                                     type="text">
                             </div>
                             <p style="color: red"
-                               th:errors="*{address}" th:if="${#fields.hasErrors('address')}"></p>
+                                th:errors="*{address}" th:if="${#fields.hasErrors('address')}"></p>
 
                         </div>
                         <div class="col-12"><p class="m-2">Chức vụ nhân viên</p>
@@ -526,18 +478,18 @@
                                         th:value="${list.getId()}">Chức vụ nhân viên:
                                 </option>
                             </select>
-                            <p style="color: red" th:errors="*{position}"
+                            <p style="color:red" th:errors="*{position}"
                                th:if="${#fields.hasErrors('position')}"></p>
 
                         </div>
                         <div class="col-12"><p class="m-2">Thêm ảnh</p>
                             <div class="box form-control ">
                                 <input class="form-control" id="image-url" name="image-url" th:field="*{avatar}"
-                                       type="text">
+                                       type="hidden">
                             </div>
-                            <input id="file-input" type="file">
+                            <input class="form-control" id="file-input" type="file">
                         </div>
-                        <p style="color: red" th:errors="*{avatar}"
+                        <p style="color:red" th:errors="*{avatar}"
                            th:if="${#fields.hasErrors('avatar')}"></p>
 
                         <div class="col-12">
@@ -585,12 +537,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-4 center text-center"></div>
                         <div class="col-4 center text-center">
                             <input class="form-control" id="upload-btn"
                                    style="border: 1px solid #00bb00; border-radius: 15px;margin-top: 20px "
                                    type="submit"
                                    value="Xác nhận">
                         </div>
+                        <div class="col-4 center text-center"></div>
                     </div>
                 </div>
             </div>
@@ -618,7 +572,7 @@
                           th:text="${#request.userPrincipal.getName()}"></span> có chắc chắn muốn đăng xuất?
             </div>
             <div class="modal-footer">
-                <form action="/logout" method="get">
+                <form action="/account/logout" method="get">
                     <button class="btn btn-secondary" data-bs-dismiss="modal"
                             type="button">Huỷ
                     </button>

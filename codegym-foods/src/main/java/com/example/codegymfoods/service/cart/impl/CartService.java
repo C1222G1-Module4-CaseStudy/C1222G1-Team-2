@@ -4,6 +4,8 @@ import com.example.codegymfoods.dto.cart.CartDTO;
 import com.example.codegymfoods.dto.product.ProductFromCartDTO;
 import com.example.codegymfoods.model.product.Product;
 import com.example.codegymfoods.service.cart.ICartService;
+import com.example.codegymfoods.service.product.IProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +13,8 @@ import java.util.Map;
 
 @Service
 public class CartService implements ICartService {
+    @Autowired
+    private IProductService productService;
 
     @Override
     public double totalBill(List<ProductFromCartDTO> productFromCartDTOList) {
@@ -19,6 +23,16 @@ public class CartService implements ICartService {
             totalBill+= productFromCartDTOList.get(i).getTotalPrice();
         }
         return totalBill;
+    }
+
+    @Override
+    public boolean checkQuantity(int id, int quantity) {
+        Product product = productService.getById(id);
+        if (product.getQuantity() >= quantity){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override

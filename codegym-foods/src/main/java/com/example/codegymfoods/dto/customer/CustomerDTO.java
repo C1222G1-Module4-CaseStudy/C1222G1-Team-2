@@ -1,8 +1,10 @@
 package com.example.codegymfoods.dto.customer;
 
 //import com.example.codegymfoods.model.customer.CustomerType;
+
 import com.example.codegymfoods.model.login.AppUser;
 
+import javax.persistence.Column;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -25,7 +27,7 @@ public class CustomerDTO {
 
     private String avatar;
 
-//    private CustomerType customerType;
+    //    private CustomerType customerType;
     @Valid
     private AppUser appUser;
 

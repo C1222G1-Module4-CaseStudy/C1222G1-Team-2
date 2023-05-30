@@ -11,17 +11,16 @@ import com.example.codegymfoods.service.employee.IEmployeeService;
 import com.example.codegymfoods.service.product.IProductService;
 import com.example.codegymfoods.service.product.IProductTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -45,25 +44,43 @@ public class HomeController {
     @Autowired
     private IProductTypeService productTypeService;
     @GetMapping("")
-    public String index(Model model,
-                        @PageableDefault() Pageable pageable, HttpServletRequest request) {
-        model.addAttribute("blogList", this.iBlogService.getBlog(pageable));
-        Page<Product> productList = productService.getBlogPage(pageable);
+    public String index(@RequestParam(defaultValue = "", required = false) String searchProduct,
+                        @RequestParam(defaultValue = "", required = false) String searchBlog,
+                        @RequestParam(required = false) Integer productID, Model model,
+                        @Qualifier("pagePro") @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pagePro,
+                        @Qualifier("pageBlog") @PageableDefault(size = 2,sort = "id", direction = Sort.Direction.DESC) Pageable pageBlog,
+                        HttpServletRequest request) {
+        Page<Product> productList;
+        if (productID==null || productID==0){
+            productList = productService.getProductPageName(searchProduct, pagePro);
+        } else {
+            productList = productService.getProductByIdName(searchProduct, productID, pagePro);
+        }
         List<ProductType> productTypeList = productTypeService.getAll();
+        model.addAttribute("blogList", this.iBlogService.getBlog(searchBlog,pageBlog));
         model.addAttribute("productTypeList", productTypeList);
         model.addAttribute("productList", productList);
         model.addAttribute("request",request);
         return "index";
     }
     @GetMapping("/success")
-    public String disPlay(Model model,
-                          @PageableDefault() Pageable pageable, HttpServletRequest request) {
-        model.addAttribute("blogList", this.iBlogService.getBlog(pageable));
-        Page<Product> productList = productService.getBlogPage(pageable);
+    public String disPlay(@RequestParam(defaultValue = "", required = false) String searchProduct,
+                          @RequestParam(defaultValue = "", required = false) String searchBlog,
+                          @RequestParam(required = false) Integer productID,Model model,
+                          @Qualifier("pagePro") @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pagePro,
+                          @Qualifier("pageBlog") @PageableDefault(size = 2,sort = "id", direction = Sort.Direction.DESC) Pageable pageBlog,
+                          HttpServletRequest request) {
+        Page<Product> productList;
+        if (productID==null || productID==0){
+            productList = productService.getProductPageName(searchProduct, pagePro);
+        } else {
+            productList = productService.getProductByIdName(searchProduct, productID, pagePro);
+        }
         List<ProductType> productTypeList = productTypeService.getAll();
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Customer customer = customerService.findByUsername(user.getUsername());
         Employee employee = employeeService.findByUsername(user.getUsername());
+        model.addAttribute("blogList", this.iBlogService.getBlog(searchBlog,pageBlog));
         model.addAttribute("customer",customer);
         model.addAttribute("employee",employee);
         model.addAttribute("productTypeList", productTypeList);

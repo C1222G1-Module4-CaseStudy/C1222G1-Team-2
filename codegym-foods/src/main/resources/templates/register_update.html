@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:replace="layout-index::head-config"></div>
     <style>
@@ -141,9 +141,9 @@
 <body>
 <div th:replace="layout-index::navba-top"></div>
 
-<div class="form">
-    <div class="title">Chỉnh sửa thông tin tài khoản</div>
-    <form action="/user/update" id="myForm" method="post" name="myForm" th:object="${customerDto}">
+<div class="form container" >
+    <div class="title d-flex justify-content-lg-center">Chỉnh sửa thông tin tài khoản</div>
+    <form  action="/user/update-user" id="myForm" method="post" name="myForm" th:object="${customerDto}">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-sm-12" style="margin:-10px">
@@ -151,41 +151,39 @@
                         <input class="input" id="id" placeholder=" " th:field="*{id}" type="hidden"/>
                         <div class="cut"></div>
                         <label class="placeholder" for="id">Id</label>
-                        <p style="color: red" th:errors="*{id}" th:if="${#fields.hasErrors('id')}"></p>
+                        <p style="color:red" th:errors="*{id}" th:if="${#fields.hasErrors('id')}"></p>
                     </div>
                     <div class="input-container ic1">
                         <input class="input" id="name" placeholder=" " th:field="*{name}" type="text"/>
                         <div class="cut"></div>
                         <label class="placeholder" for="name">Tên</label>
-                        <p style="color: red" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></p>
+                        <p style="color:red" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></p>
                     </div>
                     <div class="input-container ic2">
-                        <input class="input" id="dateOfBirth" placeholder=" " th:field="*{dateOfBirth}" type="text"/>
+                        <input th:field="*{dateOfBirth}" type="date" id="dateOfBirth" class="input" placeholder=" " name="dateOfBirth" value="" maxlength="250">
                         <div class="cut"></div>
-                        <label class="placeholder" for="dateOfBirth">Ngày Sinh</label>
-                        <p style="color: red" th:errors="*{dateOfBirth}"
-                           th:if="${#fields.hasErrors('dateOfBirth')}"></p>
+                        <label for="dateOfBirth" class="placeholder">Ngày Sinh</label>
+                        <p style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></p>
                     </div>
                     <div class="input-container ic2">
                         <input class="input" id="address" placeholder=" " th:field="*{address}" type="text"/>
                         <div class="cut cut-short"></div>
                         <label class="placeholder" for="address">Địa chỉ</label>
-                        <p style="color: red" th:errors="*{address}" th:if="${#fields.hasErrors('address')}"></p>
+                        <p style="color:red" th:errors="*{address}" th:if="${#fields.hasErrors('address')}"></p>
                     </div>
                     <div class="input-container ic2">
                         <input class="input" id="email" placeholder=" " th:field="*{email}" type="text"/>
                         <div class="cut cut-short"></div>
                         <label class="placeholder" for="email">Email</label>
-                        <p style="color: red" th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></p>
+                        <p style="color:red" th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></p>
                         <span style="color: red" th:text="${message}"></span>
                     </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
+
                     <div class="input-container ic2">
                         <input class="input" id="phoneNumber" placeholder=" " th:field="*{phoneNumber}" type="text"/>
                         <div class="cut cut-short"></div>
                         <label class="placeholder" for="phoneNumber">Số điện thoại</label>
-                        <p style="color: red" th:errors="*{phoneNumber}"
+                        <p style="color:red" th:errors="*{phoneNumber}"
                            th:if="${#fields.hasErrors('phoneNumber')}"></p>
                         <span style="color: red" th:text="${message1}"></span>
                     </div>
@@ -193,13 +191,15 @@
                         <input class="input" id="avatar" placeholder=" " th:field="*{avatar}" type="text"/>
                         <div class="cut cut-short"></div>
                         <label class="placeholder" for="avatar">Ảnh đại diện</label>
-                        <p style="color: red" th:errors="*{avatar}" th:if="${#fields.hasErrors('avatar')}"></p>
+                        <p style="color:red" th:errors="*{avatar}" th:if="${#fields.hasErrors('avatar')}"></p>
                     </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
                     <div class="input-container ic2">
                         <input class="input" id="username" placeholder=" " th:field="*{appUser.userName}" type="text"/>
                         <div class="cut cut-short"></div>
                         <label class="placeholder" for="username">Tên đăng nhâp</label>
-                        <p style="color: red" th:errors="*{appUser.userName}"
+                        <p style="color:red" th:errors="*{appUser.userName}"
                            th:if="${#fields.hasErrors('appUser.userName')}"></p>
                         <span style="color: red" th:text="${message2}"></span>
                     </div>
@@ -211,7 +211,7 @@
                                type="password"/>
                         <div class="cut cut-short"></div>
                         <label class="placeholder" for="password">Mật khẩu</label>
-                        <p style="color: red" th:errors="*{appUser.encrytedPassword}"
+                        <p style="color:red" th:errors="*{appUser.encrytedPassword}"
                            th:if="${#fields.hasErrors('appUser.encrytedPassword')}"></p>
                     </div>
                     <div id="error-text" style="color: red;"></div>
@@ -221,7 +221,9 @@
                         <label class="placeholder" for="confirmPassword">Nhập lại mật khẩu</label>
                     </div>
                 </div>
-                <button class="submit" id="button" name="submit" type="submit" value="submit">Lưu</button>
+                <div class="d-flex justify-content-lg-center">
+                <button class="submit" style="width: 10%" id="button" name="submit" type="submit" value="submit">Lưu</button>
+                </div>
             </div>
         </div>
     </form>
@@ -241,6 +243,15 @@
 
     password.onchange = validatePassword;
     confirmPassword.onkeyup = validatePassword;
+</script>
+<script>
+    jQuery(function(){
+        $('#dateOfBirth').datetimepicker({
+            format:'d/m/Y',
+            lang:'vi',
+            timepicker: false,
+        });
+    });
 </script>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

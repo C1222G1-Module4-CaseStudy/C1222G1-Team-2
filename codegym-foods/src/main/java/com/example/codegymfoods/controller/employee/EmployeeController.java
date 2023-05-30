@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +35,7 @@ public class EmployeeController {
     @GetMapping("")
     public String getEmployee(@RequestParam(defaultValue = "", required = false) String search,
                               @RequestParam(required = false) Integer positionId,
-                              @PageableDefault(size = 5) Pageable pageable, Model model) {
+                              @PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable, Model model) {
         Page<Employee> employeePage;
         if (positionId == null || positionId == 0) {
             employeePage = this.employeeService.findAllByName(search, pageable);
@@ -89,8 +90,8 @@ public class EmployeeController {
         } else {
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDTO, employee);
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            employee.setDateOfBirth(formatter.parse(employeeDTO.getDateOfBirth()));
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//            employee.setDateOfBirth(String.valueOf(formatter.parse(employeeDTO.getDateOfBirth())));
             employeeService.save(employee);
             redirectAttributes.addFlashAttribute("message", "Thêm mới thành công");
             return "redirect:/admin/employee";
